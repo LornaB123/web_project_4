@@ -1,0 +1,9 @@
+@import url("./__line/header__line.css");
+
+.header {
+    display: flex;
+    padding-top: 45px;
+    margin: 0 auto;
+    max-width: 882px;
+    max-height: 74px;
+}
