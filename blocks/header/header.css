@@ -2,6 +2,7 @@
 
 .header {
     display: flex;
+    flex-direction: column;
     padding-top: 45px;
     margin: 0 auto;
     max-width: 882px;
