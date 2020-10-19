@@ -1,0 +1,7 @@
+.profile {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 882px;
+    max-height: 120px;
+}
