@@ -1,5 +1,6 @@
-.profile__intro-title {
+.profile__info-title {
     font-weight: 500;
     font-size: 42px;
     line-height: 56px;
+    margin: 0;
 }

@@ -1,7 +1,5 @@
 .profile__info {
     max-width: 428px;
     max-height: 77px;
-    margin-right: 154px;
-    display: flex;
-    flex-direction: column;
+    margin: 18px 154px auto 30px;
 }
