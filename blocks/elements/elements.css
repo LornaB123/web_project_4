@@ -9,4 +9,5 @@
     max-width: 882px;
     grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
     grid-template-rows: repeat(3, auto);
+    grid-row-gap: 21px;
 }
