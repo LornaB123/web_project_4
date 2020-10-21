@@ -21,7 +21,7 @@ function toggleModal(){
 }
 
 function toggleClose() {
-  modal.classList.toggle('modal');
+  modal.classList.toggle('modal_close');
 }
 
 editButton.addEventListener('click', toggleModal);
