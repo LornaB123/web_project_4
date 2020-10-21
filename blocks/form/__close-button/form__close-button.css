@@ -1,7 +1,8 @@
 .form__close-button{
     width: 40.7px;
     height: 40.7px;
-    background: #FFFFFF;
+    background: none;
+    border: none;
     position: fixed;
     right: 379.44;
     top: 148px;

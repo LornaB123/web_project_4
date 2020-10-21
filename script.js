@@ -16,10 +16,13 @@ form.addEventListener('submit', (event) => {
   toggleModal()
 })
 
-
 function toggleModal(){
   modal.classList.toggle('modal_open');
 }
 
-editButton.addEventListener("click", toggleModal);
-closeButton.addEventListener("click", toggleModal);
+function toggleClose() {
+  modal.classList.toggle('modal');
+}
+
+editButton.addEventListener('click', toggleModal);
+closeButton.addEventListener('click', toggleClose);

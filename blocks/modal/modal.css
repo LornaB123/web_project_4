@@ -3,7 +3,7 @@
 
 .modal {
     display: none;
-    /*background-image: url('../../images/Overlay.png');*/
+    background-image: url('../../images/Overlay.png');
     height: 100%;
     width: 100%;
     position: fixed;
