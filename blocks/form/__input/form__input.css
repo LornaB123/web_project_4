@@ -1,0 +1,11 @@
+@import url("./_type_job/form__input_type_job.css");
+@import url("./_type_name/form__input_type_name.css");
+
+.form__input {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    border: none;
+    margin-left: 36px;
+    margin-bottom: 13.3px;
+  }
