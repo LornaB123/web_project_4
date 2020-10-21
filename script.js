@@ -17,7 +17,6 @@ form.addEventListener('submit', (event) => {
 })
 
 
-
 function toggleModal(){
   modal.classList.toggle('modal_open');
 }

@@ -1,9 +1,9 @@
 @import url("./__container/modal__container.css");
-@import url("./_open/modal_open.css");
+
 
 .modal {
     display: none;
-    background-image: url('../../images/Overlay.png');
+    /*background-image: url('../../images/Overlay.png');*/
     height: 100%;
     width: 100%;
     position: fixed;

@@ -1,5 +1,7 @@
+@import url("./__info/footer__info.css");
+
 .footer {
-    margin-left: 199px;
+    margin: 0 auto;
     padding-bottom: 60px;
     font-size: 18px;
     line-height: 22px;
