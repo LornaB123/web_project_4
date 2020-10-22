@@ -1,7 +1,7 @@
 const editButton = document.querySelector(".profile__edit-button");
 const closeButton = document.querySelector(".form__close-button");
 const form = document.querySelector(".form");
-const modal= document.querySelector('.modal');
+const modal= document.querySelector('.popup');
 const nameInput = document.querySelector('.form__input_type_name');
 const jobInput = document.querySelector('.form__input_type_job');
 const profileName = document.querySelector('.profile__info-title');
@@ -17,11 +17,11 @@ form.addEventListener('submit', (event) => {
 })
 
 function toggleModal(){
-  modal.classList.toggle('modal_open');
+  modal.classList.toggle('popup_open');
 }
 
 function toggleClose() {
-  modal.classList.toggle('modal_close');
+  modal.classList.toggle('popup_close');
 }
 
 editButton.addEventListener('click', toggleModal);
