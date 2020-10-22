@@ -9,6 +9,11 @@
     background: none;
 }
 
+@media screen and (max-width: 1120px) {
+    .profile__edit-button {
+        left: 400px;
+    }
+}
 @media screen and (max-width: 425px) {
     .profile__edit-button {
         width: 18px;
