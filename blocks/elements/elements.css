@@ -11,3 +11,10 @@
     grid-template-rows: repeat(3, auto);
     grid-row-gap: 21px;
 }
+
+@media screen and (max-width: 320px) {
+    .elements {
+        grid-template-rows: repeat(1, auto);
+        grid-row-gap: 20px;
+    }
+}

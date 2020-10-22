@@ -9,3 +9,10 @@
     margin-left: 36px;
     margin-bottom: 13.3px;
   }
+
+  @media screen and (max-width: 425px) {
+    .form__input {
+      margin-left: 22px;
+      margin-bottom: 13px;
+    }
+  }

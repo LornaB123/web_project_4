@@ -7,3 +7,14 @@
     align-self: center;
     background: none;
 }
+
+.profile__add-button:hover {
+    opacity: 60%;
+    transition: color 2s ease .5s;
+}
+
+@media screen and (max-width:425px) {
+    .profile__add-button {
+        width: 282px;
+    }
+}
