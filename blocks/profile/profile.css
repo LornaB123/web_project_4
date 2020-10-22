@@ -12,7 +12,6 @@
     display: flex;
     margin: 40px auto 50px;
     max-width: 882px;
-    max-height: 120px;
     position: relative;
 }
 
@@ -20,5 +19,6 @@
     .profile {
         display: block;
         max-width: 282px;
+        margin: 42px auto 36px;
     }
 }
