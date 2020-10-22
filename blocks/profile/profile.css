@@ -15,7 +15,12 @@
     position: relative;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 1120px) {
+    .profile{
+        max-width: 750px;
+    }
+}
+@media screen and (max-width: 725px) {
     .profile {
         display: block;
         max-width: 282px;

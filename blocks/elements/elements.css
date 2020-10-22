@@ -16,6 +16,7 @@
     .elements {
         grid-template-rows: repeat(2, auto);
         max-width: 624px;
+        grid-column-gap: 21px;
     }
 }
 

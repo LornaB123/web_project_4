@@ -5,3 +5,15 @@
     opacity: 0.7;
     border: 1px solid #545454;
 }
+
+@media screen and (max-width: 1120px) {
+    .content{
+        max-width: 725px;
+    }
+}
+
+@media screen and (max-width: 725px) {
+    .content {
+        max-width: 320px;
+    }
+}
