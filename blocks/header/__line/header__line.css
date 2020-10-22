@@ -7,13 +7,13 @@
 }
 
 @media screen and (max-width: 1120px) {
-    .content{
-        max-width: 725px;
+    .header__line{
+        max-width: 720px;
     }
 }
 
 @media screen and (max-width: 725px) {
-    .content {
+    .header__line {
         max-width: 320px;
     }
 }
