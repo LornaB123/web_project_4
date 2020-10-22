@@ -3,3 +3,10 @@
     max-height: 22px;
     margin: 0;
 }
+
+@media screen and (max-width:425px) {
+    .profile__add-button-image {
+        width: 16px;
+        height: 16px;
+    }
+}

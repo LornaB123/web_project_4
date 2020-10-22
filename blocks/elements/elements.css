@@ -12,7 +12,14 @@
     grid-row-gap: 21px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 780px) {
+    .elements {
+        grid-template-rows: repeat(2, auto);
+        max-width: 624px;
+    }
+}
+
+@media screen and (max-width: 425px) {
     .elements {
         grid-template-rows: repeat(1, auto);
         grid-row-gap: 20px;

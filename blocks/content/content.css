@@ -4,11 +4,18 @@
 }
 
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 1120px) {
     .content{
         max-width: 750px;
     }
 }
+
+@media screen and (max-width: 780px) {
+    .content {
+        max-width: 400px ;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .content {
       max-width: 320px;
