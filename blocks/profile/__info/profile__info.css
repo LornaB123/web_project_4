@@ -4,10 +4,17 @@
     margin: 18px 154px auto 30px;
 }
 
+@media screen and (max-width: 1120px) {
+    .profile__info {
+        max-width: 220px;
+        margin: 18px 80px auto 20px;
+
+    }
+}
+
 @media screen and (max-width: 425px) {
     .profile__info {
         max-width: 280px;
-        max-height: 66px;
-        margin: 10.25px auto 36 px;
+        margin: 0;
     }
 }
