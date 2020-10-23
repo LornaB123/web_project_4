@@ -1,6 +1,5 @@
 .profile__info {
     max-width: 428px;
-    max-height: 77px;
     margin: 18px 154px auto 30px;
 }
 
@@ -15,5 +14,6 @@
     .profile__info {
         max-width: 280px;
         margin: 0;
+       
     }
 }
