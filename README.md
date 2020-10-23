@@ -11,5 +11,7 @@
 
 **Summary**
 
-This project implements the use of JavaScript to create a popup block that edits the name and job of the card.
+This project implements the use of JavaScript to create a popup block that edits the name and job of the card. Clicking the save button changes the user's information and is displayed on the page. The popup closes when user clicks the close button.  
 
+link to project in github:
+https://lornab123.github.io/web_project_4/
