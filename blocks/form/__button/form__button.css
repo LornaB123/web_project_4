@@ -7,7 +7,7 @@
     text-align: center;
     margin-left: 36px;
     margin-top: 48px;
-    margin-bottom: 36.51px;
+    padding-bottom: 36.51px;
   }
 
 .form__button:hover {
@@ -22,6 +22,6 @@
       height: 46px;
       margin-top: 45px;
       margin-left: 22px;
-      margin-bottom: 25px;
+      padding-bottom: 25px;
     }
   }

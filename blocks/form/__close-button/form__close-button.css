@@ -9,6 +9,7 @@
     background-position: center;
     background-size: 40.7px;
     cursor: pointer;
+    background-color: black;
   }
 
   .form__close-button:hover {
