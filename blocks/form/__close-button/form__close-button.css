@@ -9,7 +9,7 @@
     background-position: center;
     background-size: 40.7px;
     cursor: pointer;
-    background-color: black;
+    background-color: transparent;
   }
 
   .form__close-button:hover {
