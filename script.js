@@ -20,9 +20,5 @@ function toggleModal(){
   modal.classList.toggle('popup_open');
 }
 
-/*function toggleClose() {
-  modal.classList.toggle('popup_close');*/
-}
-
 editButton.addEventListener('click', toggleModal);
-/*closeButton.addEventListener('click', toggleClose);*/
+closeButton.addEventListener('click', toggleModal);
