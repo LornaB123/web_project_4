@@ -5,7 +5,11 @@
     box-sizing: border-box;
     border-radius: 2px;
     align-self: center;
-    background: none;
+    background-image: url("../../../images/addButton.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: black;
+    background-size: 22px;
 }
 
 .profile__add-button:hover {
@@ -16,5 +20,6 @@
 @media screen and (max-width:425px) {
     .profile__add-button {
         width: 282px;
+        background-size: 16px;
     }
 }
