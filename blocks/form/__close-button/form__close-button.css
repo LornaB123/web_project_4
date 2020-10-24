@@ -1,16 +1,20 @@
 .form__close-button{
     width: 40.7px;
     height: 40.7px;
-    background: none;
     border: none;
     position: fixed;
     right: 379.44;
     top: 148px;
+    background-image: url("../../../images/CloseIcon.png");
+    background-position: center;
+    background-size: 40.7px;
+    cursor: pointer;
   }
 
   .form__close-button:hover {
     opacity: 60%;
     transition: color 2s ease .5s;
+    cursor: pointer;
   }
 
   @media screen and (max-width: 425px) {
