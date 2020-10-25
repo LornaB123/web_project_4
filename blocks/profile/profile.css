@@ -7,8 +7,8 @@
 
 .profile {
     display: flex;
-    margin: 40px auto 50px;
-    max-width: 882px;
+    margin: 40px auto 51px;
+    max-width: 880px;
     justify-content: space-between;
 }
 
