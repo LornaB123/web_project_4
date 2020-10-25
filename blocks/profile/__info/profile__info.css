@@ -1,6 +1,10 @@
 .profile__info {
     max-width: 428px;
+<<<<<<< HEAD
     margin: 22px 207px auto 30px;
+=======
+    margin: 22px 18px auto 30px;
+>>>>>>> hotfix/layout
 }
 
 @media screen and (max-width: 1120px) {
