@@ -5,7 +5,8 @@
     margin-left: 3px;
 }
 
-@media screen and (max-width: 425) {
+
+@media screen and (max-width: 425px) {
     .logo { 
       width: 126px;
       height: 24px;
