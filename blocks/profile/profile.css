@@ -10,6 +10,7 @@
     margin: 40px auto 50px;
     max-width: 882px;
     position: relative;
+    justify-content: space-between;
 }
 
 @media screen and (max-width: 1120px) {
