@@ -11,11 +11,6 @@
     max-width: 880px;
 }
 
-@media screen and (max-width: 1120px) {
-    .profile{
-        max-width: 726px;
-    }
-}
 @media screen and (max-width: 880px) {
     .profile {
         display: block;
