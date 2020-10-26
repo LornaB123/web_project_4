@@ -11,12 +11,12 @@
 }
 
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 725px) {
     .profile__info-subtitle {
         font-size: 14px;
         line-height: 17px;
         max-width: 280px;
-        margin: 0 auto 36px;
+        margin: 14px auto 36px;
         text-align: center;
     }
 }

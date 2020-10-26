@@ -19,7 +19,7 @@
     transition: color 2s ease .5s;
 }
 
-@media screen and (max-width:425px) {
+@media screen and (max-width:725px) {
     .profile__add-button {
         width: 282px;
         background-size: 16px;
