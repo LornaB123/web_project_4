@@ -7,23 +7,9 @@
     margin: 47.25px auto 66px;
     display: grid;
     max-width: 880px;
-    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
-    grid-template-rows: repeat(3, auto);
+    grid-template-columns: repeat(auto-fill, 282px);
+    grid-auto-rows: 361px;
     grid-row-gap: 20px;
     grid-column-gap: 17px;
-}
-
-@media screen and (max-width: 780px) {
-    .elements {
-        grid-template-rows: repeat(2, auto);
-        max-width: 624px;
-    }
-}
-
-@media screen and (max-width: 425px) {
-    .elements {
-        grid-template-rows: repeat(1, auto);
-        margin: 36px auto 48;
-        max-width: 282px;
-    }
+    justify-content: center;
 }
