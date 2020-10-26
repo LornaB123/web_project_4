@@ -1,6 +1,11 @@
 .profile__info {
     max-width: 428px;
     margin: 22px 18px auto 30px;
+    display: grid;
+    grid-template-columns: 373px auto;
+    grid-template-rows: repeat(2 auto);
+    grid-row-gap: 16px;
+    grid-column-gap: 18px;
 }
 
 @media screen and (max-width: 1120px) {
@@ -10,7 +15,7 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 725px) {
     .profile__info {
         max-width: 280px;
         margin: 0; 
