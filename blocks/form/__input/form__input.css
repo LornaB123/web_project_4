@@ -10,11 +10,13 @@
     border-bottom: 1px solid rgba(0,0,0,0.2);
     width: 358px;
     padding-bottom: 13.3px;
+    outline: none;
   }
 
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 880px) {
     .form__input {
       margin-left: 22px;
       width: 238px;
+      padding-bottom: 13px;
     }
   }

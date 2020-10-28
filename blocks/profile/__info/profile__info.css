@@ -8,17 +8,11 @@
     grid-column-gap: 18px;
 }
 
-@media screen and (max-width: 1120px) {
-    .profile__info {
-        max-width: 220px;
-        margin: 18px 20px auto 20px;
-    }
-}
-
 @media screen and (max-width: 880px) {
     .profile__info {
         display: block;
-        max-width: 280px;
+        position: relative;
+        max-width: 282px;
         margin: 0; 
     }
 }

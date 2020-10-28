@@ -2,7 +2,7 @@
     margin-top: 29.74px;
   }
 
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 880px) {
     .form__input_type_job {
       margin-top: 30px;
     }

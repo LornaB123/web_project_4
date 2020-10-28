@@ -11,7 +11,7 @@
   }
 
 .form__button:hover {
-  opacity: 80%;
+  opacity: .8;
   transition: color 2s ease .5s;
   cursor: pointer;
 }

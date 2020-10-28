@@ -2,9 +2,3 @@
     margin-top: 54px;
   }
 
-@media screen and (max-width) {
-  .form__input_type_name { 
-    margin-top: 75px;
-    }
-  }
-  
