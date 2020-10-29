@@ -2,3 +2,8 @@
 @import url("./__close-button/form__close-button.css");
 @import url("./__input/form__input.css");
 @import url("./__title/form__title.css");
+
+
+.form {
+    position: absolute;
+}

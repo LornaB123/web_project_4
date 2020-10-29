@@ -2,12 +2,11 @@
     width: 40.7px;
     height: 40.7px;
     border: none;
-    position: fixed;
-    right: 379.44;
-    top: 148px;
+    position: absolute;
+    right: -40px;
+    top: -40px;
     background-image: url("../../../images/CloseIcon.png");
     background-position: center;
-    background-size: 40.7px;
     cursor: pointer;
     background-color: transparent;
   }
@@ -18,10 +17,10 @@
     cursor: pointer;
   }
 
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 880px) {
     .form__close-button {
-      right: 18.62px;
-      top: 72.62px;
+      right: 0px;
+      top: -43px;
       width: 26px;
       height: 26px;
     }

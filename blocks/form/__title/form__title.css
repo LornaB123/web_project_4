@@ -7,13 +7,13 @@
     color: black;
   }
 
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 880px) {
     .form__title {
     font-size: 18px;
     line-height: 22px;
     margin-left: 22px;
     margin-top: 25px;
     margin-bottom: 75px;
-    
+
     }
   }
