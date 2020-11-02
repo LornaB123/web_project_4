@@ -23,6 +23,7 @@ form.addEventListener('submit', (event) => {
   toggleModal()
 })
 
+//Add Button Form Features
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
@@ -38,7 +39,7 @@ function toggleModal(){
 
 editButton.addEventListener('click', toggleModal);
 closeButton.addEventListener('click', toggleModal);
-
+addButton.addEventListener('click', toggleModal);
 
 //Cards to be loaded to browser
 (function initialCards() {
