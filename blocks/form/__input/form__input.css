@@ -1,4 +1,6 @@
 @import url("./_type_job/form__input_type_job.css");
+@import url("./_type_link/form__input_type_link.css");
+@import url("./_type_title/form__input_type_title.css");
 
 .form__input {
     font-weight: normal;
