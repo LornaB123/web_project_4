@@ -1,24 +1,17 @@
 //Modals
-const addCardModal = document.querySelector('.popup_type_edit');
-const addCardModal = document.querySelector('.popup_type_add-card');
-
-//Wrappers
-const modalWindow = document.querySelector('.popup');
-const editForm = document.querySelector('.popup_form');
-
-const addCardModal = document.querySelector('.popup');
+let form = document.querySelector(".form");
+let modal= document.querySelector('.popup');
 
 //Buttons and other DOM elements
 let editButton = document.querySelector(".profile__edit-button");
 let closeButton = document.querySelector(".form__close-button");
-let form = document.querySelector(".form");
-let modal= document.querySelector('.popup');
 let nameInput = document.querySelector('.form__input_type_name');
 let jobInput = document.querySelector('.form__input_type_job');
 let profileName = document.querySelector('.profile__info-title');
 let profileJob = document.querySelector('.profile__info-subtitle');
 
-//Form data
+
+// Edit Form Features
 form.addEventListener('submit', (event) => {
   event.preventDefault();
  
@@ -26,34 +19,19 @@ form.addEventListener('submit', (event) => {
   profileJob.textContent = jobInput.value;
   
   toggleModal()
-});
+})
 
+
+//Close Button Features
 function toggleModal(){
-  if(!modalWindow.classList.contains('.popup_open')) {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-  }
-  modalWindow.classList.toggle('.popup_open');
-};
-
-function formSubmitHandler(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  toggleModal();
+  modal.classList.toggle('popup_open');
 }
 
 editButton.addEventListener('click', toggleModal);
 closeButton.addEventListener('click', toggleModal);
-editForm.addEventListener('submit', formSubmitHandler);
 
-addCardForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  let nameInput = editForm.querySelector('.popup__input_type_name');
-  let jobInput = editForm.querySelector('.popup__input_type_job');
 
-});
-
+//Cards to be loaded to browser
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -81,28 +59,14 @@ const initialCards = [
   }
 ]; 
 
-const editForm = editModal.querySelector('popup__form');
-const addCardForm = addCardModal.querySelector('popup__form');
 
-initialCards.forEach(card => {
-  const cardTemplate = document.querySelector('.card-template').textContent.querySelector('.places__item');
-  
+//selecting initial cards
+const cards = document.querySelector(".elements");
 
-  const list = document.querySelector('.places__list');
-})
+const cardElements = initialCards.map( card => {
+  const cardItem = document.createElement("div");
+  cardItem.textContent = card;
+  return cardItem;
+});
 
-function createCard(card) {
-  const cardElement = cardTemplate.cloneNode(true);
-
-  const title = cardElement.querySelector('.card__title');
-  const image = cardElement.querySelector('.card__image');
-
-  title.textContent = card.name;
-  image.style.backgroundImage = `url(${card.link})`;
-
-  return cardElement;
-}
-
-function addCard (cardElement) {
-  list.prepend(cardElement);
-}
+list.append(...cardElements);
