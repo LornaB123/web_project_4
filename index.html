@@ -24,6 +24,7 @@
                     <button class="profile__add-button" aria-label="Add"></button>
                 </section>
                 <div class="elements">
+                    
                     <figure class="elements__element">
                       <img class="elements__element-pic" src="./images/Yosemite.png" alt="Yosemite Valley">
                       <figcaption class="elements__caption">Yosemite Valley<button class="elements__favorite" aria-label="Like"></button></figcaption>
@@ -53,17 +54,46 @@
             <footer class="footer">
                 <p class="footer__info">© 2020 Around The U.S.</p>
             </footer>
-            <div class="popup">
+            <div class="popup popup_type_edit">
                 <div class="popup__container">
                     <form action="#" class="form">
                       <h2 class="form__title">Edit profile</h2>
-                        <input type='text' name='name' class="form__input form__input_type_name" value="Jacques Cousteau">
-                        <input type='text' name='job' class='form__input form__input_type_job' value='Explorer'>
+                        <input type='text' name='name' class="form__input form__input_type_name" value='Name'>
+                        <input type='text' name='job' class='form__input form__input_type_job' value='Job'>
                         <button class="form__button" type="submit" aria-label="Save">Save</button>
                         <button class="form__close-button" type="reset" aria-label="Close Form"></button>
                     </form>
                 </div>
             </div>
+            <div class="popup popup_type_add-card">
+                <div class="popup__container">
+                    <form action="#" class="form">
+                      <h2 class="form__title">New Place</h2>
+                        <input type='text' name='card-title' class="form__input form__input_type_title" value='Title'>
+                        <input type='text' name='card-link' class='form__input form__input_type_link' value='Image Link'>
+                        <button class="form__button" type="submit" aria-label="Save">Save</button>
+                        <button class="form__close-button" type="reset" aria-label="Close Form"></button>
+                    </form>
+                </div>
+            </div>
+            <div class = 'popup popup_type_image'>
+                <div class = 'popup__content'>
+                    <button type = 'button' class = 'popup__close'></button>
+                    <img src ='' alt='' class='popup__image'>
+                    <h3 class='caption'></h3>
+                </div>
+            </div>
+
+            <template class = "card__template">
+                <li class = "places__item card">
+                    <div class = "card__image" style =""></div>
+                    <div class = "card__description">
+                        <h2 class = "card__title"></h2>
+                        <button type = "button" class = "card__like-button"></button>
+                    </div>
+                </li>
+            </template>
+
         <script src="script.js"></script>
     </body>
 </html>
