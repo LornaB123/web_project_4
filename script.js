@@ -32,7 +32,7 @@ closeButton.addEventListener('click', toggleModal);
 
 
 //Cards to be loaded to browser
-function initialCards() {
+(function initialCards() {
   const cards = document.querySelector('.elements');
   const cardTemplate = document.querySelector('.card__template').content;
   const initialCards = [
@@ -69,7 +69,7 @@ function initialCards() {
     cardTitle.textContent = initialCard.name;
     cards.append(cardElement);
   }
-}; 
+})(); 
 
 
 //selecting initial cards
