@@ -85,15 +85,19 @@
             </div>
 
             <template class = "card__template">
-                <li class = "places__item card">
-                    <div class = "card__image"></div>
-                    <div class = "card__description">
-                        <h2 class = "card__title"></h2>
-                        <button type = "button" class = "card__like-button"></button>
-                    </div>
-                </li>
+                <figure class="elements__element">
+                    <img class="elements__element-pic" alt="card image">
+                    <figcaption class="elements__caption"><button class="elements__favorite" type="button" aria-label="Like"></button></figcaption>
+                    <button class="elements__trash" type="button" aria-label="Delete"></button>
+                </figure>
             </template>
 
         <script src="script.js"></script>
     </body>
 </html>
+
+
+<figure class="elements__element">
+    <img class="elements__element-pic" src="./images/Yosemite.png" alt="Yosemite Valley">
+    <figcaption class="elements__caption">Yosemite Valley<button class="elements__favorite" aria-label="Like"></button></figcaption>
+</figure>

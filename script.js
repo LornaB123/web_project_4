@@ -63,8 +63,8 @@ closeButton.addEventListener('click', toggleModal);
   ];
   for(initialCard of initialCards) {
     const cardElement = cardTemplate.cloneNode(true);
-    const cardImage = cardElement.querySelector('.card__image');
-    const cardTitle = cardElement.querySelector('.card__title');
+    const cardImage = cardElement.querySelector('.elements__element-pic');
+    const cardTitle = cardElement.querySelector('.elements__caption');
     cardImage.setAttribute('src', initialCard.link);
     cardTitle.textContent = initialCard.name;
     cards.append(cardElement);
