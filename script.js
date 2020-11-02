@@ -9,7 +9,9 @@ let nameInput = document.querySelector('.form__input_type_name');
 let jobInput = document.querySelector('.form__input_type_job');
 let profileName = document.querySelector('.profile__info-title');
 let profileJob = document.querySelector('.profile__info-subtitle');
-
+let addButton = document.querySelector('.profile__add-button');
+let titleInput = document.querySelector('.form__input_type_title');
+let linkInput = document.querySelector('.form__input_type_link');
 
 // Edit Form Features
 form.addEventListener('submit', (event) => {
@@ -19,6 +21,13 @@ form.addEventListener('submit', (event) => {
   profileJob.textContent = jobInput.value;
   
   toggleModal()
+})
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  cardTitle.textContent = titleInput.value;
+  cardImage.textContent = linkInput.value;
 })
 
 
@@ -65,6 +74,8 @@ closeButton.addEventListener('click', toggleModal);
     const cardElement = cardTemplate.cloneNode(true);
     const cardImage = cardElement.querySelector('.elements__element-pic');
     const cardTitle = cardElement.querySelector('.elements__caption');
+    const cardLike = cardElement.querySelector('.elements__favorite');
+
     cardImage.setAttribute('src', initialCard.link);
     cardTitle.textContent = initialCard.name;
     cards.append(cardElement);
