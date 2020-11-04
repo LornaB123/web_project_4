@@ -42,10 +42,7 @@ closeButton.addEventListener('click', toggleModal);
 addButton.addEventListener('click', toggleModal);
 
 //Cards to be loaded to browser
-(function initialCards() {
-  const cards = document.querySelector('.elements');
-  const cardTemplate = document.querySelector('.card__template').content;
-  const initialCards = [
+const initialCards = [
     {
       name: "Yosemite Valley",
       link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
@@ -70,27 +67,21 @@ addButton.addEventListener('click', toggleModal);
       name: "Lago di Braies",
       link: "https://code.s3.yandex.net/web-code/lago.jpg"
     }
-  ];
-  for(initialCard of initialCards) {
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardImage = cardElement.querySelector('.elements__element-pic');
-    const cardTitle = cardElement.querySelector('.elements__caption');
-    const cardLike = cardElement.querySelector('.elements__favorite');
-
-    cardImage.setAttribute('src', initialCard.link);
-    cardTitle.textContent = initialCard.name;
-    cards.append(cardElement);
-  }
-})(); 
+  ]; 
 
 
-//selecting initial cards
-const cards = document.querySelector(".elements");
+initialCards.forEach(card => {
+  const cardTemplate = document.querySelector('.card__template').content.querySelector('.elements__element');
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardTitle = cardElement.querySelector('.elements__caption');
+  const cardImage = cardElement.querySelector('.elements__element-pic');
+  const cardLike = cardElement.querySelector('.elements__favorite');
+  const cardTrash = cardElement.querySelector('.elements__trash');
 
-const cardElements = initialCards.map( card => {
-  const cardItem = document.createElement("div");
-  cardItem.textContent = card;
-  return cardItem;
-});
+  cardTitle.textContent = card.name;
+  cardImage.setAttribute('src', card.link);
 
-list.append(...cardElements);
+  const list = document.querySelector('.elements__element');
+  list.prepend(cardElement);
+})
+

@@ -39,17 +39,19 @@
                     </form>
                 </div>
             </div>
-            <div class="popup popup_type_add-card">
-                <div class="popup__container">
-                    <form action="#" class="form">
-                      <h2 class="form__title">New Place</h2>
-                        <input type='text' name='card-title' class="form__input form__input_type_title" value='Title'>
-                        <input type='text' name='card-link' class='form__input form__input_type_link' value='Image Link'>
-                        <button class="form__button" type="submit" aria-label="Save">Save</button>
-                        <button class="form__close-button" type="reset" aria-label="Close Form"></button>
-                    </form>
+            <template class="form__template">
+                <div class="popup popup_type_add-card">
+                    <div class="popup__container">
+                      <form action="#" class="form">
+                        <h2 class="form__title">New Place</h2>
+                            <input type='text' name='card-title' class="form__input form__input_type_title" value='Title'>
+                            <input type='text' name='card-link' class='form__input form__input_type_link' value='Image Link'>
+                            <button class="form__button" type="submit" aria-label="Save">Save</button>
+                            <button class="form__close-button" type="reset" aria-label="Close Form"></button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </template>
             <div class = 'popup popup_type_image'>
                 <div class = 'popup__content'>
                     <button type = 'button' class = 'popup__close'></button>
