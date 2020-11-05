@@ -1,5 +1,7 @@
 .elements__trash {
     background-image: url(../../../images/trashIcon.png);
+    background-color: transparent;
+    border: none;
     position: absolute;
     width: 18px;
     height: 19.3px;
