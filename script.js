@@ -23,10 +23,7 @@ let addCloseButton = document.querySelector('.form__close-button');
 let titleInput = document.querySelector('.form__input_type_title');
 let linkInput = document.querySelector('.form__input_type_link');
 
-const newCard =[{
-  name: card.name,
-  link: card.link
-}];
+
 
 // Edit Form Features
 editForm.addEventListener('submit', (event) => {
@@ -42,8 +39,9 @@ editForm.addEventListener('submit', (event) => {
 addForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
-  newCard.forEach(card => {
-  
+
+  function newCard(card => {
+
     const cardElement = cardTemplate.cloneNode(true);
   
     const cardTitle = cardElement.querySelector('.elements__caption');
