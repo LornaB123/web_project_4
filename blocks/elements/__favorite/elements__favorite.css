@@ -4,8 +4,9 @@
     margin-top: 6px;
     background-image: url("../../../images/favoriteHeart.svg");
     border: none;
-    background-color: white;
+    background-color: transparent;
     cursor: pointer;
+    outline: none;
     position: absolute;
     top: 313px;
     right: 18.24px;

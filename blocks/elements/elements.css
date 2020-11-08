@@ -2,6 +2,7 @@
 @import url("./__element-pic/elements__element-pic.css");
 @import url("./__caption/elements__caption.css");
 @import url("./__favorite/elements__favorite.css");
+@import url("./__favorite/_selected/elements__favorite_selected.css");
 @import url("./__trash/elements__trash.css");
 
 .elements{

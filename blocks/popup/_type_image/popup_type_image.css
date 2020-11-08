@@ -1,4 +1,7 @@
-.popup_type_image {
+.popup_type_image .popup__container {
     padding: 0;
     background: transparent;
+    width: auto;
+    height: auto;
+    
 }
