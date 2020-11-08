@@ -9,6 +9,7 @@
     background-position: center;
     cursor: pointer;
     background-color: transparent;
+    transition:visibility 0s, opacity 1s ease-in-out;
   }
 
   .form__close-button:hover {

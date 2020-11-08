@@ -1,6 +1,5 @@
 @import url("./_type_job/form__input_type_job.css");
 @import url("./_type_link/form__input_type_link.css");
-@import url("./_type_title/form__input_type_title.css");
 
 .form__input {
     font-weight: normal;
@@ -10,10 +9,11 @@
     margin-left: 36px;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     width: 358px;
-    padding-bottom: 13.3px;
+    padding-bottom: 13.34px;
     outline: none;
   }
 
+ 
   @media screen and (max-width: 880px) {
     .form__input {
       margin-left: 22px;

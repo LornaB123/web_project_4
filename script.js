@@ -3,7 +3,7 @@ let editModal= document.querySelector('.popup_type_edit');
 let addModal = document.querySelector('.popup_type_add-card');
 let editForm = editModal.querySelector('.edit-form');
 let addForm = addModal.querySelector('.add-form');
-
+let imagePopup = document.querySelector('.popup_type_image');
 //Buttons and other DOM elements
 let editButton = document.querySelector('.profile__edit-button');
 let closeButton = editModal.querySelector('.form__close-button');
@@ -16,6 +16,7 @@ let list = document.querySelector('.elements');
 let addButton = document.querySelector('.profile__add-button');
 let addCloseButton = addModal.querySelector('.form__close-button');
 let addCardForm = addModal.querySelector('.popup__form')
+let imageCloseButton = imagePopup.querySelector('.form__close-button');
 
 // Edit Form Features
 editForm.addEventListener('submit', (event) => {
@@ -57,7 +58,6 @@ addButton.addEventListener('click', () => {
 });
 
 
-
 //Close Buttons Functionality 
 addCloseButton.addEventListener('click', () => {
   toggleModal(addModal);
@@ -67,6 +67,9 @@ closeButton.addEventListener('click', () => {
   toggleModal(editModal);
 });
 
+imageCloseButton.addEventListener('click', e => {
+  toggleModal(imagePopup);
+});
 
 
 //Cards to be loaded to browser
@@ -117,8 +120,10 @@ const initialCards = [
     cardImage.setAttribute('src', card.link);
 
     cardImage.addEventListener('click', (e) =>{
-      toggleModal(imagePopup);
+      
       imageModal(card.link, card.name);
+      toggleModal(imagePopup);
+
     });
 
     return cardElement;
@@ -139,13 +144,9 @@ function imageModal(link, name) {
   let imagePopup = document.querySelector('.popup_type_image');
   let popupPic = imagePopup.querySelector('.popup__image');
   let popupCaption = imagePopup.querySelector('.popup__caption');
-  let imageCloseButton = imagePopup.querySelector('.form__close-button');
 
   imagePopup.classList.add('visible');
   popupPic.setAttribute('src', link);
   popupCaption.textContent = name;
-  popupPic.addEventListener('click', e => {
-    toggleModal(imagePopup);
-  });
 };
  
