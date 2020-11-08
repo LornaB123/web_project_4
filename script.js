@@ -57,6 +57,7 @@ addButton.addEventListener('click', () => {
 });
 
 
+
 //Close Buttons Functionality 
 addCloseButton.addEventListener('click', () => {
   toggleModal(addModal);
@@ -116,7 +117,8 @@ const initialCards = [
     cardImage.setAttribute('src', card.link);
 
     cardImage.addEventListener('click', (e) =>{
-      imageModal(card.link, card.value);
+      toggleModal(imagePopup);
+      imageModal(card.link, card.name);
     });
 
     return cardElement;
