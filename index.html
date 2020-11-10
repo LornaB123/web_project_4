@@ -32,8 +32,8 @@
                 <div class="popup__container">
                     <form action="#" class="form edit-form">
                       <h2 class="form__title">Edit profile</h2>
-                        <input type='text' name='name' class="form__input form__input_type_name" value='Jacques Cousteau'>
-                        <input type='text' name='job' class='form__input form__input_type_job' value='Explorer'>
+                        <input type='text' name='name' class="form__input form__input_type_name" placeholder='Jacques Cousteau' required>
+                        <input type='text' name='job' class='form__input form__input_type_job' placeholder='Explorer' required>
                         <button class="form__save" type="submit" aria-label="Save">Save</button>
                         <button class="form__close-button" type="reset" aria-label="Close Form"></button>
                     </form>
@@ -43,8 +43,8 @@
                     <div class="popup__container">
                       <form action="#" class="form add-form">
                         <h2 class="form__title">New Place</h2>
-                            <input type='text' name='card-title' class="form__input form__input_type_title" placeholder='Title'>
-                            <input type='text' name='card-link' class='form__input form__input_type_link' placeholder='Image Link'>
+                            <input type='text' name='card-title' class="form__input form__input_type_title" placeholder='Title' required>
+                            <input type='url' name='card-link' class='form__input form__input_type_link' placeholder='Image Link' required>
                             <button class="form__save" type="submit" aria-label="Save">Create</button>
                             <button class="form__close-button" type="reset" aria-label="Close Form"></button>
                         </form>
@@ -72,6 +72,7 @@
                     <button class="elements__trash" type="button" aria-label="Delete"></button>
                 </figure>
             </template>
-        <script src="script.js"></script>
+        <script src="scripts/initialCards.js"></script>
+        <script src="scripts/script.js"></script>
     </body>
 </html>
