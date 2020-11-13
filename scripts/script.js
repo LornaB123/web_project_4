@@ -17,7 +17,8 @@ const addButton = document.querySelector('.profile__add-button');
 const addCloseButton = addModal.querySelector('.form__close-button');
 const popupPic = imagePopup.querySelector('.popup__image');
 const popupCaption = imagePopup.querySelector('.popup__caption');
-
+const titleInput = addForm.querySelector('.form__input_type_title');
+const linkInput = addForm.querySelector('.form__input_type_link');
 const imageCloseButton = imagePopup.querySelector('.form__close-button');
 
 // Edit Form Features
@@ -34,9 +35,6 @@ editForm.addEventListener('submit', (event) => {
 //Add Form Submit/Save
 addForm.addEventListener('submit', (evt)  => {
   evt.preventDefault();
-
-  const titleInput = addForm.querySelector('.form__input_type_title');
-  const linkInput = addForm.querySelector('.form__input_type_link');
 
   addCard({name: titleInput.value, link: linkInput.value});
 
@@ -91,7 +89,8 @@ imageCloseButton.addEventListener('click', e => {
     });
   
     cardTitle.textContent = card.name;
-    cardImage.setAttribute('src', card.link), alt="Card Link Image";
+    cardImage.setAttribute('src', card.link);
+    cardImage.setAttribute('alt', card.name);
 
     cardImage.addEventListener('click', (e) =>{
       
@@ -116,7 +115,8 @@ initialCards.forEach(card => {
 
 function imageModal(link, name) {
   imagePopup.classList.add('visible');
-  popupPic.setAttribute('src', link), alt="Popup Photo Image";
+  popupPic.setAttribute('src', link);
+  popupPic.setAttribute('alt', name);
   popupCaption.textContent = name;
 };
  
