@@ -53,9 +53,9 @@ function enableValidation({formSelector, inputSelector, submitButtonSelector, ..
                 checkInputValidity(input, form, rest);
                 //toggle button state
                 toggleButtonState(inputs, button, rest);
-            })
-       })
-    })
+            });
+       });
+    });
 }
 
 
