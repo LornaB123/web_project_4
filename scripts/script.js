@@ -6,20 +6,20 @@ const addForm = addModal.querySelector('.add-form');
 const imagePopup = document.querySelector('.popup_type_image');
 //Buttons and other DOM elements
 const editButton = document.querySelector('.profile__edit-button');
-const closeButton = editModal.querySelector('.form__close-button');
-const nameInput = document.querySelector('.form__input_type_name');
-const jobInput = document.querySelector('.form__input_type_job');
+const closeButton = editModal.querySelector('.popup__close-button');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_job');
 const profileName = document.querySelector('.profile__info-title');
 const profileJob = document.querySelector('.profile__info-subtitle');
 const cardTemplate = document.querySelector('.card__template').content.querySelector('.elements__element');
 const list = document.querySelector('.elements');
 const addButton = document.querySelector('.profile__add-button');
-const addCloseButton = addModal.querySelector('.form__close-button');
+const addCloseButton = addModal.querySelector('.popup__close-button');
 const popupPic = imagePopup.querySelector('.popup__image');
 const popupCaption = imagePopup.querySelector('.popup__caption');
-const titleInput = addForm.querySelector('.form__input_type_title');
-const linkInput = addForm.querySelector('.form__input_type_link');
-const imageCloseButton = imagePopup.querySelector('.form__close-button');
+const titleInput = addForm.querySelector('.popup__input_type_title');
+const linkInput = addForm.querySelector('.popup__input_type_link');
+const imageCloseButton = imagePopup.querySelector('.popup__close-button');
 
 // Edit Form Features
 editForm.addEventListener('submit', (event) => {
@@ -119,4 +119,3 @@ function imageModal(link, name) {
   popupPic.setAttribute('alt', name);
   popupCaption.textContent = name;
 };
- 
