@@ -13,7 +13,6 @@
     outline: none;
   }
 
- 
   @media screen and (max-width: 880px) {
     .popup__input {
       margin-left: 22px;
