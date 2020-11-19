@@ -1,6 +1,5 @@
 @import url("./_type_job/popup__input_type_job.css");
 @import url("./_type_link/popup__input_type_link.css");
-@import url("./_type_error/popup__input_type_error.css");
 
 .popup__input {
     display: block;

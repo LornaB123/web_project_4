@@ -24,23 +24,13 @@ const imageCloseButton = imagePopup.querySelector('.popup__close-button');
 const saveButton = document.querySelector('.popup__save');
 const createButton = addModal.querySelector('.popup__save');
 
-
-//Escape key function
-// function escKeyClose(e) {
-//   if(e.keyCode === 27) {
-//     toggleModal();
-//   }
-// }
-
-
-
 // Edit Form Features
 editForm.addEventListener('submit', (event) => {
   event.preventDefault();
-
+  //update fields on main page
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
- 
+  //close window on submit
   toggleModal(editModal);
 });
 
@@ -48,14 +38,13 @@ editForm.addEventListener('submit', (event) => {
 //Add Form Submit/Save
 addForm.addEventListener('submit', (evt)  => {
   evt.preventDefault();
-
+  //create card:
   addCard({name: titleInput.value, link: linkInput.value});
-
+  //close modal after submit
   toggleModal(addModal);
   });
   
 //Button Popup Toggle Function
-
 function toggleModal(modal){
   modal.classList.toggle('popup_open');
 };
@@ -65,10 +54,28 @@ function imageModalToggle(imageMod){
   imageMod.classList.toggle('popup_visible');
 }
 
+//Escape key listener Edit Modal
+window.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') {
+    editModal.classList.remove('popup_open');
+  }
+});
+//Escape key listener Add Modal
+window.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') {
+    addModal.classList.remove('popup_open');
+  }
+});
+//Escape key listener image Modal
+window.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') {
+    imagePopup.classList.remove('popup_visible');
+  }
+});
+
 //Open Button Fucntionalities
 //EditModal
 editButton.addEventListener('click', () => {
-  saveButton.classList.add('popup__save_disabled');
   toggleModal(editModal);
 });
 
