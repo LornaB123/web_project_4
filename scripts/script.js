@@ -43,12 +43,12 @@ addForm.addEventListener('submit', (evt)  => {
   //close modal after submit
   toggleModal(addModal);
   });
-  
+
+  //Toggle Functions
 //Button Popup Toggle Function
 function toggleModal(modal){
   modal.classList.toggle('popup_open');
 };
-
 //Function to toggle Image Modal
 function imageModalToggle(imageMod){
   imageMod.classList.toggle('popup_visible');
@@ -70,6 +70,23 @@ window.addEventListener('keydown', function(e){
 window.addEventListener('keydown', function(e){
   if(e.key === 'Escape') {
     imagePopup.classList.remove('popup_visible');
+  }
+});
+
+//Outside Modal Click = Close
+editModal.addEventListener('click', function (e){
+  if (e.target === this){
+    editModal.classList.toggle('popup_open');
+  }
+});
+addModal.addEventListener('click', function (e){
+  if (e.target === this){
+    addModal.classList.toggle('popup_open');
+  }
+});
+imagePopup.addEventListener('click', function (e){
+  if (e.target === this){
+    imagePopup.classList.toggle('popup_visible');
   }
 });
 
