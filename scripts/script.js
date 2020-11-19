@@ -23,8 +23,9 @@ const linkInput = addForm.querySelector('.popup__input_type_link');
 const imageCloseButton = imagePopup.querySelector('.popup__close-button');
 const saveButton = document.querySelector('.popup__save');
 const createButton = addModal.querySelector('.popup__save');
+const errorMessage = addModal.querySelector('.popup__input');
 
-// Edit Form Features
+//Edit Form Submit/Save
 editForm.addEventListener('submit', (event) => {
   event.preventDefault();
   //update fields on main page
@@ -44,7 +45,8 @@ addForm.addEventListener('submit', (evt)  => {
   toggleModal(addModal);
   });
 
-  //Toggle Functions
+
+//Toggle Functions
 //Button Popup Toggle Function
 function toggleModal(modal){
   modal.classList.toggle('popup_open');
@@ -54,19 +56,21 @@ function imageModalToggle(imageMod){
   imageMod.classList.toggle('popup_visible');
 }
 
-//Escape key listener Edit Modal
+
+//Escape key listener functionality 
+//Edit Modal
 window.addEventListener('keydown', function(e){
   if(e.key === 'Escape') {
     editModal.classList.remove('popup_open');
   }
 });
-//Escape key listener Add Modal
+//Add Modal
 window.addEventListener('keydown', function(e){
   if(e.key === 'Escape') {
     addModal.classList.remove('popup_open');
   }
 });
-//Escape key listener image Modal
+//Image Modal
 window.addEventListener('keydown', function(e){
   if(e.key === 'Escape') {
     imagePopup.classList.remove('popup_visible');
@@ -95,7 +99,6 @@ imagePopup.addEventListener('click', function (e){
 editButton.addEventListener('click', () => {
   toggleModal(editModal);
 });
-
 //Add Card Modal
 addButton.addEventListener('click', () => {
   createButton.classList.add('popup__save_disabled');
@@ -103,15 +106,16 @@ addButton.addEventListener('click', () => {
 });
 
 
-//Close Buttons Functionality 
+//Close Buttons Functionalities
+//AddModal 
 addCloseButton.addEventListener('click', () => {
   toggleModal(addModal);
 });
-
+//Edit Modal
 closeButton.addEventListener('click', () => {
   toggleModal(editModal);
 });
-
+//Image Modal
 imageCloseButton.addEventListener('click', e => {
   imageModalToggle(imagePopup);
 });
@@ -124,28 +128,22 @@ imageCloseButton.addEventListener('click', e => {
     const cardImage = cardElement.querySelector('.elements__element-pic');
     const cardLike = cardElement.querySelector('.elements__favorite');
     const cardTrash = cardElement.querySelector('.elements__trash');
-
     cardTrash.addEventListener('click', (e) => {
       e.target.closest('.elements__element').remove();
     });
-
     cardLike.addEventListener('click', (e) => {
       e.target.classList.toggle('elements__favorite_selected');
     });
-  
     cardTitle.textContent = card.name;
     cardImage.setAttribute('src', card.link);
     cardImage.setAttribute('alt', card.name);
-
-    cardImage.addEventListener('click', (e) =>{
-      
+    cardImage.addEventListener('click', (e) =>{     
       imageModal(card.link, card.name);
       imageModalToggle(imagePopup);
-
     });
-
     return cardElement;
   };
+
 
 //loading card templates to the browser
 function addCard (card) {

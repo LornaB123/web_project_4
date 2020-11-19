@@ -1,3 +1,4 @@
+//Function to show error messages when validation criteria is not met
 function showErrorMessage(input, {errorClass, inputErrorClass}) {
     const error = document.querySelector('#' + input.id + '-error');
     error.textContent = input.validationMessage;
@@ -6,6 +7,7 @@ function showErrorMessage(input, {errorClass, inputErrorClass}) {
     input.classList.add(inputErrorClass);
 }
 
+//Function to hide the error messages when validation criteria is met
 function hideErrorMessage(input, {errorClass, inputErrorClass}) {
     const error = document.querySelector('#' + input.id + '-error');
     error.textContent = '';
@@ -14,6 +16,7 @@ function hideErrorMessage(input, {errorClass, inputErrorClass}) {
     input.classList.remove(inputErrorClass);
 }
 
+//Function to check the input validity according to requirements
 function checkInputValidity(input, form, rest) {
     if(input.validity.valid) {
         //hide error message
@@ -24,6 +27,7 @@ function checkInputValidity(input, form, rest) {
     }
 }
 
+//Function to change state of Save/Create buttons on form
 function toggleButtonState(inputs, button, inactiveButtonClass) {
     const isValid = inputs.every((input) => input.validity.valid);
 
@@ -34,7 +38,7 @@ function toggleButtonState(inputs, button, inactiveButtonClass) {
     }
 }
 
-
+//Function to enable validation of each forms input fields
 function enableValidation({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, ...rest}) {
     const forms = [...document.querySelectorAll(formSelector)];
 
