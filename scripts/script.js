@@ -4,6 +4,7 @@ const addModal = document.querySelector('.popup_type_add-card');
 const editForm = editModal.querySelector('.edit-form');
 const addForm = addModal.querySelector('.add-form');
 const imagePopup = document.querySelector('.popup_type_image');
+
 //Buttons and other DOM elements
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = editModal.querySelector('.popup__close-button');
@@ -20,14 +21,26 @@ const popupCaption = imagePopup.querySelector('.popup__caption');
 const titleInput = addForm.querySelector('.popup__input_type_title');
 const linkInput = addForm.querySelector('.popup__input_type_link');
 const imageCloseButton = imagePopup.querySelector('.popup__close-button');
+const saveButton = document.querySelector('.popup__save');
+const createButton = addModal.querySelector('.popup__save');
+
+
+//Escape key function
+// function escKeyClose(e) {
+//   if(e.keyCode === 27) {
+//     toggleModal();
+//   }
+// }
+
+
 
 // Edit Form Features
 editForm.addEventListener('submit', (event) => {
   event.preventDefault();
- 
+
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  
+ 
   toggleModal(editModal);
 });
 
@@ -41,7 +54,6 @@ addForm.addEventListener('submit', (evt)  => {
   toggleModal(addModal);
   });
   
-
 //Button Popup Toggle Function
 
 function toggleModal(modal){
@@ -49,11 +61,15 @@ function toggleModal(modal){
 };
 
 //Open Button Fucntionalities
+//EditModal
 editButton.addEventListener('click', () => {
+  saveButton.classList.add('popup__save_disabled');
   toggleModal(editModal);
 });
 
+//Add Card Modal
 addButton.addEventListener('click', () => {
+  createButton.classList.add('popup__save_disabled');
   toggleModal(addModal);
 });
 

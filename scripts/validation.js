@@ -55,12 +55,8 @@ function enableValidation({formSelector, inputSelector, submitButtonSelector, in
     });
 }
 
-
 // enabling validation by calling enableValidation()
 // pass all the settings on call
-
-
-//call enableValidation
 enableValidation({
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
