@@ -62,7 +62,7 @@ function toggleModal(modal){
 
 //Function to toggle Image Modal
 function imageModalToggle(imageMod){
-  imageMod.classList.remove('popup_visible');
+  imageMod.classList.toggle('popup_visible');
 }
 
 //Open Button Fucntionalities
@@ -135,7 +135,6 @@ initialCards.forEach(card => {
 });
 
 function imageModal(link, name) {
-  imagePopup.classList.add('popup_visible');
   popupPic.setAttribute('src', link);
   popupPic.setAttribute('alt', name);
   popupCaption.textContent = name;
