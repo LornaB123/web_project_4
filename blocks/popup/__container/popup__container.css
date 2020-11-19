@@ -5,8 +5,8 @@
     opacity: 1;
     width: 430px;
     height: 330px;
-    position: fixed;
-    top: 195px;
+    position: relative;
+    top: 25px;
     border-radius: 10px;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.15); 
   }

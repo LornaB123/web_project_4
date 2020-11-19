@@ -24,12 +24,11 @@ function checkInputValidity(input, form, rest) {
     }
 }
 
-function toggleButtonState(inputs, button, {inactiveButtonClass, ...rest}) {
-    const isValid = inputs.every((input) => input.validity.valid)
-
+function toggleButtonState(inputs, button, inactiveButtonClass) {
+    const isValid = inputs.every((input) => input.validity.valid);
+    
     if (isValid) {
         button.classList.remove(inactiveButtonClass);
-
     } else {
         button.classList.add(inactiveButtonClass);
     }
@@ -38,21 +37,18 @@ function toggleButtonState(inputs, button, {inactiveButtonClass, ...rest}) {
 
 function enableValidation({formSelector, inputSelector, submitButtonSelector, ...rest}) {
     const forms = [...document.querySelectorAll(formSelector)];
-
     forms.forEach((form) => {
         form.addEventListener('submit', ((e) => {
             e.preventDefault()
         }))
-
         const inputs = [...form.querySelectorAll(inputSelector)];
         const button = form.querySelector(submitButtonSelector);
-
         inputs.forEach((input) => {
             input.addEventListener('input', () => {
                 //check Input Validity
                 checkInputValidity(input, form, rest);
                 //toggle button state
-                toggleButtonState(inputs, button, rest);
+                toggleButtonState(inputs, button, inactiveButtonClass);
             });
        });
     });
