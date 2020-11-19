@@ -1,6 +1,7 @@
 @import url("./__container/popup__container.css");
 @import url("./_type_image/popup_type_image.css");
 @import url("./__image/popup__image.css");
+@import url("./_visible/popup_visible.css");
 @import url("./__caption/popup__caption.css");
 @import url("./__input/popup__input.css");
 @import url("./__title/popup__title.css");
@@ -12,7 +13,7 @@
 
 
 .popup {
-    background-image: url('../../images/Overlay.png');
+    background-color: black;
     position: fixed;
     top: 0;
     left: 0;

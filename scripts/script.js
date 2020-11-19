@@ -60,6 +60,11 @@ function toggleModal(modal){
   modal.classList.toggle('popup_open');
 };
 
+//Function to toggle Image Modal
+function imageModalToggle(imageMod){
+  imageMod.classList.toggle('popup_visible');
+}
+
 //Open Button Fucntionalities
 //EditModal
 editButton.addEventListener('click', () => {
@@ -84,7 +89,7 @@ closeButton.addEventListener('click', () => {
 });
 
 imageCloseButton.addEventListener('click', e => {
-  toggleModal(imagePopup);
+  imageModalToggle(imagePopup);
 });
 
 
@@ -111,7 +116,7 @@ imageCloseButton.addEventListener('click', e => {
     cardImage.addEventListener('click', (e) =>{
       
       imageModal(card.link, card.name);
-      toggleModal(imagePopup);
+      imageModalToggle(imagePopup);
 
     });
 
@@ -130,7 +135,7 @@ initialCards.forEach(card => {
 });
 
 function imageModal(link, name) {
-  imagePopup.classList.add('visible');
+  imagePopup.classList.add('popup_visible');
   popupPic.setAttribute('src', link);
   popupPic.setAttribute('alt', name);
   popupCaption.textContent = name;
