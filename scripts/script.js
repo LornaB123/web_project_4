@@ -62,7 +62,7 @@ function toggleModal(modal){
 
 //Function to toggle Image Modal
 function imageModalToggle(imageMod){
-  imageMod.classList.toggle('popup_visible');
+  imageMod.classList.remove('popup_visible');
 }
 
 //Open Button Fucntionalities
