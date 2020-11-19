@@ -39,10 +39,12 @@ editForm.addEventListener('submit', (event) => {
 //Add Form Submit/Save
 addForm.addEventListener('submit', (evt)  => {
   evt.preventDefault();
+  
   //create card:
   addCard({name: titleInput.value, link: linkInput.value});
   //close modal after submit
   toggleModal(addModal);
+  addForm.reset();
   });
 
 
@@ -59,11 +61,11 @@ function imageModalToggle(imageMod){
 
 //Escape key listener functionality 
 //Edit Modal
-window.addEventListener('keydown', function(e){
-  if(e.key === 'Escape') {
-    editModal.classList.remove('popup_open');
-  }
-});
+ window.addEventListener('keydown', function(e){
+   if(e.key === 'Escape') {
+     editModal.classList.remove('popup_open');
+   }
+ });
 //Add Modal
 window.addEventListener('keydown', function(e){
   if(e.key === 'Escape') {
@@ -79,10 +81,10 @@ window.addEventListener('keydown', function(e){
 
 //Outside Modal Click = Close
 editModal.addEventListener('click', function (e){
-  if (e.target === this){
-    editModal.classList.toggle('popup_open');
-  }
-});
+   if (e.target === this){
+     editModal.classList.toggle('popup_open');
+   }
+ });
 addModal.addEventListener('click', function (e){
   if (e.target === this){
     addModal.classList.toggle('popup_open');

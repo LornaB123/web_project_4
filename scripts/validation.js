@@ -17,13 +17,13 @@ function hideErrorMessage(input, {errorClass, inputErrorClass}) {
 }
 
 //Function to check the input validity according to requirements
-function checkInputValidity(input, form, rest) {
+function checkInputValidity(input, rest) {
     if(input.validity.valid) {
         //hide error message
-        hideErrorMessage(input, form, rest)
+        hideErrorMessage(input, rest)
     } else {
         //show error message
-        showErrorMessage(input, form, rest)
+        showErrorMessage(input, rest)
     }
 }
 
