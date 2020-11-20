@@ -51,13 +51,14 @@ function enableValidation({formSelector, inputSelector, submitButtonSelector, in
         inputs.forEach((input) => {
             input.addEventListener('input', () => {
                 //check Input Validity
-                checkInputValidity(input, form, rest);
+                checkInputValidity(input, rest);
                 //toggle button state
                 toggleButtonState(inputs, button, inactiveButtonClass);
             });
        });
     });
 }
+
 
 // enabling validation by calling enableValidation()
 // pass all the settings on call
