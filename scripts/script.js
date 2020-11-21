@@ -40,6 +40,12 @@ function editButtonOpen(){
 }
 
 //Edit Form Submit/Save Button Functionality
+editForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  profileName.textContent = nameInput.value; 
+  profileJob.textContent = jobInput.value;
+  closeModal(editModal);
+});
 
 //Add Form Submit/Save Button Functionality
 addForm.addEventListener('submit', (evt)  => { 
@@ -75,11 +81,11 @@ function closePopup(e){
 //Escape key close functionality
 function escKeyClose(e){
   if(e.key === 'Escape'){
-    close(document.querySelector('.popup_open'));
+    closeModal(document.querySelector('.popup_open'));
   }
 }
 
-function close(modal){
+function closeModal(modal){
   toggleModal(modal);
   window.removeEventListener('keydown', escKeyClose);
   modal.removeEventListener('click', closePopup);
