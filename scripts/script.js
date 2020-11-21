@@ -58,13 +58,12 @@ function toggleModal(modal){
 
 //Open Modal Function
 function openModal(modal){
-   document.addEventListener('keydown', escKeyClose);
-   document.addEventListener('click', closeModalClick);
-   toggleModal(modal);
+   window.addEventListener('keydown', escKeyClose);
+   modal.addEventListener('click', closePopup);
  }
 
 addButton.addEventListener('click', openModal(addModal));
-editButton.addEventListener('click', openModal(addModal));
+editButton.addEventListener('click', openModal(editModal));
 
 
 //Open Button Fucntionalities 
@@ -80,8 +79,8 @@ editButton.addEventListener('click', openModal(addModal));
 
 //Close Function
 function closePopup(modal){
-  modal.removeEventListener('click', escKeyClose);
-  toggleModal(modal);
+  modal.removeEventListener('keydown', escKeyClose);
+  modal.removeEventListener('click', closeModalClick);
 }
 
 //Escape key close functionality
@@ -108,29 +107,29 @@ function escKeyClose(e, modal){
 
 //Close Button and Outside Click Close Function
 function closeModalClick(e, button, modal){
-  if (e.target === this || e.target === button) {
-    toggleModal(modal);
-  }
+   if (e.target === this || e.target === button) {
+     toggleModal(modal);
+   }
 }
 
-//closeMdalClick(coseMloseButton, editModal);
+//closeMdalClick(closeButton, editModal);
 
 //Outside Modal Click & Close Button Event Listeners
-editModal.addEventListener('click', function (e){ 
-   if (e.target === this || e.target === closeButton){ 
-     editModal.classList.toggle('popup_open'); 
-   } 
- }); 
-addModal.addEventListener('click', function (e){ 
-  if (e.target === this || e.target === addCloseButton){ 
-    addModal.classList.toggle('popup_open'); 
-  } 
-}); 
-imagePopup.addEventListener('click', function (e){ 
-  if (e.target === this || e.target === imageCloseButton){ 
-    imagePopup.classList.toggle('popup_open'); 
-  } 
-}); 
+// editModal.addEventListener('click', function (e){ 
+//    if (e.target === this || e.target === closeButton){ 
+//      editModal.classList.toggle('popup_open'); 
+//    } 
+//  }); 
+// addModal.addEventListener('click', function (e){ 
+//   if (e.target === this || e.target === addCloseButton){ 
+//     addModal.classList.toggle('popup_open'); 
+//   } 
+// }); 
+// imagePopup.addEventListener('click', function (e){ 
+//   if (e.target === this || e.target === imageCloseButton){ 
+//     imagePopup.classList.toggle('popup_open'); 
+//   } 
+// }); 
  
 
 
