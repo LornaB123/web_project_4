@@ -57,32 +57,35 @@ function toggleModal(modal){
 }  
 
 //Open Modal Function
-function openModal(button){
-  button.addEventListener('click', toggleModal);
-  document.addEventListener('keydown', escKeyClose);
-}
+function openModal(modal){
+   document.addEventListener('keydown', escKeyClose);
+   document.addEventListener('click', closeModalClick);
+   toggleModal(modal);
+ }
 
-openModal(editButton);
-openModal(addButton);
+addButton.addEventListener('click', openModal(addModal));
+editButton.addEventListener('click', openModal(addModal));
+
 
 //Open Button Fucntionalities 
 //EditModal 
 // editButton.addEventListener('click', () => { 
-//   toggleModal(editModal); 
-// }); 
-// //Add Card Modal 
-// addButton.addEventListener('click', () => { 
-//   createButton.classList.add('popup__save_disabled'); 
-//   toggleModal(addModal); 
-// }); 
+//    toggleModal(editModal); 
+//  }); 
+// // //Add Card Modal 
+//  addButton.addEventListener('click', () => { 
+//    createButton.classList.add('popup__save_disabled'); 
+//    toggleModal(addModal); 
+//  }); 
 
 //Close Function
 function closePopup(modal){
   modal.removeEventListener('click', escKeyClose);
+  toggleModal(modal);
 }
 
 //Escape key close functionality
-function escKeyClose(e){
+function escKeyClose(e, modal){
   if(e.key === 'Escape'){
     toggleModal(modal);
   }
@@ -91,18 +94,26 @@ function escKeyClose(e){
 
 //Escape key listener functionality  
 //Edit Modal 
- window.addEventListener('keydown', function(e){ 
-   if(e.key === 'Escape') { 
-     editModal.classList.remove('popup_open'); 
-   } 
- }); 
-//Add Modal 
-window.addEventListener('keydown', function(e){ 
-  if(e.key === 'Escape') { 
-    addModal.classList.remove('popup_open'); 
-  } 
-});
+//  window.addEventListener('keydown', function(e){ 
+//    if(e.key === 'Escape') { 
+//      editModal.classList.remove('popup_open'); 
+//    } 
+//  }); 
+// //Add Modal 
+// window.addEventListener('keydown', function(e){ 
+//   if(e.key === 'Escape') { 
+//     addModal.classList.remove('popup_open'); 
+//   } 
+// });
 
+//Close Button and Outside Click Close Function
+function closeModalClick(e, button, modal){
+  if (e.target === this || e.target === button) {
+    toggleModal(modal);
+  }
+}
+
+//closeMdalClick(coseMloseButton, editModal);
 
 //Outside Modal Click & Close Button Event Listeners
 editModal.addEventListener('click', function (e){ 
