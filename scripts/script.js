@@ -28,17 +28,19 @@ const popupCaption = imagePopup.querySelector('.popup__caption');
 const titleInput = addForm.querySelector('.popup__input_type_title'); 
 const linkInput = addForm.querySelector('.popup__input_type_link'); 
 const errorMessage = addModal.querySelector('.popup__input'); 
- 
-//Edit Form Submit/Save Button Functionality
-editForm.addEventListener('submit', (event) => { 
-  event.preventDefault(); 
+
+
+//Edit Modal Open Function
+function editButtonOpen(){
   //update fields on main page 
   profileName.textContent = nameInput.value; 
-  profileJob.textContent = jobInput.value; 
-  //close window on submit 
-  toggleModal(editModal); 
-}); 
- 
+  profileJob.textContent = jobInput.value;
+  //open modal
+  openModal(editModal);
+}
+
+//Edit Form Submit/Save Button Functionality
+
 //Add Form Submit/Save Button Functionality
 addForm.addEventListener('submit', (evt)  => { 
   evt.preventDefault(); 
@@ -58,10 +60,40 @@ function toggleModal(modal){
 
 //Open Modal Function
 function openModal(modal){
-   window.addEventListener('keydown', escKeyClose(modal));
-   modal.addEventListener('click', closePopup(modal));
+   toggleModal(modal);
+   window.addEventListener('keydown', escKeyClose);
+   modal.addEventListener('click', closePopup);
  }
 
+//Close Function
+function closePopup(e){
+  if(e.target === this || e.target === this.querySelector('.popup__close-button')) {
+    closeModal(this);
+  } 
+}
+
+//Escape key close functionality
+function escKeyClose(e){
+  if(e.key === 'Escape'){
+    close(document.querySelector('.popup_open'));
+  }
+}
+
+function close(modal){
+  toggleModal(modal);
+  window.removeEventListener('keydown', escKeyClose);
+  modal.removeEventListener('click', closePopup);
+}
+
+//   modal.removeEventListener('keydown', escKeyClose);
+//   modal.removeEventListener('click', closeModalClick);
+// }
+// //Close Button and Outside Click Close Function
+// function closeModalClick(e, button, modal){
+//   if (e.target === this || e.target === button) {
+//     toggleModal(modal);
+//   }
+// }
  
 addButton.addEventListener('click', (e) => openModal(addModal));
 editButton.addEventListener('click',(e) => openModal(editModal));
@@ -78,18 +110,8 @@ editButton.addEventListener('click',(e) => openModal(editModal));
 //    toggleModal(addModal); 
 //  }); 
 
-//Close Function
-function closePopup(modal){
-  modal.removeEventListener('keydown', escKeyClose);
-  modal.removeEventListener('click', closeModalClick);
-}
 
-//Escape key close functionality
-function escKeyClose(e, modal){
-  if(e.key === 'Escape'){
-    toggleModal(modal);
-  }
-}
+
 
 
 //Escape key listener functionality  
@@ -106,12 +128,7 @@ function escKeyClose(e, modal){
 //   } 
 // });
 
-//Close Button and Outside Click Close Function
-function closeModalClick(e, button, modal){
-   if (e.target === this || e.target === button) {
-     toggleModal(modal);
-   }
-}
+
 
 //closeMdalClick(closeButton, editModal);
 
