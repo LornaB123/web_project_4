@@ -29,7 +29,7 @@ const titleInput = addForm.querySelector('.popup__input_type_title');
 const linkInput = addForm.querySelector('.popup__input_type_link'); 
 const errorMessage = addModal.querySelector('.popup__input'); 
  
-//Edit Form Submit/Save 
+//Edit Form Submit/Save Button Functionality
 editForm.addEventListener('submit', (event) => { 
   event.preventDefault(); 
   //update fields on main page 
@@ -39,11 +39,9 @@ editForm.addEventListener('submit', (event) => {
   toggleModal(editModal); 
 }); 
  
- 
-//Add Form Submit/Save 
+//Add Form Submit/Save Button Functionality
 addForm.addEventListener('submit', (evt)  => { 
   evt.preventDefault(); 
-   
   //create card: 
   addCard({name: titleInput.value, link: linkInput.value}); 
   //close modal after submit 
@@ -56,17 +54,43 @@ addForm.addEventListener('submit', (evt)  => {
 //Button Popup Toggle Function 
 function toggleModal(modal){ 
   modal.classList.toggle('popup_open'); 
-} 
-//Function to toggle Image Modal 
+}  
 
-function imageModalToggle(imageMod){ 
-  imageMod.classList.toggle('popup_visible'); 
-} 
- 
- 
+//Open Modal Function
+function openModal(button){
+  button.addEventListener('click', toggleModal);
+  document.addEventListener('keydown', escKeyClose);
+}
+
+openModal(editButton);
+openModal(addButton);
+
+//Open Button Fucntionalities 
+//EditModal 
+// editButton.addEventListener('click', () => { 
+//   toggleModal(editModal); 
+// }); 
+// //Add Card Modal 
+// addButton.addEventListener('click', () => { 
+//   createButton.classList.add('popup__save_disabled'); 
+//   toggleModal(addModal); 
+// }); 
+
+//Close Function
+function closePopup(modal){
+  modal.removeEventListener('click', escKeyClose);
+}
+
+//Escape key close functionality
+function escKeyClose(e){
+  if(e.key === 'Escape'){
+    toggleModal(modal);
+  }
+}
+
+
 //Escape key listener functionality  
 //Edit Modal 
-
  window.addEventListener('keydown', function(e){ 
    if(e.key === 'Escape') { 
      editModal.classList.remove('popup_open'); 
@@ -77,13 +101,8 @@ window.addEventListener('keydown', function(e){
   if(e.key === 'Escape') { 
     addModal.classList.remove('popup_open'); 
   } 
-}); 
-//Image Modal 
-window.addEventListener('keydown', function(e){ 
-  if(e.key === 'Escape') { 
-    imagePopup.classList.remove('popup_visible'); 
-  } 
-}); 
+});
+
 
 //Outside Modal Click & Close Button Event Listeners
 editModal.addEventListener('click', function (e){ 
@@ -98,20 +117,12 @@ addModal.addEventListener('click', function (e){
 }); 
 imagePopup.addEventListener('click', function (e){ 
   if (e.target === this || e.target === imageCloseButton){ 
-    imagePopup.classList.toggle('popup_visible'); 
+    imagePopup.classList.toggle('popup_open'); 
   } 
 }); 
  
-//Open Button Fucntionalities 
-//EditModal 
-editButton.addEventListener('click', () => { 
-  toggleModal(editModal); 
-}); 
-//Add Card Modal 
-addButton.addEventListener('click', () => { 
-  createButton.classList.add('popup__save_disabled'); 
-  toggleModal(addModal); 
-}); 
+
+
  
  
   //Function to create new card 
@@ -132,7 +143,7 @@ addButton.addEventListener('click', () => {
     cardImage.setAttribute('alt', card.name); 
     cardImage.addEventListener('click', (e) =>{      
       imageModal(card.link, card.name); 
-      imageModalToggle(imagePopup); 
+      toggleModal(imagePopup); 
     }); 
     return cardElement; 
   }
