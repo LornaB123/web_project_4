@@ -58,12 +58,13 @@ function toggleModal(modal){
 
 //Open Modal Function
 function openModal(modal){
-   window.addEventListener('keydown', escKeyClose);
-   modal.addEventListener('click', closePopup);
+   window.addEventListener('keydown', escKeyClose(modal));
+   modal.addEventListener('click', closePopup(modal));
  }
 
-addButton.addEventListener('click', openModal(addModal));
-editButton.addEventListener('click', openModal(editModal));
+ 
+addButton.addEventListener('click', (e) => openModal(addModal));
+editButton.addEventListener('click',(e) => openModal(editModal));
 
 
 //Open Button Fucntionalities 
