@@ -27,7 +27,7 @@ const list = document.querySelector('.elements');
 const popupCaption = imagePopup.querySelector('.popup__caption'); 
 const titleInput = addForm.querySelector('.popup__input_type_title'); 
 const linkInput = addForm.querySelector('.popup__input_type_link'); 
-const errorMessage = addModal.querySelector('.popup__input'); 
+const errorMessage = addModal.querySelector('.popup__input');
 
 //Modal Open Functions
 //Edit Modal Open Function
