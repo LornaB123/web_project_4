@@ -40,7 +40,7 @@ function editButtonOpen(){
 }
 //Add Modal Open Function
 function addButtonOpen(){
-  addCard({name: titleInput.value, link: linkInput.value});
+  createButton.classList.add('popup__save_disabled');
   openModal(addModal);
 }
 //Image Modal Open Function
@@ -48,6 +48,10 @@ function imagePopupOpen(){
   imageModal(card.link, card.name); 
   openModal(imagePopup);
 }
+
+//event listeners for click of modal open buttons
+addButton.addEventListener('click', (e) => openModal(addModal));
+editButton.addEventListener('click',(e) => openModal(editModal));
 
 
 //Edit Form Submit/Save Button Functionality
@@ -100,11 +104,6 @@ function closeModal(modal){
   window.removeEventListener('keydown', escKeyClose);
   modal.removeEventListener('click', closePopup);
 }
- 
-//event listeners for click of modal open buttons
-addButton.addEventListener('click', (e) => openModal(addModal));
-editButton.addEventListener('click',(e) => openModal(editModal));
-
  
   //Function to create new card 
   function createCard(card) { 
