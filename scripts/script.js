@@ -38,11 +38,8 @@ function editButtonOpen(){
   //open modal
   openModal(editModal);
 }
-//Add Modal Open Function
-function addButtonOpen(){
-  createButton.classList.add('popup__save_disabled');
-  openModal(addModal);
-}
+
+
 //Image Modal Open Function
 function imagePopupOpen(){
   imageModal(card.link, card.name); 
@@ -50,7 +47,11 @@ function imagePopupOpen(){
 }
 
 //event listeners for click of modal open buttons
-addButton.addEventListener('click', (e) => openModal(addModal));
+addButton.addEventListener('click', (e) => {
+  createButton.classList.add('popup__save_disabled');
+  openModal(addModal);
+});
+
 editButton.addEventListener('click',(e) => openModal(editModal));
 
 
