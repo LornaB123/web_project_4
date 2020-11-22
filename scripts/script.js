@@ -29,7 +29,7 @@ const titleInput = addForm.querySelector('.popup__input_type_title');
 const linkInput = addForm.querySelector('.popup__input_type_link'); 
 const errorMessage = addModal.querySelector('.popup__input'); 
 
-
+//Modal Open Functions
 //Edit Modal Open Function
 function editButtonOpen(){
   //update fields on main page 
@@ -38,6 +38,17 @@ function editButtonOpen(){
   //open modal
   openModal(editModal);
 }
+//Add Modal Open Function
+function addButtonOpen(){
+  addCard({name: titleInput.value, link: linkInput.value});
+  openModal(addModal);
+}
+//Image Modal Open Function
+function imagePopupOpen(){
+  imageModal(card.link, card.name); 
+  openModal(imagePopup);
+}
+
 
 //Edit Form Submit/Save Button Functionality
 editForm.addEventListener('submit', (e) => {
@@ -46,14 +57,13 @@ editForm.addEventListener('submit', (e) => {
   profileJob.textContent = jobInput.value;
   closeModal(editModal);
 });
-
 //Add Form Submit/Save Button Functionality
-addForm.addEventListener('submit', (evt)  => { 
-  evt.preventDefault(); 
+addForm.addEventListener('submit', (e)  => { 
+  e.preventDefault(); 
   //create card: 
   addCard({name: titleInput.value, link: linkInput.value}); 
   //close modal after submit 
-  toggleModal(addModal); 
+  closeModal(addModal); 
   addForm.reset(); 
   }); 
  
@@ -90,74 +100,11 @@ function closeModal(modal){
   window.removeEventListener('keydown', escKeyClose);
   modal.removeEventListener('click', closePopup);
 }
-
-//   modal.removeEventListener('keydown', escKeyClose);
-//   modal.removeEventListener('click', closeModalClick);
-// }
-// //Close Button and Outside Click Close Function
-// function closeModalClick(e, button, modal){
-//   if (e.target === this || e.target === button) {
-//     toggleModal(modal);
-//   }
-// }
  
+//event listeners for click of modal open buttons
 addButton.addEventListener('click', (e) => openModal(addModal));
 editButton.addEventListener('click',(e) => openModal(editModal));
 
-
-//Open Button Fucntionalities 
-//EditModal 
-// editButton.addEventListener('click', () => { 
-//    toggleModal(editModal); 
-//  }); 
-// // //Add Card Modal 
-//  addButton.addEventListener('click', () => { 
-//    createButton.classList.add('popup__save_disabled'); 
-//    toggleModal(addModal); 
-//  }); 
-
-
-
-
-
-//Escape key listener functionality  
-//Edit Modal 
-//  window.addEventListener('keydown', function(e){ 
-//    if(e.key === 'Escape') { 
-//      editModal.classList.remove('popup_open'); 
-//    } 
-//  }); 
-// //Add Modal 
-// window.addEventListener('keydown', function(e){ 
-//   if(e.key === 'Escape') { 
-//     addModal.classList.remove('popup_open'); 
-//   } 
-// });
-
-
-
-//closeMdalClick(closeButton, editModal);
-
-//Outside Modal Click & Close Button Event Listeners
-// editModal.addEventListener('click', function (e){ 
-//    if (e.target === this || e.target === closeButton){ 
-//      editModal.classList.toggle('popup_open'); 
-//    } 
-//  }); 
-// addModal.addEventListener('click', function (e){ 
-//   if (e.target === this || e.target === addCloseButton){ 
-//     addModal.classList.toggle('popup_open'); 
-//   } 
-// }); 
-// imagePopup.addEventListener('click', function (e){ 
-//   if (e.target === this || e.target === imageCloseButton){ 
-//     imagePopup.classList.toggle('popup_open'); 
-//   } 
-// }); 
- 
-
-
- 
  
   //Function to create new card 
   function createCard(card) { 
@@ -177,11 +124,11 @@ editButton.addEventListener('click',(e) => openModal(editModal));
     cardImage.setAttribute('alt', card.name); 
     cardImage.addEventListener('click', (e) =>{      
       imageModal(card.link, card.name); 
-      toggleModal(imagePopup); 
+      openModal(imagePopup); 
     }); 
     return cardElement; 
   }
- 
+
  
 //loading card templates to the browser 
 function addCard (card) { 
