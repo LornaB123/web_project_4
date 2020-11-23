@@ -38,8 +38,6 @@ function editButtonOpen(){
   //open modal
   openModal(editModal);
 }
-
-
 //Image Modal Open Function
 function imagePopupOpen(){
   imageModal(card.link, card.name); 
@@ -49,6 +47,7 @@ function imagePopupOpen(){
 //event listeners for click of modal open buttons
 addButton.addEventListener('click', (e) => {
   createButton.classList.add('popup__save_disabled');
+  createButton.disabled = true;
   openModal(addModal);
 });
 
@@ -90,6 +89,7 @@ function openModal(modal){
 function closePopup(e){
   if(e.target === this || e.target === this.querySelector('.popup__close-button')) {
     closeModal(this);
+    addForm.reset();
   } 
 }
 
@@ -97,6 +97,7 @@ function closePopup(e){
 function escKeyClose(e){
   if(e.key === 'Escape'){
     closeModal(document.querySelector('.popup_open'));
+    addForm.reset();
   }
 }
 

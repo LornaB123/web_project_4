@@ -28,14 +28,15 @@ function checkInputValidity(input, rest) {
 }
 
 //Function to change state of Save/Create buttons on form
-function toggleButtonState(inputs, button, inactiveButtonClass) {
-    const isValid = inputs.every((input) => input.validity.valid);
+function toggleButtonState(inputs, button, inactiveButtonClass = "popup__save_disabled") {
+    const isValid = inputs.every(input => input.validity.valid);
 
     if (isValid) {
         button.classList.remove(inactiveButtonClass);
+        button.disabled = false;
     } else {
         button.classList.add(inactiveButtonClass);
-        inactiveButtonClass.disabled = true;
+        button.disabled = true;
     }
 }
 
@@ -46,7 +47,7 @@ function enableValidation({formSelector, inputSelector, submitButtonSelector, in
     forms.forEach((form) => {
         form.addEventListener('submit', ((e) => {
             e.preventDefault()
-        }))
+        }));
         const inputs = [...form.querySelectorAll(inputSelector)];
         const button = form.querySelector(submitButtonSelector);
         inputs.forEach((input) => {
