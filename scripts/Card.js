@@ -1,31 +1,4 @@
-function imageModal(link, name) { 
-    popupPic.setAttribute('src', link); 
-    popupPic.setAttribute('alt', name); 
-    popupCaption.textContent = name; 
-  } 
-
-//Open Modal Function
-function openModal(modal){
-    toggleModal(modal);
-    window.addEventListener('keydown', escKeyClose);
-    modal.addEventListener('click', closePopup);
-  }
-
-//Close Function
-function closePopup(e){
-    if(e.target === this || e.target === this.querySelector('.popup__close-button')) {
-      closeModal(this);
-      addForm.reset();
-    } 
-  }
-  
-  //Escape key close functionality
-  function escKeyClose(e){
-    if(e.key === 'Escape'){
-      closeModal(document.querySelector('.popup_open'));
-      addForm.reset();
-    }
-  }
+import {openModal, imageModal} from "./utils/js";
 
 export default class Card {
     constructor (data, template){
@@ -38,6 +11,12 @@ export default class Card {
         const cardTemplate = document.querySelector(this._template).content.querySelector('.elements__element'); 
         return cardTemplate;
     }
+
+    _imageModal() { 
+      popupPic.setAttribute('src', this._link); 
+      popupPic.setAttribute('alt', this._name); 
+      popupCaption.textContent = this._name; 
+    } 
 
     _setEventListeners() {
         
@@ -54,7 +33,7 @@ export default class Card {
         }); 
 
         cardImage.addEventListener('click', (e) =>{      
-            this._imageModal(card.link, card.name); 
+            this._imageModal(this._link, this._name); 
             this._openModal(imagePopup); 
            }); 
     }

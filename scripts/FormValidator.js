@@ -5,21 +5,19 @@ export default class FormValidator {
         this._inactiveButtonClass = settings.inactiveButtonClass;
         this._inputErrorClass = settings.inputErrorClass;
         this._errorClass = settings.errorClass;
-
         this._form = formElement;
     }
     
     _showErrorMessage(inputElement, errorMessage) {
         const errorElement = this._form.querySelector("#" + inputElement.id + "-error");
-        inputElement.classList.add(this._inputErrorClass);
         errorElement.textContent = errorMessage;
-        errorElement.classList.add(this._errorClass);
+        errorElement.classList.add(errorClass);
+        inputElement.classList.add(inputErrorClass);
     }
-
+    
     _hideErrorMessage(inputElement) {
         const errorElement = this._form.querySelector("#" + input.id + "-error");
         errorElement.textContent = "";
-    
         errorElement.classList.remove(this._errorClass);
         inputElement.classList.remove(this._inputErrorClass);
     }
@@ -68,12 +66,3 @@ export default class FormValidator {
     this._setEventListeners();    
    };
 };
-
-// {
-//     formSelector: ".popup__form",
-//     inputSelector: ".popup__input",
-//     submitButtonSelector: ".popup__save",
-//     inactiveButtonClass: "popup__save_disabled",
-//     inputErrorClass: "popup__input_type_error",
-//     errorClass: "popup__error_visible"
-// }

@@ -33,4 +33,10 @@ function toggleModal(modal){
     modal.removeEventListener('click', closePopup);
   }
 
-  export {openModal, closeModal};
+  function imageModal(link, name) { 
+    popupPic.setAttribute('src', link); 
+    popupPic.setAttribute('alt', name); 
+    popupCaption.textContent = name; 
+  } 
+  
+  export {openModal, closeModal, imageModal};
