@@ -1,3 +1,20 @@
+import FormValidator from "./FormValidator.js";
+
+const defaultConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__save",
+  inactiveButtonClass: "popup__save_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+};
+
+const editFormValidator = new FormValidator(defaultConfig, editForm);
+const addFormValidator = new FormValidator(defaultConfig, addForm);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
 //Modals 
 const editModal= document.querySelector('.popup_type_edit'); 
 const addModal = document.querySelector('.popup_type_add-card'); 
