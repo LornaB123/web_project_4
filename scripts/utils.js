@@ -1,3 +1,6 @@
+const addModal = document.querySelector('.popup_type_add-card');
+const addForm = addModal.querySelector('.add-form');
+
 //Toggle Functions 
 //Button Popup Toggle Function 
 function toggleModal(modal){ 
@@ -34,6 +37,9 @@ function toggleModal(modal){
   }
 
   function imageModal(link, name) { 
+    const imagePopup = document.querySelector('.popup_type_image');
+    const popupPic = imagePopup.querySelector('.popup__image');
+    const popupCaption = imagePopup.querySelector('.popup__caption');
     popupPic.setAttribute('src', link); 
     popupPic.setAttribute('alt', name); 
     popupCaption.textContent = name; 
