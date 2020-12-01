@@ -25,10 +25,10 @@ export default class FormValidator {
     _checkInputValidity(inputElement) {
         if(inputElement.validity.valid) {
             //hide error message
-            hideErrorMessage();
+            this._hideErrorMessage();
         } else {
             //show error message
-            showErrorMessage();
+            this._showErrorMessage();
         }
     }
 
@@ -51,7 +51,7 @@ export default class FormValidator {
         inputs.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                  //check Input Validity
-                 this._checkInputValidity();
+                 this._checkInputValidity(inputElement);
                 //toggle button state
                 this._toggleButtonState();
                 });
