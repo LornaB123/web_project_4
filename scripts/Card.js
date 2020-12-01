@@ -1,4 +1,4 @@
-import {openModal, imageModal} from "./utils/js";
+import {openModal, imageModal} from "./utils.js";
 
 export default class Card {
     constructor (data, template){
@@ -50,8 +50,5 @@ export default class Card {
         this._setEventListeners();
 
         return this._cardElement;
-    };   
-
-
-
+    }
 };
