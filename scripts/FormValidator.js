@@ -38,10 +38,10 @@ export default class FormValidator {
         //const button = formElement.querySelector(this._submitButtonSelector);
 
         if(isValid) {
-            button.classList.remove(settings.inactiveButtonClass);
+            button.classList.remove(this._inactiveButtonClass);
             button.disabled = false;
         } else {
-            button.classList.add(settings.inactiveButtonClass);
+            button.classList.add(this._inactiveButtonClass);
             button.disabled = true;
         }
     }
