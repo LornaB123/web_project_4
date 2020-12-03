@@ -44,22 +44,15 @@ for(const initialCard of initialCards) initiateCardModule(initialCard, "append")
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 //const popupPic = imagePopup.querySelector('.popup__image'); 
-
 const closeButton = editModal.querySelector('.popup__close-button'); 
 const imageCloseButton = imagePopup.querySelector('.popup__close-button'); 
 const addCloseButton = addModal.querySelector('.popup__close-button'); 
-
 const saveButton = document.querySelector('.popup__save'); 
 const createButton = addModal.querySelector('.popup__save');
-
 const nameInput = document.querySelector('.popup__input_type_name'); 
 const jobInput = document.querySelector('.popup__input_type_job'); 
 const profileName = document.querySelector('.profile__info-title'); 
-const profileJob = document.querySelector('.profile__info-subtitle'); 
-
- 
-
- 
+const profileJob = document.querySelector('.profile__info-subtitle');  
 const titleInput = addForm.querySelector('.popup__input_type_title'); 
 const linkInput = addForm.querySelector('.popup__input_type_link'); 
 
