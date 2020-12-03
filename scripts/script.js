@@ -20,7 +20,6 @@ const addModal = document.querySelector('.popup_type_add-card');
 const editForm = editModal.querySelector('.edit-form'); 
 const addForm = addModal.querySelector('.add-form'); 
 const imagePopup = document.querySelector('.popup_type_image'); 
-
 const cardTemplate = document.querySelector('.card__template').content;
 const list = document.querySelector('.elements'); 
 
