@@ -125,16 +125,16 @@ addForm.addEventListener('submit', (e)  => {
   // }
 
  
-// //loading card templates to the browser 
+// // //loading card templates to the browser 
 // function addCard (card) { 
-//   const cardElement = createCard(card); 
+//    const cardElement = createCard(card); 
  
-//   list.prepend(cardElement); 
-// } 
+//    list.prepend(cardElement); 
+//  } 
  
 // initialCards.forEach(card => { 
 //   addCard(card); 
-// }); 
+//  }); 
  
 // function imageModal(link, name) { 
 //   popupPic.setAttribute('src', link); 

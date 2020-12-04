@@ -56,3 +56,15 @@ export default class Card {
         return this._cardElement;
     }
 };
+
+ 
+// // //loading card templates to the browser 
+// function addCard (card) { 
+//    const cardElement = createCard(card); 
+ 
+//    list.prepend(cardElement); 
+//  } 
+ 
+// initialCards.forEach(card => { 
+//   addCard(card); 
+//  }); 
