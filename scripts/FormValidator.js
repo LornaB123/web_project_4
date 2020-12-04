@@ -28,17 +28,7 @@ export default class FormValidator {
         inputElement.classList.remove(this._inputErrorClass);
     }
 
-    // //Function to check the input validity according to requirements
-// function checkInputValidity(input, rest) {
-//     if(input.validity.valid) {
-//         //hide error message
-//         hideErrorMessage(input, rest)
-//     } else {
-//         //show error message
-//         showErrorMessage(input, rest)
-//     }
-// }
-
+    //Function to check the input validity according to requirements
     _checkInputValidity(inputElement, inputErrorClass) {
         if(inputElement.validity.valid) {
             //hide error message
@@ -49,21 +39,22 @@ export default class FormValidator {
         }
     }
 
+    //Function to change state of Save/Create buttons on form
     _toggleButtonState(formElement, inputSelector) {
         const inputs = [...formElement.querySelectorAll(inputSelector)];
         const isValid = inputs.every(input => input.validity.valid);
         const buttonElement = this._form.querySelector(this._submitButtonSelector);
-        const inactiveButton = this._form.querySelector(this._inactiveButtonClass);
 
         if(isValid) {
-            buttonElement.classList.remove(inactiveButton);
+            buttonElement.classList.remove(this._inactiveButtonClass);
             buttonElement.disabled = false;
         } else {
-            buttonElement.classList.add(inactiveButton);
+            buttonElement.classList.add(this._inactiveButtonClass);
             buttonElement.disabled = true;
         }
     }
 
+    //
     _setEventListeners() {
         const inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
        //const buttonElement = this._form.querySelector(this._submitButtonSelector);
