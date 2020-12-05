@@ -9,8 +9,8 @@ export default class FormValidator {
     }
 
 
-    // //Function to show error messages when validation criteria is not met
-    _showErrorMessage(inputElement, errorClass, inputErrorClass) {
+    //Function to show error messages when validation criteria is not met
+    _showErrorMessage(inputElement) {
         const errorElement = this._form.querySelector("#" + inputElement.id + "-error");
 
         errorElement.textContent = inputElement.validationMessage;
@@ -54,7 +54,7 @@ export default class FormValidator {
         }
     }
 
-    //
+  //event listeners set for card arrays
     _setEventListeners() {
         const inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
        //const buttonElement = this._form.querySelector(this._submitButtonSelector);
@@ -69,6 +69,7 @@ export default class FormValidator {
            });
         };
 
+  //enable validation of form submit buttons
    enableValidation () {
     this._form.addEventListener('submit', (e) => {
        e.preventDefault();
