@@ -24,7 +24,7 @@ export default class Card {
     
 
     _cardImageSelector(){
-        this._imageModal(this._link, this._name);
+        this._imageModal(e.target.src, e.target.alt);
         openModal(imagePopup);
     }
 
@@ -32,7 +32,7 @@ export default class Card {
         e.target.closest('.elements__element').remove(); 
     }
 
-    _cardLikeSelector(){
+    _cardLikeSelector(e){
         e.target.classList.toggle('elements__favorite_selected'); 
     }
 
