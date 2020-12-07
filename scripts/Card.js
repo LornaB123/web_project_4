@@ -11,7 +11,6 @@ export default class Card {
         this._template = template;
     }
 
-
     _getCardTemplate (){
         return this._template.cloneNode(true);
     }
@@ -21,7 +20,6 @@ export default class Card {
       popupPic.setAttribute('alt', this._name); 
       popupCaption.textContent = this._name; 
     } 
-    
 
     _cardImageSelector(){
         this._imageModal(e.target.src, e.target.alt);
@@ -54,7 +52,7 @@ export default class Card {
         cardImage.setAttribute('src', this._link); 
         cardImage.setAttribute('alt', this._name); 
 
-        this._setEventListeners;
+        this._setEventListeners();
 
         return this._cardElement;
     }
