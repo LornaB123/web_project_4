@@ -36,13 +36,6 @@ function toggleModal(modal){
     modal.removeEventListener('click', closePopup);
   }
 
-  // function imageModal(link, name) { 
-  //   const imagePopup = document.querySelector('.popup_type_image');
-  //   const popupPic = imagePopup.querySelector('.popup__image');
-  //   const popupCaption = imagePopup.querySelector('.popup__caption');
-  //   popupPic.setAttribute('src', link); 
-  //   popupPic.setAttribute('alt', name); 
-  //   popupCaption.textContent = name; 
-  // } 
+
   
   export {openModal, closeModal};
