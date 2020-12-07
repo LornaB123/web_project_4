@@ -22,7 +22,7 @@ export default class Card {
     } 
 
     _cardImageSelector(){
-        this._imageModal;
+        this._imageModal();
         openModal(imagePopup);
     }
 
@@ -37,7 +37,7 @@ export default class Card {
     _setEventListeners() {
         this._cardLike.addEventListener("click", this._cardLikeSelector);
         this._cardTrash.addEventListener("click", this._cardTrashSelector);
-        this._cardImage.addEventListener("click", this._cardImageSelector);
+        this._cardImage.addEventListener("click", this._cardImageSelector.bind(this));
     }
 
     createCard() { 
