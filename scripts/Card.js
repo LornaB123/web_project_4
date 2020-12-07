@@ -1,7 +1,8 @@
 import {openModal} from "./utils.js";
 
 const imagePopup = document.querySelector('.popup_type_image');
-
+const popupPic = imagePopup.querySelector('.popup__image');
+const popupCaption = imagePopup.querySelector('.popup__caption');
 
 export default class Card {
     constructor (data, template){
@@ -16,16 +17,14 @@ export default class Card {
     }
 
     _imageModal() { 
-      this._popupPic = imagePopup.querySelector('.popup__image');
-      this._popupCaption = imagePopup.querySelector('.popup__caption');
-      this._popupPic.setAttribute('src', this._link); 
-      this._popupPic.setAttribute('alt', this._name); 
-      this._popupCaption.textContent = this._name; 
+      popupPic.setAttribute('src', this._link); 
+      popupPic.setAttribute('alt', this._name); 
+      popupCaption.textContent = this._name; 
     } 
     
 
     _cardImageSelector(){
-        _imageModal(this._link, this._name);
+        this._imageModal(this._link, this._name);
         openModal(imagePopup);
     }
 
