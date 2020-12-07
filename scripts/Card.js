@@ -21,8 +21,8 @@ export default class Card {
       popupCaption.textContent = this._name; 
     } 
 
-    _cardImageSelector(e){
-        this._imageModal(e.target.src, e.target.alt);
+    _cardImageSelector(){
+        this._imageModal(src, alt);
         openModal(imagePopup);
     }
 
