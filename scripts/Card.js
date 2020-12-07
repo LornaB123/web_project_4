@@ -22,7 +22,7 @@ export default class Card {
     } 
 
     _cardImageSelector(){
-        this._imageModal(src, alt);
+        this._imageModal;
         openModal(imagePopup);
     }
 
