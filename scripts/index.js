@@ -2,6 +2,7 @@ import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import initialCards from "./initialCards.js";
 import {openModal, closeModal} from "./utils.js";
+import Section from "./Section.js";
 
 const defaultConfig = {
   formSelector: ".popup__form",
@@ -29,13 +30,25 @@ editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
 //initiate new Card modal 
-function initiateCardModule(cardInfo, insert){
-  const cardObject = new Card(cardInfo, cardTemplate);
-  const card = cardObject.createCard();
-  list[insert](card);
-}
+// function initiateCardModule(cardInfo, insert){
+//   const cardObject = new Card(cardInfo, cardTemplate);
+//   const card = cardObject.createCard();
+//   list[insert](card);
+// }
 
-for(const initialCard of initialCards) initiateCardModule(initialCard, "append");
+// for(const initialCard of initialCards) initiateCardModule(initialCard, "append");
+
+
+//call SEction
+new Section(
+  {items: initialCards,
+  renderer: (cardInfo) => new Card({
+      data: cardInfo,
+      template: cardTemplate
+    }).createCard()
+  }
+  , list).renderer();
+
 
 //Buttons and other DOM elements 
 const editButton = document.querySelector('.profile__edit-button');
