@@ -54,7 +54,7 @@ const cardSection = new Section({
 list
 )
 
-cardSection.renderer()
+cardSection.renderer();
 
 
 //Buttons and other DOM elements 
