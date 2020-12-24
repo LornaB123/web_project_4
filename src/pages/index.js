@@ -1,8 +1,8 @@
-import FormValidator from "./FormValidator.js";
-import Card from "./Card.js";
-import initialCards from "./initialCards.js";
-import {openModal, closeModal} from "./utils.js";
-import Section from "./Section.js";
+import FormValidator from "../FormValidator.js";
+import Card from "../Card.js";
+import initialCards from "../initialCards.js";
+import {openModal, closeModal} from "../utils.js";
+import Section from "../Section.js";
 
 const defaultConfig = {
   formSelector: ".popup__form",
@@ -39,7 +39,7 @@ addFormValidator.enableValidation();
 // for(const initialCard of initialCards) initiateCardModule(initialCard, "append");
 
 
-//call SEction
+//call Section
 new Section(
   {items: initialCards,
   renderer: (cardInfo) => new Card({
