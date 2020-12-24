@@ -8,7 +8,7 @@ export default class Section {
 
     renderer(){
         this._items.forEach(item => {
-            this._renderer(item)
+            this._cssSelector.append(this._renderer(item))
         });
 //This is the original code used to render cards in index.js (before Section class creation)
         // function initiateCardModule(cardInfo, insert){
@@ -20,7 +20,8 @@ export default class Section {
         //   for(const initialCard of initialCards) initiateCardModule(initialCard, "append");
     }
 
-    addItems(){
-
+    addItem(item){
+        this._items.append(item);
+        this._cssSelector.append(this._renderer(item));
     }
 }

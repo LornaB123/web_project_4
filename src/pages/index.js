@@ -42,15 +42,17 @@ addFormValidator.enableValidation();
 
 
 //call Section
-new Section(
-  {items: initialCards,
-  renderer: (cardInfo) => new Card({
+const cardSection = new Section({
+  items: initialCards,
+  renderer: (cardInfo) => {
+    return new Card({
       data: cardInfo,
-      template: cardTemplate
+      template: cardTemplate,
     }).createCard()
-  }
-  , list).renderer();
-
+  },
+},
+list
+).renderer()
 
 //Buttons and other DOM elements 
 const editButton = document.querySelector('.profile__edit-button');
