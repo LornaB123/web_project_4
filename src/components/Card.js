@@ -6,6 +6,7 @@ const popupCaption = imagePopup.querySelector('.popup__caption');
 
 export default class Card {
     constructor ({data, template}){
+        console.log(arguments);
         this._link = data.link;
         this._name = data.name;
         this._template = template;

@@ -1,5 +1,6 @@
 export default class Section {
     constructor({items, renderer}, cssSelector) {
+        console.log(arguments);
         this._items = items;
         this._renderer = renderer;
         this._cssSelector = cssSelector;
