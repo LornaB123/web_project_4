@@ -21,7 +21,7 @@ export default class Section {
     }
 
     addItem(item){
-        this._items.append(item);
-        this._cssSelector.append(this._renderer(item));
+        //this._items.append(item);
+        this._cssSelector.prepend(this._renderer(item));
     }
 }

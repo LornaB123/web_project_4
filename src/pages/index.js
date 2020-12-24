@@ -52,7 +52,10 @@ const cardSection = new Section({
   },
 },
 list
-).renderer()
+)
+
+cardSection.renderer()
+
 
 //Buttons and other DOM elements 
 const editButton = document.querySelector('.profile__edit-button');
@@ -102,7 +105,8 @@ addForm.addEventListener('submit', (e)  => {
   e.preventDefault(); 
   //create card: 
   const newCard = {name: titleInput.value, link: linkInput.value};
-  initiateCardModule(newCard, "prepend");
+  //initiateCardModule(newCard, "prepend");
+  cardSection.addItem(newCard);
 
   //close modal after submit 
   closeModal(addModal); 
