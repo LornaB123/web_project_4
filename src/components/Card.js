@@ -1,12 +1,11 @@
-import {openModal} from "../utils/utils.js";
-
-const imagePopup = document.querySelector('.popup_type_image');
+//import {openModal} from "../utils/utils.js";
+ import {open} from "./Popup.js";
+//const imagePopup = document.querySelector('.popup_type_image');
 const popupPic = imagePopup.querySelector('.popup__image');
 const popupCaption = imagePopup.querySelector('.popup__caption');
 
 export default class Card {
     constructor ({data, template}){
-        console.log(arguments);
         this._link = data.link;
         this._name = data.name;
         this._template = template;
@@ -24,7 +23,7 @@ export default class Card {
 
     _cardImageSelector(){
         this._imageModal();
-        openModal(imagePopup);
+        imagePopup.open();
     }
 
     _cardTrashSelector(e){

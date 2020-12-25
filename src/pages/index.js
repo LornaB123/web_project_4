@@ -3,7 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import initialCards from "../utils/initialCards.js";
-import Popup from "../components/Popup.js";
+//import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PoppupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
 //import {openModal, closeModal} from "../utils/utils.js";
