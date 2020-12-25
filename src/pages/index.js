@@ -60,12 +60,12 @@ const cardSection = new Section({
   renderer: (cardInfo) => {
     return new Card({
       data: cardInfo,
-      template: cardTemplate,
-    }).createCard()
-  },
-},
-list
-)
+      handleCardClick: ({name, link}) => {
+        imagePopup.open(link, name)
+      }
+    }, cardTemplate).createCard()
+  }, list
+})
 
 cardSection.renderer();
 
@@ -134,3 +134,5 @@ addButton.addEventListener('click', (e) => {
 //   closeModal(addModal); 
 //   addForm.reset(); 
 //   }); 
+
+export default {imagePopup}

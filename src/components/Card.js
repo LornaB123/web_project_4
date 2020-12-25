@@ -1,25 +1,26 @@
 //import {openModal} from "../utils/utils.js";
- import {open} from "./Popup.js";
-//const imagePopup = document.querySelector('.popup_type_image');
-const popupPic = imagePopup.querySelector('.popup__image');
-const popupCaption = imagePopup.querySelector('.popup__caption');
+//import {imagePopup} from "../pages/index.js"
+//const popupPic = imagePopup.querySelector('.popup__image');
+//const popupCaption = imagePopup.querySelector('.popup__caption');
 
 export default class Card {
-    constructor ({data, template}){
+    constructor ({data, handleCardClick}, template){
         this._link = data.link;
         this._name = data.name;
         this._template = template;
+        this._handleCardClick = handleCardClick;
     }
 
     _getCardTemplate (){
         return this._template.cloneNode(true);
     }
 
-    _imageModal() { 
-      popupPic.setAttribute('src', this._link); 
-      popupPic.setAttribute('alt', this._name); 
-      popupCaption.textContent = this._name; 
-    } 
+
+    // _imageModal() { 
+    //   popupPic.setAttribute('src', this._link); 
+    //   popupPic.setAttribute('alt', this._name); 
+    //   popupCaption.textContent = this._name; 
+    // } 
 
     _cardImageSelector(){
         this._imageModal();
