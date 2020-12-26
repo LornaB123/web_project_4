@@ -1,4 +1,4 @@
-//import {openModal} from "../utils/utils.js";
+import {openModal} from "../utils/utils.js";
 //import {imagePopup} from "../pages/index.js"
 const imageModalPopup = document.querySelector('.popup_type_image');
 const popupPic = imageModalPopup.querySelector('.popup__image');

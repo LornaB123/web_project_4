@@ -60,7 +60,7 @@ const cardSection = new Section({
   renderer: (cardInfo) => {
     return new Card({
       data: cardInfo,
-      handleCardClick: ({name, link}) => {
+      _handleCardClick: ({name, link}) => {
         imagePopup.open(link, name)
       }
     }, cardTemplate).createCard()
@@ -72,7 +72,7 @@ cardSection.renderer();
 //Call new Popups for each type of form: image, add, edit,
 
 //Image Popup
-const imagePopup = new PopupWithImage(imageModal);
+const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
 //Add Form
