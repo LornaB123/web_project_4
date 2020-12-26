@@ -1,5 +1,4 @@
-import {openModal} from "../utils/utils.js";
-//import {imagePopup} from "../pages/index.js"
+//import {openModal} from "../utils/utils.js";
 const imageModalPopup = document.querySelector('.popup_type_image');
 const popupPic = imageModalPopup.querySelector('.popup__image');
 const popupCaption = imageModalPopup.querySelector('.popup__caption');
@@ -26,7 +25,7 @@ export default class Card {
 
      _cardImageSelector(){
          this._imageModal();
-         imageModalPopup.open();
+         openModal(imageModalPopup);
      }
 
     _cardTrashSelector(e){
@@ -40,7 +39,7 @@ export default class Card {
     _setEventListeners() {
         this._cardLike.addEventListener("click", this._cardLikeSelector);
         this._cardTrash.addEventListener("click", this._cardTrashSelector);
-        this._cardImage.addEventListener("click", this._cardImageSelector.bind(this));
+        this._cardImage.addEventListener("click", this._handleCardClick);
     }
 
     createCard() { 

@@ -13,7 +13,7 @@ export default class Popup {
 //   }  
     open(){
         this._popupElement.classList.add('popup_open');
-        document.addEventListener('keyup', this._handleEscapeClose)
+        document.addEventListener('keyup', this._handleEscapeClose);
 //Previous code to open modals on sprint 7
 //Open Modal Function
 //   function openModal(modal){
@@ -25,7 +25,7 @@ export default class Popup {
 
     close(){
         this._popupElement.classList.remove('popup_open');
-        document.removeEventListener('keyup', this._handleEscapeClose)
+        document.removeEventListener('keyup', this._handleEscapeClose);
 //   //Close Function
 //   function closePopup(e){
 //     if(e.target === this || e.target === this.querySelector('.popup__close-button')) {

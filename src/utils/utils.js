@@ -8,11 +8,11 @@ function toggleModal(modal){
   }  
   
   // //Open Modal Function
-  // function openModal(modal){
-  //    toggleModal(modal);
-  //    window.addEventListener('keydown', escKeyClose);
-  //    modal.addEventListener('click', closePopup);
-  //  }
+   function openModal(modal){
+     toggleModal(modal);
+     window.addEventListener('keydown', escKeyClose);
+     modal.addEventListener('click', closePopup);
+    }
   
   // //Close Function
   // function closePopup(e){
@@ -35,3 +35,5 @@ function toggleModal(modal){
     window.removeEventListener('keydown', escKeyClose);
     modal.removeEventListener('click', closePopup);
   }
+
+  export default {openModal}

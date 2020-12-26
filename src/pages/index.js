@@ -2,7 +2,7 @@ import "./index.css";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
-import initialCards from "../utils/initialCards.js";
+import initialCards from "../components/initialCards.js";
 //import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PoppupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
@@ -53,6 +53,9 @@ addFormValidator.enableValidation();
 
 // for(const initialCard of initialCards) initiateCardModule(initialCard, "append");
 
+//Image Popup
+const imagePopup = new PopupWithImage('.popup_type_image');
+imagePopup.setEventListeners();
 
 //call Section to render original cards to the 'elements' section of page
 const cardSection = new Section({
@@ -60,7 +63,7 @@ const cardSection = new Section({
   renderer: (cardInfo) => {
     return new Card({
       data: cardInfo,
-      _handleCardClick: ({name, link}) => {
+      handleCardClick: ({name, link}) => {
         imagePopup.open(link, name)
       }
     }, cardTemplate).createCard()
@@ -71,9 +74,7 @@ cardSection.renderer();
 
 //Call new Popups for each type of form: image, add, edit,
 
-//Image Popup
-const imagePopup = new PopupWithImage('.popup_type_image');
-imagePopup.setEventListeners();
+
 
 //Add Form
 const addFormPopup = new PopupWithForm({
