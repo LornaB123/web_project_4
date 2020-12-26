@@ -64,8 +64,8 @@ const cardSection = new Section({
         imagePopup.open(link, name)
       }
     }, cardTemplate).createCard()
-  }, list
-})
+  }
+}, list)
 
 cardSection.renderer();
 

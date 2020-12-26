@@ -1,7 +1,9 @@
 //import {openModal} from "../utils/utils.js";
 //import {imagePopup} from "../pages/index.js"
-//const popupPic = imagePopup.querySelector('.popup__image');
-//const popupCaption = imagePopup.querySelector('.popup__caption');
+const imageModalPopup = document.querySelector('.popup_type_image');
+const popupPic = imageModalPopup.querySelector('.popup__image');
+const popupCaption = imageModalPopup.querySelector('.popup__caption');
+
 
 export default class Card {
     constructor ({data, handleCardClick}, template){
@@ -16,16 +18,16 @@ export default class Card {
     }
 
 
-    // _imageModal() { 
-    //   popupPic.setAttribute('src', this._link); 
-    //   popupPic.setAttribute('alt', this._name); 
-    //   popupCaption.textContent = this._name; 
-    // } 
+    _imageModal() { 
+       popupPic.setAttribute('src', this._link); 
+       popupPic.setAttribute('alt', this._name); 
+       popupCaption.textContent = this._name; 
+     } 
 
-    _cardImageSelector(){
-        this._imageModal();
-        imagePopup.open();
-    }
+     _cardImageSelector(){
+         this._imageModal();
+         imageModalPopup.open();
+     }
 
     _cardTrashSelector(e){
         e.target.closest('.elements__element').remove(); 
