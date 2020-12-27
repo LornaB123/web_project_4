@@ -63,8 +63,8 @@ const cardSection = new Section({
   renderer: (cardInfo) => {
     return new Card({
       data: cardInfo,
-      handleCardClick: ({name, link}) => {
-        imagePopup.open(link, name)
+      handleCardClick: (name, link) => {
+        imagePopup.open(name, link)
       }
     }, cardTemplate).createCard()
   }
@@ -78,7 +78,7 @@ cardSection.renderer();
 
 //Add Form
 const addFormPopup = new PopupWithForm({
-  popupSelector: addModal,
+  popupSelector: '.popup_type_add-card',
   popupSubmit: (data) => cardSection(data)
 })
 
@@ -94,7 +94,7 @@ addButton.addEventListener('click', (e) => {
 
  //Edit Title Form
 // const editFormPopup = newPopupWithForm({
- //  popupSelector: editModal,
+ //  popupSelector: '.popup_type_edit',
 //   poupSubmit: () => profileInfo.setUserInfo(inputName.value, inputJob.value)
  //})
 //Modal Open Functions
@@ -136,4 +136,4 @@ addButton.addEventListener('click', (e) => {
 //   addForm.reset(); 
 //   }); 
 
-export default {imagePopup}
+//export default {imagePopup}

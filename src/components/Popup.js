@@ -39,13 +39,11 @@ export default class Popup {
 //     modal.removeEventListener('click', closePopup);
 //   }
     }
-
     _handleEscapeClose(e){
         if(e.which == 27) {
             this.close();
         }
-    }
-  
+    } 
 //   //Escape key close functionality
 //   function escKeyClose(e){
 //     if(e.key === 'Escape'){
