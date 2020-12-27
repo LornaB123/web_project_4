@@ -79,10 +79,13 @@ cardSection.renderer();
 //Add Form
 const addFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  popupSubmit: (data) => cardSection(data)
-})
-
+  popupSubmit: (name, link) => {
+    cardSection(name, link)}
+  })
+//const cardFormSubmit = ([name,link]) => newSection([{name,link}]);
 addFormPopup.setEventListeners();
+
+const cardFormSubmit = ([name,link]) => newSection([{name,link}]);
 
 ////event listeners for click of modal add card button
 addButton.addEventListener('click', (e) => {

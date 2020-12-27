@@ -2,7 +2,7 @@ import Popup from "./Popup.js";
 
 //class takes callback of form submission into constructor
 export default class PopupWithForm extends Popup {
-    constructor(popupSelector, popupSubmit){
+    constructor({popupSelector, popupSubmit}){
         super(popupSelector); //the 'add/edit FORMS' as this._popupElement (addForm or editForm)
         this._popupSubmit = popupSubmit;
         this._formElement = document.querySelector('.popup__form');
@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
         this._inputList = this._formElement.querySelector('.popup__input');
         this._inputValues = {};
         this._inputList.forEach(input => {
-            this._inputValues[input.name, input.job] = input.value;
+            this._inputValues[input.name] = input.value;
             return this._inputValues;
         });
     }
@@ -49,7 +49,7 @@ export default class PopupWithForm extends Popup {
     }
     //modifies close method to reset form once popup is closed
     close(){
-        this._formElement.querySelector('.popup__form').reset();
         super.close();
+        this._formElement.querySelector('.popup__form').reset();
     }
 }
