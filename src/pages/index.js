@@ -72,25 +72,39 @@ const cardSection = new Section({
 
 cardSection.renderer();
 
-
-const newCardAdded = (data) => {
-  const newCard = new Card({
-    data: data,
-    handleCardClick: (name, link) => {
-      imagePopup.open(name, link)
+const newCardAdded = () => {
+  const newAddition = new Section ({
+    items: addCard,
+    renderer: (data) => {
+      return new Card({
+        data: data,
+        handleCardClick: (name, link) => {
+          imagePopup.open(name, link)
+        }
+      }, cardTemplate).createCard();
     }
-  }, cardTemplate).createCard();
-  list.addItem(newCard);
+  }, list)
 }
+
+//newAddition.renderer();
+// const newCardAdded = (data) => {
+//   const newCard = new Card({
+//     data: data,
+//     handleCardClick: (name, link) => {
+//       imagePopup.open(name, link)
+//     }
+//   }, cardTemplate).createCard();
+//   list.addItem(newCard);
+// }
 //Call new Popups for each type of form: image, add, edit,
 //Add Form
 const addFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
   popupSubmit: (data) => {
-    newCardAdded(data)
+    newCardAdded(data);
   }
 })
-
+addFormPopup.renderer();
 addFormPopup.setEventListeners();
 
 ////event listeners for click of modal add card button
