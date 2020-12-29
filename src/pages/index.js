@@ -1,11 +1,11 @@
-import "./index.css";
+//import "./index.css";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import initialCards from "../components/initialCards.js";
 //import Popup from "../components/Popup.js";
-import PopupWithImage from "../components/PoppupWithImage";
-import PopupWithForm from "../components/PopupWithForm";
+import PopupWithImage from "../components/PoppupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 //import {openModal, closeModal} from "../utils/utils.js";
 
 
@@ -72,20 +72,26 @@ const cardSection = new Section({
 
 cardSection.renderer();
 
+
+const newCardAdded = (data) => {
+  const newCard = new Card({
+    data: data,
+    handleCardClick: (name, link) => {
+      imagePopup.open(name, link)
+    }
+  }, cardTemplate).createCard();
+  list.addItem(newCard);
+}
 //Call new Popups for each type of form: image, add, edit,
-
-
-
 //Add Form
 const addFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  popupSubmit: (name, link) => {
-    cardSection(name, link)}
-  })
-//const cardFormSubmit = ([name,link]) => newSection([{name,link}]);
-addFormPopup.setEventListeners();
+  popupSubmit: (data) => {
+    newCardAdded(data)
+  }
+})
 
-const cardFormSubmit = ([name,link]) => newSection([{name,link}]);
+addFormPopup.setEventListeners();
 
 ////event listeners for click of modal add card button
 addButton.addEventListener('click', (e) => {

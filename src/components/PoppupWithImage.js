@@ -8,8 +8,8 @@ export default class PopupWithImage extends Popup {
     }
 
     open(name, link){
-        this._popupLink.src = link;
         this._popupName.src = name;
+        this._popupLink.src = link;
         super.open();
 // Previous Edit Form Submit/Save Button Functionality from Sprint 7
 // editForm.addEventListener('submit', (e) => {
