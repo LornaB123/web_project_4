@@ -102,8 +102,8 @@ const editFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   popupSubmit: ([nameSelector, jobSelector]) => {
     const userInformation =  new UserInfo ({
-      nameSelector: '.popup__input_type_name',
-      jobSelector: '.popup__input_type_job'
+      nameSelector: '.profile__info-title',
+      jobSelector: '.profile__info-subtitle'
     })
     userInformation.setUserInfo(nameSelector, jobSelector); 
   } 
