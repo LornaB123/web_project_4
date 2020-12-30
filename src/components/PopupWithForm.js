@@ -10,13 +10,9 @@ export default class PopupWithForm extends Popup {
 
     //private method, collects data from all input fields
     _getInputValues(){
-        this._inputList = this._formElement.querySelectorAll('.popup__input');
-        this._inputValues = {};
-        this._inputList.forEach(input => {
-            this._inputValues[input.name] = input.value;
-            return this._inputValues;
-        });
+        return [...this._popupElement.querySelectorAll('.popup__input')].map(input => input.value);
     }
+
     _submitEventHandler = (e) => {
         e.preventDefault();
         this._popupSubmit(this._getInputValues());
@@ -47,11 +43,11 @@ export default class PopupWithForm extends Popup {
 //   closeModal(addModal); 
 //   addForm.reset(); 
 //   }); 
+
     }
     //modifies close method to reset form once popup is closed
     close(){
-        this._popupElement.querySelector('popup__form').reset();
+        this._popupElement.querySelector('.popup__form').reset();
         super.close();
-        
     }
 }

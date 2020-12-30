@@ -6,6 +6,8 @@ import initialCards from "../components/initialCards.js";
 //import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PoppupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import Popup from "../components/Popup.js";
+import UserInfo from "../components/UserInfo.js";
 //import {openModal, closeModal} from "../utils/utils.js";
 
 
@@ -72,48 +74,68 @@ const cardSection = new Section({
 
 cardSection.renderer();
 
-const newCardAdded = () => {
-  const newAddition = new Section ({
-    items: addCard,
-    renderer: (data) => {
-      return new Card({
-        data: data,
-        handleCardClick: (name, link) => {
-          imagePopup.open(name, link)
-        }
-      }, cardTemplate).createCard();
-    }
-  }, list)
-}
 
-//newAddition.renderer();
-// const newCardAdded = (data) => {
-//   const newCard = new Card({
-//     data: data,
-//     handleCardClick: (name, link) => {
-//       imagePopup.open(name, link)
-//     }
-//   }, cardTemplate).createCard();
-//   list.addItem(newCard);
-// }
 //Call new Popups for each type of form: image, add, edit,
-//Add Form
+//Add Card Form
 const addFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  popupSubmit: (data) => {
-    newCardAdded(data);
-  }
-})
-addFormPopup.renderer();
+  popupSubmit: ([name, link]) => {
+     const newCard = new Section({
+        items: [{name, link}],
+        renderer: (newCardInfo) => {
+          return new Card({
+            data: newCardInfo,
+            handleCardClick: (name, link) => {
+              imagePopup.open(name, link)
+            }
+          }, cardTemplate).createCard();
+        }
+      }, list)
+      newCard.addItem();
+    }
+  })
+
+
 addFormPopup.setEventListeners();
 
-////event listeners for click of modal add card button
+//Edit Profile Form
+const editFormPopup = new PopupWithForm({
+  popupSelector: '.popup_type_edit',
+  popupSubmit: ([name, info]) => {
+    new UserInfo ({
+      nameSelector: '.profile-name',
+      jobSelector: '.profile-text'
+    }).setUserInfo(name, info);
+  } 
+}) 
+
+editFormPopup.setEventListeners();
+
+// const handleEditButtonClick = new PopupWithForm('.popup_profile',{ //muddoo
+//   info: userInfo,//mudoo
+//   submit: profileFormSubmit //muuddoo
+// });
+
+//const userInfo = new UserInfo(['.profile__name','.profile__text']);
+//const profileFormSubmit = ([name,info]) => userInfo.setUserInfo(name,info); 
+
+// editForm.addEventListener('submit', (e) => {
+//   e.preventDefault();
+//   profileName.textContent = nameInput.value; 
+//   profileJob.textContent = jobInput.value;
+//   closeModal(editModal);
+// });
+////event listeners for add card button
 addButton.addEventListener('click', (e) => {
   createButton.classList.add('popup__save_disabled');
   createButton.disabled = true;
   addFormPopup.open();
  });
 
+ //event listener for editButton 
+ editButton.addEventListener('click', (e) => {
+   editFormPopup.open();
+ })
 
  //Edit Title Form
 // const editFormPopup = newPopupWithForm({
@@ -136,16 +158,13 @@ addButton.addEventListener('click', (e) => {
 //}
 
 
+// Previous Edit Form Submit/Save Button Functionality from Sprint 7
 
 //editButton.addEventListener('click',(e) => openModal(editModal));
 
-// //Edit Form Submit/Save Button Functionality
-// editForm.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   profileName.textContent = nameInput.value; 
-//   profileJob.textContent = jobInput.value;
-//   closeModal(editModal);
-// });
+
+
+
 // //Add Form Submit/Save Button Functionality
 // addForm.addEventListener('submit', (e)  => { 
 //   e.preventDefault(); 

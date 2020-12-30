@@ -16,8 +16,9 @@ export default class Section {
         //   } 
         //   for(const initialCard of initialCards) initiateCardModule(initialCard, "append");
     }
-    addItem(item){
-        //this._items.append(item);
-        this._cssSelector.prepend(this._renderer(item));
+    addItem(){
+        this._items.forEach(item => {
+            this._cssSelector.prepend(this._renderer(item))
+        });
     }
 }

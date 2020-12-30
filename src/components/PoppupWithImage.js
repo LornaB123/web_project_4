@@ -11,12 +11,6 @@ export default class PopupWithImage extends Popup {
         this._popupName.src = name;
         this._popupLink.src = link;
         super.open();
-// Previous Edit Form Submit/Save Button Functionality from Sprint 7
-// editForm.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   profileName.textContent = nameInput.value; 
-//   profileJob.textContent = jobInput.value;
-//   closeModal(editModal);
-// });
+
     }
 }
