@@ -1,15 +1,11 @@
-//import "./index.css";
+import "./index.css";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import initialCards from "../components/initialCards.js";
-//import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PoppupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import Popup from "../components/Popup.js";
 import UserInfo from "../components/UserInfo.js";
-//import {openModal, closeModal} from "../utils/utils.js";
-
 
 const defaultConfig = {
   formSelector: ".popup__form",
