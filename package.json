@@ -1,23 +1,9 @@
 {
   "name": "web_project_4",
   "version": "1.0.0",
-  "description": "### Overview * Intro * Figma * Images",
-  "main": "index.js",
-  "scripts": {
-    "build": "rm -rf dist && set NODE_ENV=production&&webpack",
-    "dev": "webpack serve --open chrome --port 3000"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Muddoo/web_project_4.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Muddoo/web_project_4/issues"
-  },
-  "homepage": "https://github.com/Muddoo/web_project_4#readme",
+  "description": "",
+  "main": "babel.config.js",
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
@@ -37,5 +23,20 @@
     "webpack": "^5.10.2",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "scripts": {
+    "build": "rm -rf dist && set NODE_ENV=production&&webpack",
+    "dev": "webpack serve --open chrome --port 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LornaB123/web_project_4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LornaB123/web_project_4/issues"
+  },
+  "homepage": "https://github.com/LornaB123/web_project_4#readme"
 }
