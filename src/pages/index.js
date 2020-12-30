@@ -95,17 +95,17 @@ const addFormPopup = new PopupWithForm({
     }
   })
 
-
 addFormPopup.setEventListeners();
 
 //Edit Profile Form
 const editFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_edit',
-  popupSubmit: ([name, info]) => {
-    new UserInfo ({
-      nameSelector: '.profile-name',
-      jobSelector: '.profile-text'
-    }).setUserInfo(name, info);
+  popupSubmit: ([nameSelector, jobSelector]) => {
+    const userInformation =  new UserInfo ({
+      nameSelector: '.popup__input_type_name',
+      jobSelector: '.popup__input_type_job'
+    })
+    userInformation.setUserInfo(nameSelector, jobSelector); 
   } 
 }) 
 

@@ -8,8 +8,8 @@ export default class UserInfo {
         return [this._nameSelector.textContent, this._jobSelector.textContent];
     }
 
-    setUserInfo(){
+    setUserInfo(nameSelector, jobSelector) {
         this._nameSelector.textContent = nameSelector;
-        this.jobSelector.textContent = jobSelector;
+        this._jobSelector.textContent = jobSelector;
     }
 } 
