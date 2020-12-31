@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "babel.config.js",
-  "dependencies": {},
+  "dependencies": {
+    "core-js": "^2.6.12",
+    "esm": "^3.2.25"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/plugin-syntax-class-properties": "^7.12.1",
-    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "autoprefixer": "^10.1.0",
     "babel-loader": "^8.2.2",
     "babel-polyfill": "^6.26.0",

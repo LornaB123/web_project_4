@@ -5,7 +5,6 @@ module.exports = {
   stats: "verbose",
   devtool: "source-map",
   entry: { main: "./src/pages/index.js" },
-  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
