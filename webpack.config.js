@@ -1,9 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { NONAME } = require("dns");
 
 
 module.exports = {
+  mode: 'none',
   stats: "verbose",
   devtool: "source-map",
   entry: { main: "./src/pages/index.js" },
