@@ -21,7 +21,7 @@ addFormValidator.enableValidation();
 const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
-//function to create cards
+//function to create individual cards
 function createItem(cardInfo) {
   return new Card({
     data: cardInfo,
@@ -46,7 +46,7 @@ const addFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
   popupSubmit: ([name, link]) => {
     const newCard = createItem({name, link})
-    cardSection.addItem(newCard);
+    newCard.addItem();
    }
   })
 
@@ -90,10 +90,19 @@ addButton.addEventListener('click', (e) => {
   addFormPopup.open();
  });
 
+//  //event listener for editButton 
+//  editButton.addEventListener('click', (e) => {
+//    editFormPopup.open();
+//  })
+
  //event listener for editButton 
  editButton.addEventListener('click', (e) => {
-   editFormPopup.open();
- })
+  const userData = userInformation.getUserInfo()
+   nameInput.value = userData.name
+   jobInput.value = userData.job
+   
+  editFormPopup.open();
+}) 
 
  //Edit Title Form
 // const editFormPopup = newPopupWithForm({
