@@ -39,14 +39,13 @@ const cardSection = new Section({
 
 cardSection.renderer();
 
-
 //Call new Popups for each type of form: image, add, edit,
 //Add Card Form
 const addFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
   popupSubmit: ([name, link]) => {
     const newCard = createItem({name, link})
-    newCard.addItem();
+    cardSection.addItem(newCard);
    }
   })
 
@@ -128,9 +127,6 @@ addButton.addEventListener('click', (e) => {
 // Previous Edit Form Submit/Save Button Functionality from Sprint 7
 
 //editButton.addEventListener('click',(e) => openModal(editModal));
-
-
-
 
 // //Add Form Submit/Save Button Functionality
 // addForm.addEventListener('submit', (e)  => { 
