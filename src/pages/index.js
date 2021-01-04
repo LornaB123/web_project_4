@@ -67,6 +67,22 @@ const editFormPopup = new PopupWithForm({
 
 editFormPopup.setEventListeners();
 
+////event listeners for add card button
+addButton.addEventListener('click', (e) => {
+  addFormValidator.disableButton();
+  //createButton.classList.add('popup__save_disabled');
+  //createButton.disabled = true;
+  addForm.reset();
+  addFormPopup.open();
+ });
+
+ //event listener for editButton 
+ editButton.addEventListener('click', (e) => {
+  const userData = userInformation.getUserInfo()
+  editFormPopup.open();
+}) 
+
+
 // const handleEditButtonClick = new PopupWithForm('.popup_profile',{ //muddoo
 //   info: userInfo,//mudoo
 //   submit: profileFormSubmit //muuddoo
@@ -81,27 +97,6 @@ editFormPopup.setEventListeners();
 //   profileJob.textContent = jobInput.value;
 //   closeModal(editModal);
 // });
-////event listeners for add card button
-addButton.addEventListener('click', (e) => {
-  addFormValidator.disableButton();
-  //createButton.classList.add('popup__save_disabled');
-  //createButton.disabled = true;
-  addFormPopup.open();
- });
-
-//  //event listener for editButton 
-//  editButton.addEventListener('click', (e) => {
-//    editFormPopup.open();
-//  })
-
- //event listener for editButton 
- editButton.addEventListener('click', (e) => {
-  const userData = userInformation.getUserInfo()
-   nameInput.value = userData.name
-   jobInput.value = userData.job
-   
-  editFormPopup.open();
-}) 
 
  //Edit Title Form
 // const editFormPopup = newPopupWithForm({

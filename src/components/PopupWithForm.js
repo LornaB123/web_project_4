@@ -22,19 +22,20 @@ export default class PopupWithForm extends Popup {
         });
     }
 
-    // _submitEventHandler(){
-    //     this._formElement.addEventListener('submit', (e) => {
-    //         e.preventDefault();
-    //         this._popupSubmit(this._getInputValues());
-    //         this.close();
-    //     })
-    // }
-
     //modifies setEventListeners, adds click event listener
     //to the close icon, while adding submit event handler
     setEventListeners(){
         this._popupElement.addEventListener('submit', this._submitEventHandler);
         super.setEventListeners();
+    }
+    //modifies close method to reset form once popup is closed
+    close(){
+       // this._formElement.removeEventListener('submit', close);
+        super.close();
+    }
+}
+
+
 // Previous Edit Form Submit/Save Button Functionality from Sprint 7
 // editForm.addEventListener('submit', (e) => {
 //   e.preventDefault();
@@ -53,12 +54,4 @@ export default class PopupWithForm extends Popup {
 //   //close modal after submit 
 //   closeModal(addModal); 
 //   addForm.reset(); 
-//   }); 
-
-    }
-    //modifies close method to reset form once popup is closed
-    close(){
-        this._popupElement.querySelector('.popup__form').reset();
-        super.close();
-    }
-}
+//   });

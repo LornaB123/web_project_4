@@ -1,9 +1,3 @@
-// //import {openModal} from "../utils/utils.js";
-// const imageModalPopup = document.querySelector('.popup_type_image');
-// const popupPic = imageModalPopup.querySelector('.popup__image');
-// const popupCaption = imageModalPopup.querySelector('.popup__caption');
-
-
 export default class Card {
     constructor ({data, handleCardClick}, template){
         this._link = data.link;
