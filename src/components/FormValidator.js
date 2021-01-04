@@ -53,6 +53,13 @@ export default class FormValidator {
             buttonElement.disabled = true;
         }
     }
+    //method to disable create button 
+    disableButton() {
+        this._addModal = document.querySelector('.popup_type_add-card');
+        this._createButton = this._addModal.querySelector('.popup__save');
+        this._createButton.classList.add('popup__save_disabled');
+        this._createButton.disabled = true;
+    }
 
   //event listeners set for card arrays
     _setEventListeners() {
