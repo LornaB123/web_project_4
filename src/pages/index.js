@@ -55,7 +55,7 @@ addFormPopup.setEventListeners();
 const userInformation =  new UserInfo ({
   nameSelector: '.profile__info-title',
   jobSelector: '.profile__info-subtitle'
-})
+});
 
 //Edit Profile Form
 const editFormPopup = new PopupWithForm({
@@ -63,7 +63,7 @@ const editFormPopup = new PopupWithForm({
   popupSubmit: ([nameSelector, jobSelector]) => {
     userInformation.setUserInfo(nameSelector, jobSelector); 
   } 
-})  
+});
 
 editFormPopup.setEventListeners();
 
@@ -85,10 +85,12 @@ addButton.addEventListener('click', (e) => {
  //event listener for editButton 
  editButton.addEventListener('click', (e) => {
    const [nameSelector, jobSelector] = userInformation.getUserInfo();
-   document.querySelector('.profile__info-title').value = nameSelector;
-   document.querySelector('.profile__info-subtitle').value = jobSelector;
+   document.querySelector('.popup__input_type_name').value = nameSelector;
+   document.querySelector('.popup__input_type_job').value = jobSelector;
    editFormPopup.open();
-})  
+});  
+
+
 
 
 // editForm.addEventListener('submit', (e) => {
