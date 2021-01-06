@@ -14,12 +14,13 @@ export default class PopupWithForm extends Popup {
         return [...this._popupElement.querySelectorAll('.popup__input')].map(input => input.value);
     }
 
-     _submitEventHandler(){
-        this._formElement.addEventListener('submit', (e) => {
+     _submitEventHandler(e){
+        //this._formElement.addEventListener('submit', (e) => {
+            //this._formElement.addEventListener('submit', this._submitEventHandler.bind(this));
             e.preventDefault();
             this._popupSubmit(this._getInputValues());
             this.close();
-        });
+        //});
     }
 
     //modifies setEventListeners, adds click event listener
@@ -30,7 +31,7 @@ export default class PopupWithForm extends Popup {
     }
     //modifies close method to reset form once popup is closed
     close(){
-       // this._formElement.removeEventListener('submit', close);
+        this._formElement.reset();
         super.close();
     }
 }

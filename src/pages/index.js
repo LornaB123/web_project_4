@@ -72,24 +72,24 @@ addButton.addEventListener('click', (e) => {
   addFormValidator.disableButton();
   //createButton.classList.add('popup__save_disabled');
   //createButton.disabled = true;
-  addForm.reset();
+  //addForm.reset();
   addFormPopup.open();
  });
 
+//  //event listener for editButton 
+//  editButton.addEventListener('click', (e) => {
+//   const userData = userInformation.getUserInfo()
+//   editFormPopup.open();
+// }) 
+
  //event listener for editButton 
  editButton.addEventListener('click', (e) => {
-  const userData = userInformation.getUserInfo()
-  editFormPopup.open();
-}) 
+   const [nameSelector, jobSelector] = userInformation.getUserInfo();
+   document.querySelector('.profile__info-title').value = nameSelector;
+   document.querySelector('.profile__info-subtitle').value = jobSelector;
+   editFormPopup.open();
+})  
 
-
-// const handleEditButtonClick = new PopupWithForm('.popup_profile',{ //muddoo
-//   info: userInfo,//mudoo
-//   submit: profileFormSubmit //muuddoo
-// });
-
-//const userInfo = new UserInfo(['.profile__name','.profile__text']);
-//const profileFormSubmit = ([name,info]) => userInfo.setUserInfo(name,info); 
 
 // editForm.addEventListener('submit', (e) => {
 //   e.preventDefault();

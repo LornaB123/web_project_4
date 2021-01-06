@@ -6,6 +6,8 @@ export default class FormValidator {
         this._inputErrorClass = settings.inputErrorClass;
         this._errorClass = settings.errorClass;
         this._form = formElement;
+        this._buttonElement = this._form.querySelector(this._submitButtonSelector);
+        this._inputs = [...this._form.querySelectorAll(this._inputSelector)];
     }
 
 
@@ -55,10 +57,8 @@ export default class FormValidator {
     }
     //method to disable create button 
     disableButton() {
-        this._addModal = document.querySelector('.popup_type_add-card');
-        this._createButton = this._addModal.querySelector('.popup__save');
-        this._createButton.classList.add('popup__save_disabled');
-        this._createButton.disabled = true;
+        this._buttonElement.classList.add('popup__save_disabled');
+        this._buttonElement.disabled = true;
     }
 
   //event listeners set for card arrays
