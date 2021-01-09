@@ -14,9 +14,7 @@ export default class FormValidator {
     //Function to show error messages when validation criteria is not met
     _showErrorMessage(inputElement) {
         const errorElement = this._form.querySelector("#" + inputElement.id + "-error");
-
         errorElement.textContent = inputElement.validationMessage;
-
         errorElement.classList.add(this._errorClass);
         inputElement.classList.add(this._inputErrorClass);
     }
@@ -24,7 +22,6 @@ export default class FormValidator {
     //Function to hide the error messages when validation criteria is met
     _hideErrorMessage(inputElement) {
         const errorElement = this._form.querySelector("#" + inputElement.id + "-error");
-
         errorElement.textContent = "";
         errorElement.classList.remove(this._errorClass);
         inputElement.classList.remove(this._inputErrorClass);
@@ -43,30 +40,27 @@ export default class FormValidator {
 
     //Function to change state of Save/Create buttons on form
     _toggleButtonState(formElement, inputSelector) {
-        const inputs = [...formElement.querySelectorAll(inputSelector)];
-        const isValid = inputs.every(input => input.validity.valid);
-        const buttonElement = this._form.querySelector(this._submitButtonSelector);
-
+        //const inputs = [...formElement.querySelectorAll(inputSelector)];
+        const isValid = this._inputs.every(input => input.validity.valid);
+        //const buttonElement = this._form.querySelector(this._submitButtonSelector);
         if(isValid) {
-            buttonElement.classList.remove(this._inactiveButtonClass);
-            buttonElement.disabled = false;
+            this._buttonElement.classList.remove(this._inactiveButtonClass);
+            this._buttonElement.disabled = false;
         } else {
-            buttonElement.classList.add(this._inactiveButtonClass);
-            buttonElement.disabled = true;
+            this._buttonElement.classList.add(this._inactiveButtonClass);
+            this._buttonElement.disabled = true;
         }
     }
+
     //method to disable create button 
     disableButton() {
-        this._buttonElement.classList.add('popup__save_disabled');
+        this._buttonElement.classList.add(this._inactiveButtonClass);
         this._buttonElement.disabled = true;
     }
 
   //event listeners set for card arrays
     _setEventListeners() {
-        const inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
-       //const buttonElement = this._form.querySelector(this._submitButtonSelector);
-        
-        inputs.forEach(inputElement => {
+        this._inputs.forEach(inputElement => {
             inputElement.addEventListener("input", () => {
                 //check Input Validity
                 this._checkInputValidity(inputElement, this._inputErrorClass);
@@ -75,6 +69,12 @@ export default class FormValidator {
                 });
            });
         };
+    
+    hideErrors(){
+        this._inputs.forEach(inputElement => {
+        this._hideErrorMessage(inputElement);
+        })
+    }     
 
   //enable validation of form submit buttons
    enableValidation () {

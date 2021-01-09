@@ -1,5 +1,5 @@
 import "./index.css";
-import {defaultConfig, editModal, addModal, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
+import {defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
@@ -70,23 +70,19 @@ editFormPopup.setEventListeners();
 ////event listeners for add card button
 addButton.addEventListener('click', (e) => {
   addFormValidator.disableButton();
+  addFormValidator.hideErrors();
   //createButton.classList.add('popup__save_disabled');
   //createButton.disabled = true;
   //addForm.reset();
   addFormPopup.open();
  });
 
-//  //event listener for editButton 
-//  editButton.addEventListener('click', (e) => {
-//   const userData = userInformation.getUserInfo()
-//   editFormPopup.open();
-// }) 
-
  //event listener for editButton 
  editButton.addEventListener('click', (e) => {
    const [nameSelector, jobSelector] = userInformation.getUserInfo();
-   document.querySelector('.popup__input_type_name').value = nameSelector;
-   document.querySelector('.popup__input_type_job').value = jobSelector;
+   nameInput.value = nameSelector;
+   jobInput.value = jobSelector;
+   editFormValidator.hideErrors();
    editFormPopup.open();
 });  
 
