@@ -49,7 +49,7 @@ api.getAppInfo()
     popupSubmit: ([name, link]) => {
       api.addCard({name, link})
       .then(res => {
-        const newCard = createItem({name, link})
+        const newCard = createItem(res)
         cardSection.addItem(newCard);
       })
     }
@@ -70,8 +70,8 @@ function createItem(cardInfo) {
     handleCardClick: (name, link) => {
       imagePopup.open(name, link)
     },
-    handleDeleteClick: (cardID, cardElement) => {
-      deleteCardPopup.open([cardID, cardElement]);
+    handleDeleteClick: (cardInfo) => {
+      deleteCardPopup.open(cardInfo);
     }
   }, userData._id,
    cardTemplate).createCard()
@@ -90,10 +90,10 @@ const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
 
-  //Delete Card Form
+//Delete Card Form
 const deleteCardPopup = new PopupWithForm({
   popupSelector: '.popup_type_delete-card',
-  popupSubmit: ([cardID, cardElement]) => {
+  popupSubmit: (cardID, cardElement) => {
      api.removeCard(cardID)
      .then(() => {
       deleteCardPopup.close();

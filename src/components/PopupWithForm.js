@@ -12,7 +12,7 @@ export default class PopupWithForm extends Popup {
     //private method, collects data from all input fields
     _getInputValues(){
         if(this._info){
-            return this._info
+            return this._info.length
         } else {
             return [...this._popupElement.querySelectorAll('.popup__input')].map(input => input.value);
         }
@@ -34,8 +34,8 @@ export default class PopupWithForm extends Popup {
         super.setEventListeners();
     }
     //modifies open method
-    open(cardID, cardElement){
-        this._info = [cardID, cardElement];
+    open(cardInfo){
+        this._info = cardInfo;
         super.open();
     }
     //modifies close method to reset form once popup is closed
