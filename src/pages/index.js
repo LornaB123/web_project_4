@@ -71,9 +71,6 @@ function createItem(cardInfo) {
       imagePopup.open(name, link)
     },
     handleDeleteClick: (cardID, cardElement) => {
-      console.log(cardID);
-
-      //api.removeCard(cardID);
       deleteCardPopup.open([cardID, cardElement]);
     }
   }, userData._id,
@@ -105,11 +102,6 @@ const deleteCardPopup = new PopupWithForm({
   }
 })
 deleteCardPopup.setEventListeners();
-
-
-// trashButton.addEventListener('click', (e) => {
-//   deleteCardPopup.open();
-// })
 
 //Call new Popups for each type of form: image, add, edit,
 //Edit Profile Form

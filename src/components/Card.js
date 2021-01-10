@@ -24,7 +24,7 @@ export default class Card {
     }
 
     _getCardTemplate (){
-        return this._template.cloneNode(true);
+        return this._template.cloneNode(true).querySelector('.elements__element');
     }
 
     _handleTrashClick(e){
