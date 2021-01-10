@@ -70,11 +70,11 @@ function createItem(cardInfo) {
     handleCardClick: (name, link) => {
       imagePopup.open(name, link)
     },
-    handleDeleteClick: (cardID) => {
+    handleDeleteClick: (cardID, cardElement) => {
       console.log(cardID);
 
       //api.removeCard(cardID);
-      deleteCardPopup.open(cardID);
+      deleteCardPopup.open([cardID, cardElement]);
     }
   }, userData._id,
    cardTemplate).createCard()
@@ -93,17 +93,20 @@ const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
 
-//Delete Card Form
+  //Delete Card Form
 const deleteCardPopup = new PopupWithForm({
   popupSelector: '.popup_type_delete-card',
-  popupSubmit: (cardID) => {
+  popupSubmit: ([cardID, cardElement]) => {
      api.removeCard(cardID)
      .then(() => {
       deleteCardPopup.close();
+      cardElement.remove();
      })
   }
 })
 deleteCardPopup.setEventListeners();
+
+
 // trashButton.addEventListener('click', (e) => {
 //   deleteCardPopup.open();
 // })

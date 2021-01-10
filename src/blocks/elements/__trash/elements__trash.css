@@ -1,4 +1,5 @@
 .elements__trash {
+    visibility: hidden;
     background-image: url(../../../images/trashIcon.png);
     background-color: transparent;
     border: none;

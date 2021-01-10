@@ -11,8 +11,8 @@ export default class PopupWithForm extends Popup {
 
     //private method, collects data from all input fields
     _getInputValues(){
-        if(this.info){
-            return this.info
+        if(this._info){
+            return this._info
         } else {
             return [...this._popupElement.querySelectorAll('.popup__input')].map(input => input.value);
         }
@@ -34,8 +34,8 @@ export default class PopupWithForm extends Popup {
         super.setEventListeners();
     }
     //modifies open method
-    open(cardID){
-        this._info = cardID;
+    open(cardID, cardElement){
+        this._info = [cardID, cardElement];
         super.open();
     }
     //modifies close method to reset form once popup is closed
@@ -44,24 +44,3 @@ export default class PopupWithForm extends Popup {
         super.close();
     }
 }
-
-
-// Previous Edit Form Submit/Save Button Functionality from Sprint 7
-// editForm.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   profileName.textContent = nameInput.value; 
-//   profileJob.textContent = jobInput.value;
-//   closeModal(editModal);
-// });
-// //Add Form Submit/Save Button Functionality
-// addForm.addEventListener('submit', (e)  => { 
-//   e.preventDefault(); 
-//   //create card: 
-//   const newCard = {name: titleInput.value, link: linkInput.value};
-//   //initiateCardModule(newCard, "prepend");
-//   cardSection.addItem(newCard);
-
-//   //close modal after submit 
-//   closeModal(addModal); 
-//   addForm.reset(); 
-//   });
