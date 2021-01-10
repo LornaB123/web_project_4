@@ -12,7 +12,7 @@ import Api from "../components/Api.js";
 
 //connect api
 // project server URL = https://around.nomoreparties.co/v1/ + ADD Group ID here(group-7)..., 
-//authorization = TOKEN( )
+//authorization = TOKEN( a950b923-6d6c-4927-9948-6833c1950cc9 )
 const api = new Api({
      baseUrl: "https://around.nomoreparties.co/v1/group-7",
     headers: {
@@ -71,6 +71,8 @@ function createItem(cardInfo) {
       imagePopup.open(name, link)
     },
     handleDeleteClick: (cardID) => {
+      console.log(cardID);
+
       //api.removeCard(cardID);
       deleteCardPopup.open(cardID);
     }
@@ -94,7 +96,7 @@ imagePopup.setEventListeners();
 //Delete Card Form
 const deleteCardPopup = new PopupWithForm({
   popupSelector: '.popup_type_delete-card',
-  popupSubmit: ({cardID}) => {
+  popupSubmit: (cardID) => {
      api.removeCard(cardID)
      .then(() => {
       deleteCardPopup.close();
