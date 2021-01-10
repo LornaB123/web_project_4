@@ -15,7 +15,10 @@
             </header>
             <main class="content">
                 <section class="profile">
-                        <img class="profile__image" src="images/cousteau.png" alt="Jacques Cousteau Avatar">
+                        <div class="profile__avatar">
+                            <img class="profile__image" src="images/cousteau.png" alt="Jacques Cousteau Avatar">
+                            <button class="profile__image-edit" type="button" aria-label="Edit Avatar"></button>
+                        </div>
                     <div class="profile__info">
                         <h1 class="profile__info-title">Jacques Cousteau</h1>
                         <button class="profile__edit-button" aria-label="Edit"></button>
@@ -28,6 +31,19 @@
             <footer class="footer">
                 <p class="footer__info">© 2020 Around The U.S.</p>
             </footer>
+
+            <div class = "popup popup_type_avatar">
+                <div class="popup__container">
+                    <form action="#" class="popup__form edit-form" novalidate>
+                      <h2 class="popup__title">Change Profile Picture</h2>                        
+                        <input id = "avatar-URL" type='url' name='avatarURL' class="popup__input popup__input_type_avatar-URL" minlength="2">
+                        <span id="avatar-URL-error" class = "popup__error"></span>
+
+                        <button class="popup__save" type="submit" aria-label="Save">Save</button>
+                        <button class="popup__close-button" type="reset" aria-label="Close Form"></button>
+                    </form>
+                </div>
+            </div>
 
             <div class="popup popup_type_edit">
                 <div class="popup__container">
@@ -60,7 +76,7 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <div class="popup popup_type_delete-card">
                     <div class="popup__container">
                       <form action="#" class="popup__form add-form" novalidate>
@@ -73,9 +89,9 @@
 
                 <div class="popup popup_type_image">
                     <div class="popup_container_type_image">
-                            <img alt="Popup Image Picture" class="popup__image">
-                            <h3 class= "popup__caption"></h3>
-                            <button class="popup__close-button" type="reset" aria-label="Close Form"></button>
+                        <img alt="Popup Image Picture" class="popup__image">
+                        <h3 class= "popup__caption"></h3>
+                        <button class="popup__close-button" type="reset" aria-label="Close Form"></button>
                     </div>
                 </div>
                 
