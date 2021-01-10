@@ -10,18 +10,6 @@ export default class Card {
         return this._template.cloneNode(true);
     }
 
-
-    // _imageModal() { 
-    //    popupPic.setAttribute('src', this._link); 
-    //    popupPic.setAttribute('alt', this._name); 
-    //    popupCaption.textContent = this._name; 
-    //  } 
-
-    //  _cardImageSelector(){
-    //      this._imageModal();
-    //      openModal(imageModalPopup);
-    //  }
-
     _handleTrashClick(e){
         e.target.closest('.elements__element').remove(); 
     }

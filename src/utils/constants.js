@@ -18,6 +18,7 @@ const defaultConfig = {
   //Buttons and other DOM elements 
   const editButton = document.querySelector('.profile__edit-button');
   const addButton = document.querySelector('.profile__add-button');
+  const trashButton = document.querySelector('.elements__trash');
   const createButton = addModal.querySelector('.popup__save');
   const nameInput = document.querySelector('.popup__input_type_name');
   const jobInput = document.querySelector('.popup__input_type_job');
@@ -30,4 +31,4 @@ const defaultConfig = {
 //const linkInput = addForm.querySelector('.popup__input_type_link'); 
 //const profileInfo = new UserInfo(profileName, profileJob);
 
-  export {defaultConfig, nameInput, jobInput, editModal, addModal, editForm, addForm, cardTemplate, list, editButton, addButton, createButton }
+  export {trashButton, defaultConfig, nameInput, jobInput, editModal, addModal, editForm, addForm, cardTemplate, list, editButton, addButton, createButton }

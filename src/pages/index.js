@@ -1,5 +1,5 @@
 import "./index.css";
-import {defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
+import { trashButton, defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
@@ -69,15 +69,23 @@ function createItem(cardInfo) {
 //Add Card Form
 const addFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  popupSubmit: ([name, link]) => {
-    const newCard = createItem({name, link})
-    cardSection.addItem(newCard);
+  popupSubmit: (data) => {
+    api.addCard(data)
+    
+    // const newCard = createItem({name, link})
+    // cardSection.addItem(newCard);
    }
   })
   
   addFormPopup.setEventListeners();
 //Delete Card Form
-const deleteCardPopup = n
+const deleteCardPopup = new PopupWithForm({
+  popupSelector: 'popup_type_delete-card',
+  popupSubmit: (e) => {
+    e.target.closest('.elements__element').remove();
+  }
+})
+deleteCardPopup.setEventListeners();
 
 //Edit Profile Form
 const editFormPopup = new PopupWithForm({
@@ -88,7 +96,9 @@ const editFormPopup = new PopupWithForm({
 });
 
 editFormPopup.setEventListeners();
-
+trashButton.addEventListener('click', (e) => {
+  deleteCardPopup.open();
+})
 ////event listeners for add card button
 addButton.addEventListener('click', (e) => {
   addFormValidator.disableButton();
@@ -108,52 +118,3 @@ addButton.addEventListener('click', (e) => {
    editFormPopup.open();
 });  
 
-
-
-
-// editForm.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   profileName.textContent = nameInput.value; 
-//   profileJob.textContent = jobInput.value;
-//   closeModal(editModal);
-// });
-
- //Edit Title Form
-// const editFormPopup = newPopupWithForm({
- //  popupSelector: '.popup_type_edit',
-//   poupSubmit: () => profileInfo.setUserInfo(inputName.value, inputJob.value)
- //})
-//Modal Open Functions
-//Edit Modal Open Function
-// function editButtonOpen(){
-//   //update fields on main page 
-//   profileName.textContent = nameInput.value; 
-//   profileJob.textContent = jobInput.value;
-//   //open modal
-//   openModal(editModal);
-// }
-//Image Modal Open Function
-//function imagePopupOpen(){
- // imageModal(card.link, card.name); 
- // openModal(imagePopup);
-//}
-
-
-// Previous Edit Form Submit/Save Button Functionality from Sprint 7
-
-//editButton.addEventListener('click',(e) => openModal(editModal));
-
-// //Add Form Submit/Save Button Functionality
-// addForm.addEventListener('submit', (e)  => { 
-//   e.preventDefault(); 
-//   //create card: 
-//   const newCard = {name: titleInput.value, link: linkInput.value};
-//   //initiateCardModule(newCard, "prepend");
-//   cardSection.addItem(newCard);
-
-//   //close modal after submit 
-//   closeModal(addModal); 
-//   addForm.reset(); 
-//   }); 
-
-//export default {imagePopup}
