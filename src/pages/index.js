@@ -29,6 +29,28 @@ const api = new Api({
   renderer: createItem
 }, list)
 cardSection.renderer();
+
+//Add Card Form
+  const addFormPopup = new PopupWithForm({
+    popupSelector: '.popup_type_add-card',
+    popupSubmit: ([name, link]) => {
+      api.addCard({name, link})
+      .then(res => {
+        const newCard = createItem({name, link})
+        cardSection.addItem(newCard);
+      })
+    }
+    })
+  addFormPopup.setEventListeners();
+
+  ////event listeners for add card button
+  addButton.addEventListener('click', (e) => {
+    addFormValidator.disableButton();
+    addFormValidator.hideErrors();
+    addFormPopup.open();
+  });
+
+
 })
 
 api.getUserInfo()
@@ -60,32 +82,27 @@ function createItem(cardInfo) {
     data: cardInfo,
     handleCardClick: (name, link) => {
       imagePopup.open(name, link)
+    },
+    handleDeleteClick: (cardID) => {
+      api.removeCard(cardID);
     }
   }, cardTemplate).createCard()
 }
 
 
 //Call new Popups for each type of form: image, add, edit,
-//Add Card Form
-const addFormPopup = new PopupWithForm({
-  popupSelector: '.popup_type_add-card',
-  popupSubmit: (data) => {
-    api.addCard(data)
-    
-    // const newCard = createItem({name, link})
-    // cardSection.addItem(newCard);
-   }
-  })
-  
-  addFormPopup.setEventListeners();
+
 //Delete Card Form
 const deleteCardPopup = new PopupWithForm({
-  popupSelector: 'popup_type_delete-card',
-  popupSubmit: (e) => {
-    e.target.closest('.elements__element').remove();
-  }
-})
-deleteCardPopup.setEventListeners();
+   popupSelector: 'popup_type_delete-card',
+   popupSubmit: (e) => {
+     e.target.closest('.elements__element').remove();
+   }
+ })
+// deleteCardPopup.setEventListeners();
+// trashButton.addEventListener('click', (e) => {
+//   deleteCardPopup.open();
+// })
 
 //Edit Profile Form
 const editFormPopup = new PopupWithForm({
@@ -96,18 +113,8 @@ const editFormPopup = new PopupWithForm({
 });
 
 editFormPopup.setEventListeners();
-trashButton.addEventListener('click', (e) => {
-  deleteCardPopup.open();
-})
-////event listeners for add card button
-addButton.addEventListener('click', (e) => {
-  addFormValidator.disableButton();
-  addFormValidator.hideErrors();
-  //createButton.classList.add('popup__save_disabled');
-  //createButton.disabled = true;
-  //addForm.reset();
-  addFormPopup.open();
- });
+
+
 
  //event listener for editButton 
  editButton.addEventListener('click', (e) => {

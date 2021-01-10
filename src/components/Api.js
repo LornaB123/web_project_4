@@ -23,10 +23,10 @@ export default class Api {
         .catch(err => console.log(err))
     }
 
-    getAppInfo(){
-        //gather all info together and render all at once
-        return Promise.all([this.getUserInfo(), this.getInitialCards()])
-    }
+      getAppInfo(){
+          //gather all info together and render all at once
+          return Promise.all([this.getUserInfo(), this.getInitialCards()])
+      }
 
     //POST speicifed url -cards
     addCard({ name, link }) {
@@ -43,15 +43,15 @@ export default class Api {
     }
 
     // //DELETE specified url =cardID
-    // removeCard(cardID) {
-    //     return fetch(this._baseUrl + '/cards/' + cardID, {
-    //         headers:  this._headers,
-    //         method: "DELETE",
-    //         })
-    //     .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
-    //     .then(res => res.remove(cardID))
-    //     .catch(err => console.log(err))
-    // }
+    removeCard(cardID) {
+         return fetch(this._baseUrl + '/cards/' + cardID, {
+             headers:  this._headers,
+             method: "DELETE",
+             })
+         .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
+         //.then(res => res.remove(cardID))
+         .catch(err => console.log(err))
+     }
 
     //PUT specified url cardID
     //DELETE specified url cardID
