@@ -5,6 +5,7 @@ export default class PopupWithForm extends Popup {
     constructor({popupSelector, popupSubmit}){
         super(popupSelector); //the 'add/edit FORMS' as this._popupElement (addForm or editForm)
         this._popupSubmit = popupSubmit;
+        console.log('popupElement =',this._popupElement)
         this._formElement = this._popupElement.querySelector('.popup__form');
         this._submitEventHandler = this._submitEventHandler.bind(this);
     }
