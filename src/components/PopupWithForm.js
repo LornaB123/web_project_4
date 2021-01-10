@@ -12,7 +12,7 @@ export default class PopupWithForm extends Popup {
     //private method, collects data from all input fields
     _getInputValues(){
         if(this._info){
-            return this._info.length
+            return this._info
         } else {
             return [...this._popupElement.querySelectorAll('.popup__input')].map(input => input.value);
         }

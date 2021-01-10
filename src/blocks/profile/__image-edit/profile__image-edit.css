@@ -19,3 +19,7 @@
     transition: color 2s ease 1s;
     background-size: 26px;
 }
+
+.profile__image-edit:focus {
+    outline: none;
+}
