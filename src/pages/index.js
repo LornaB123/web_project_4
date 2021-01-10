@@ -85,7 +85,7 @@ function createItem(cardInfo) {
     },
     handleDeleteClick: (cardID) => {
       api.removeCard(cardID);
-      deleteCardPopup.open(cardID);
+      //deleteCardPopup.open(cardID);
     }
   }, cardTemplate).createCard()
 }
