@@ -1,5 +1,5 @@
 import "./index.css";
-import { avatarModal, avatarButton, trashButton, defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
+import {avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
@@ -105,41 +105,44 @@ deleteCardPopup.setEventListeners();
 
 //Call new Popups for each type of form: image, add, edit, avatar
 //popup Loading function
-function loadingPopup(isLoading, popup){
-  if(isLoading) {
-    popup.querySelector('.popup__save').textContent = "Saving...";
-  } else {
-    popup.querySelector(".popup__save").textContent = "Save";
-  }
-}
+ function loadingPopup(isLoading, popup){
+   if(isLoading) {
+     popup.querySelector('.popup__save').textContent = "Saving...";
+   } else {
+     popup.querySelector(".popup__save").textContent = "Save";
+   }
+ }
+// //avatar edit form
+ const avatarFormPopup = new PopupWithForm({
+   popupSelector: '.popup_type_avatar',
+   popupSubmit: (data) => {
+     handleAvatarClick(data)
+   }
+ });
+ avatarFormPopup.setEventListeners();
 
-//avatar edit handler
-function handleAvatarClick(data){
-  loadingPopup(true, avatarModal);
-  api.setUserAvatar({
-    avatar: data.avatarURL
-  })
-  .then( res => {
-    avatarImage.src = res.avatar;
-    loadingPopup(false, avatarModal);
-    avatarFormPopup.close();
-  })
-  .catch(err => console.log(err));
-}
+// //event listener for avatar edit button
+ avatarButton.addEventListener('click', (e) => {
+   avatarFormPopup.open();
+ });
+ //avatar edit handler
+ function handleAvatarClick(data){
+   loadingPopup(true, avatarModal);
+   api.setUserAvatar({data})
+   .then( res => {
+     console.log('res', res);
+     avatarImage.src = res.avatar;
+     loadingPopup(false, avatarModal);
+     avatarFormPopup.close();
+   })
+   .catch(err => console.log(err));
+ }
+//  api.getUserInfo()
+//       .then(res => {
+//       userInformation.setUserInfo(res.name, res.about)
+//     })
 
-//avatar edit form
-const avatarFormPopup = new PopupWithForm({
-  popupSelector: '.popup_type_avatar-edit',
-  popupSubmit: (data) => {
-    handleAvatarClick(data)
-  }
-});
-avatarFormPopup.setEventListeners();
 
-//event listener for avatar edit button
-avatarButton.addEventListener('click', (e) => {
-  avatarFormPopup.open();
-});
 //Edit Profile Form
 const editFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_edit',

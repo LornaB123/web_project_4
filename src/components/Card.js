@@ -27,9 +27,9 @@ export default class Card {
         return this._template.cloneNode(true).querySelector('.elements__element');
     }
 
-    _handleTrashClick(e){
-        e.target.closest('.elements__element').remove(); 
-    }
+    // _handleTrashClick(e){
+    //     e.target.closest('.elements__element').remove(); 
+    // }
 
     _handleCardLike(e){
         e.target.classList.toggle('elements__favorite_selected'); 
