@@ -1,11 +1,33 @@
+import { cardTemplate } from "../utils/constants";
+
 export default class Card {
-    constructor ({data, handleCardClick, handleDeleteClick}, template){
+    constructor ({data, handleCardClick, handleDeleteClick}, userId, template){
         this._link = data.link;
         this._name = data.name;
-        this._id = data.id;
+        this._owner = data.owner;
+        this._id = data._id;
+        this._userId = userId;
         this._template = template;
         this._handleCardClick = handleCardClick;
         this._handleDeleteClick = handleDeleteClick;
+    }
+
+    id(){
+        return this._id;
+    }
+
+    _cardDelete(cardID){
+        const cardElement = document.getElementById(cardID);
+        if(cardElement){
+            cardElement.parentNode.removeChild(cardElement);
+        }
+        this._cardElement = null;
+    }
+    
+    _showDeleteIcon(){
+        if(this._owner._id === this._userId){
+            this._cardTrash.classList.add('elements__trash_visible');
+        }
     }
 
     _getCardTemplate (){
@@ -22,7 +44,7 @@ export default class Card {
 
     _setEventListeners() {
         this._cardLike.addEventListener("click", this._handleCardLike);
-        this._cardTrash.addEventListener("click", this._handleDeleteClick(this._id));
+        this._cardTrash.addEventListener("click", () => this._handleDeleteClick(this._id));
         this._cardImage.addEventListener("click", () => this._handleCardClick(this._name, this._link));
     }
 
@@ -37,7 +59,9 @@ export default class Card {
         this._cardTitle.textContent = this._name; 
         this._cardImage.setAttribute('src', this._link); 
         this._cardImage.setAttribute('alt', this._name); 
+        this._cardElement.id = this._id;
 
+        this._showDeleteIcon();
         this._setEventListeners();
 
         return this._cardElement;

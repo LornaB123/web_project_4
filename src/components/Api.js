@@ -66,7 +66,15 @@ export default class Api {
 
     //PATCH avatar
     setUserAvatar({avatar}) {
-
+        return fetch(this._baseUrl + '/users/me/avatar', {
+            headers: this._headers,
+            method: "PATCH",
+            body: JSON.stringify({
+                avatar
+            })
+        })
+        .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
+        .catch(err => console.log(err))
     }
 }
 
