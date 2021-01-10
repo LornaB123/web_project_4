@@ -85,24 +85,25 @@ function createItem(cardInfo) {
     },
     handleDeleteClick: (cardID) => {
       api.removeCard(cardID);
+      deleteCardPopup.open(cardID);
     }
   }, cardTemplate).createCard()
 }
 
 
 //Call new Popups for each type of form: image, add, edit,
-
 //Delete Card Form
 const deleteCardPopup = new PopupWithForm({
    popupSelector: 'popup_type_delete-card',
-   popupSubmit: (e) => {
-     e.target.closest('.elements__element').remove();
+   popupSubmit: ({info}) => {
+     info.remove();
+     deleteCardPopup.close();
    }
  })
-// deleteCardPopup.setEventListeners();
-// trashButton.addEventListener('click', (e) => {
-//   deleteCardPopup.open();
-// })
+ deleteCardPopup.setEventListeners();
+ trashButton.addEventListener('click', (e) => {
+   deleteCardPopup.open();
+ })
 
 //Edit Profile Form
 const editFormPopup = new PopupWithForm({
