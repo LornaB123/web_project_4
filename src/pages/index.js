@@ -93,7 +93,7 @@ imagePopup.setEventListeners();
 //Delete Card Form
 const deleteCardPopup = new PopupWithForm({
   popupSelector: '.popup_type_delete-card',
-  popupSubmit: (cardID, cardElement) => {
+  popupSubmit: ([cardID, cardElement]) => {
      api.removeCard(cardID)
      .then(() => {
       deleteCardPopup.close();
