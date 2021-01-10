@@ -7,7 +7,40 @@ import initialCards from "../utils/initialCards.js";
 import PopupWithImage from "../components/PoppupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
+
+//connect api
+// project server URL = https://around.nomoreparties.co/v1/ + ADD Group ID here(group-7)..., 
+//authorization = TOKEN( )
+const api = new Api({
+     baseUrl: "https://around.nomoreparties.co/v1/group-7",
+    headers: {
+         authorization: "a950b923-6d6c-4927-9948-6833c1950cc9",
+         "Content-Type": "application/json"
+     }
+ });
+
+ api.getInitialCards()
+ .then(res => {
+   //call Section to render original cards to the 'elements' section of page
+  const cardSection = new Section({
+  items: res,
+  renderer: createItem
+}, list)
+cardSection.renderer();
+})
+
+api.getUserInfo()
+.then(res => {
+  userInformation.setUserInfo(res.name, res.about)
+})
+
+//Edit Profile Form
+const userInformation =  new UserInfo ({
+  nameSelector: '.profile__info-title',
+  jobSelector: '.profile__info-subtitle'
+});
 
 //call form validator class
 const editFormValidator = new FormValidator(defaultConfig, editForm);
@@ -31,13 +64,6 @@ function createItem(cardInfo) {
   }, cardTemplate).createCard()
 }
 
-//call Section to render original cards to the 'elements' section of page
-const cardSection = new Section({
-  items: initialCards,
-  renderer: createItem
-}, list)
-
-cardSection.renderer();
 
 //Call new Popups for each type of form: image, add, edit,
 //Add Card Form
@@ -48,14 +74,10 @@ const addFormPopup = new PopupWithForm({
     cardSection.addItem(newCard);
    }
   })
-
-addFormPopup.setEventListeners();
-
-//Edit Profile Form
-const userInformation =  new UserInfo ({
-  nameSelector: '.profile__info-title',
-  jobSelector: '.profile__info-subtitle'
-});
+  
+  addFormPopup.setEventListeners();
+//Delete Card Form
+const deleteCardPopup = n
 
 //Edit Profile Form
 const editFormPopup = new PopupWithForm({
