@@ -34,7 +34,7 @@
 
             <div class = "popup popup_type_avatar">
                 <div class="popup__container">
-                    <form action="#" class="popup__form edit-form" novalidate>
+                    <form action="#" class="popup__form avatar-form" novalidate>
                       <h2 class="popup__title">Change Profile Picture</h2>                        
                         <input id = "avatar-URL" type='url' name='avatarURL' class="popup__input popup__input_type_avatar-URL" minlength="2">
                         <span id="avatar-URL-error" class = "popup__error"></span>
@@ -79,7 +79,7 @@
 
                 <div class="popup popup_type_delete-card">
                     <div class="popup__container">
-                      <form action="#" class="popup__form add-form" novalidate>
+                      <form action="#" class="popup__form delete-form" novalidate>
                         <h2 class="popup__title">Are you sure?</h2>
                             <button class="popup__save" type="submit" aria-label="Create">Yes</button>
                             <button class="popup__close-button" type="reset" aria-label="Close Form"></button>
@@ -99,8 +99,10 @@
                 <figure class="elements__element">
                     <img src(unknown) class="elements__element-pic" alt="card image">
                     <figcaption class="elements__caption"></figcaption>
-                    <button class="elements__favorite" type="button" aria-label="Like"></button>
-                    <p class="elements__likes">0</p>
+                    <div class = "elements__favorite-container">
+                        <button class="elements__favorite" type="button" aria-label="Like"></button>
+                        <p class="elements__likes">0</p>
+                    </div>
                     <button class="elements__trash" type="button" aria-label="Delete"></button>
                 </figure>
             </template>

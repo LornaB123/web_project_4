@@ -1,5 +1,5 @@
 import "./index.css";
-import {deleteModal, avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
+import {deleteModal, avatarForm, avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
@@ -38,7 +38,7 @@ api.getAppInfo()
     
     api.getUserInfo()
       .then(res => {
-      api.setUserInfo(res.name, res.about)
+      userInformation.setUserInfo(res.name, res.about)
     })
 
     cardSection.renderer();
@@ -81,7 +81,8 @@ function createItem(cardInfo) {
 //call form validator class
 const editFormValidator = new FormValidator(defaultConfig, editForm);
 const addFormValidator = new FormValidator(defaultConfig, addForm);
-
+const avatarFormValidator = new FormValidator(defaultConfig, avatarForm);
+avatarFormValidator.enableValidation();
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
@@ -94,10 +95,10 @@ imagePopup.setEventListeners();
 const deleteCardPopup = new PopupWithForm({
   popupSelector: '.popup_type_delete-card',
   popupSubmit: ([cardID, cardElement]) => {
-     //loadingPopup(true, deleteModal);
+     loadingPopup(true, deleteModal);
      api.removeCard(cardID)
      .then(() => {
-      //loadingPopup(false, deleteModal);
+      loadingPopup(false, deleteModal);
       deleteCardPopup.close();
       cardElement.remove();
      })
