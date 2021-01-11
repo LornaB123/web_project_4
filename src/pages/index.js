@@ -62,7 +62,27 @@ api.getAppInfo()
     addFormValidator.hideErrors();
     addFormPopup.open();
   });
-
+//function for counting likes
+function cardCountLikes(cardID){
+  if(cardElement.querySelector('.elements__favorite').classList.contains('.elements__favorite_selected')){
+  api.removeLike(cardID)
+  .then(res => {
+    cardElement.querySelector('.elements__favorite').classList.remove('elements__favorite_selected');
+    cardInstance.showLikes(res.likes.length)
+    cardInstance._likes = res.likes;
+  })
+  .catch(err => console.log(err))
+} else {
+  cardInstance._cardElement.classList.toggle('.elements__favorite_selected');
+  api.addLike(cardID)
+  .then(res => {
+    cardElement.querySelector('.elements__favorite').classList.add('.elements__favorite_selected');
+    cardInstance.showLikes(res.likes.length)
+    cardInstance._likes = res.likes;
+  })
+  .catch(err => console.log(err))
+}
+}
   //function to create individual cards
 function createItem(cardInfo) {
   return new Card({
@@ -72,11 +92,16 @@ function createItem(cardInfo) {
     },
     handleDeleteClick: (cardInfo) => {
       deleteCardPopup.open(cardInfo);
+    },
+    likeHandler: (cardID) => {
+     cardCountLikes(cardID);
     }
   }, userData._id,
    cardTemplate).createCard()
 }
 })
+
+
 
 //call form validator class
 const editFormValidator = new FormValidator(defaultConfig, editForm);

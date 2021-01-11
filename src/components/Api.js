@@ -55,8 +55,24 @@ export default class Api {
 
     //PUT specified url cardID
     //DELETE specified url cardID
-    changeLikeCardStatus(cardID, like) {
+    addLike(cardID) {
+        return fetch(this._baseUrl + '/cards/likes' + cardID, {
+            headers:  this._headers,
+            method: "PUT",
+            })
+        .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
+        //.then(res => res.remove(cardID))
+        .catch(err => console.log(err))
+    }
 
+    removeLike(cardID){
+        return fetch(this._baseUrl + '/cards/likes' + cardID, {
+            headers:  this._headers,
+            method: "DELETE",
+            })
+        .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
+        //.then(res => res.remove(cardID))
+        .catch(err => console.log(err))
     }
 
     //PATCH user-info
