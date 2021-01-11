@@ -51,11 +51,13 @@ export default class Card {
         this._cardImage = this._cardElement.querySelector('.elements__element-pic'); 
         this._cardLike = this._cardElement.querySelector('.elements__favorite'); 
         this._cardTrash = this._cardElement.querySelector('.elements__trash');
+        this._cardLikes = this._cardElement.querySelector('.elements__likes');
             
         this._cardTitle.textContent = this._name; 
         this._cardImage.setAttribute('src', this._link); 
         this._cardImage.setAttribute('alt', this._name); 
         this._cardElement.id = this._id;
+        this._cardLikes.textContent = this._cardLikes.length;
 
         this._showDeleteIcon();
         this._setEventListeners();
