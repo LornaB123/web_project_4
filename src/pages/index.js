@@ -63,7 +63,9 @@ api.getAppInfo()
     addFormPopup.open();
   });
 //function for counting likes
-function cardCountLikes(cardID){
+function cardCountLikes(cardElement, cardID){
+  console.log('cardElement', cardElement);
+  console.log('cardID', cardID)
   if(cardElement.querySelector('.elements__favorite').classList.contains('.elements__favorite_selected')){
   api.removeLike(cardID)
   .then(res => {
@@ -93,8 +95,8 @@ function createItem(cardInfo) {
     handleDeleteClick: (cardInfo) => {
       deleteCardPopup.open(cardInfo);
     },
-    likeHandler: (cardID) => {
-     cardCountLikes(cardID);
+    likeHandler: (cardElement, cardID) => {
+     cardCountLikes(cardElement, cardID);
     }
   }, userData._id,
    cardTemplate).createCard()
