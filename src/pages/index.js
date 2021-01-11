@@ -117,8 +117,8 @@ deleteCardPopup.setEventListeners();
 // //avatar edit form
  const avatarFormPopup = new PopupWithForm({
    popupSelector: '.popup_type_avatar',
-   popupSubmit: ([data]) => {
-     handleAvatarClick([data])
+   popupSubmit: ([avatar]) => {
+     handleAvatarClick(avatar)
    }
  });
  avatarFormPopup.setEventListeners();
@@ -129,11 +129,11 @@ deleteCardPopup.setEventListeners();
  });
 
  //avatar edit handler
- function handleAvatarClick([data]){
+ function handleAvatarClick(avatar){
    loadingPopup(true, avatarModal);
-   api.setUserAvatar({avatar: [data.avatar]})
+   api.setUserAvatar({avatar})
    .then( res => {
-     avatarImage.src = res.avatar;
+     avatarImage.src = res.data;
      loadingPopup(false, avatarModal);
      avatarFormPopup.close();
    })
