@@ -131,9 +131,10 @@ deleteCardPopup.setEventListeners();
  //avatar edit handler
  function handleAvatarClick(avatar){
    loadingPopup(true, avatarModal);
-   api.setUserAvatar({avatar})
+   api.setUserAvatar(avatar)
    .then( res => {
-     avatarImage.src = res.data;
+     console.log(res);
+     avatarImage.src = res.avatar;
      loadingPopup(false, avatarModal);
      avatarFormPopup.close();
    })
