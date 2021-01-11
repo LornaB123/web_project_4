@@ -10,6 +10,7 @@ const defaultConfig = {
   //Modals 
   const editModal= document.querySelector('.popup_type_edit'); 
   const addModal = document.querySelector('.popup_type_add-card'); 
+  const deleteModal = document.querySelector('.popup_type_delete-card');
   const editForm = editModal.querySelector('.edit-form'); 
   const addForm = addModal.querySelector('.add-form'); 
   const avatarModal = document.querySelector('.popup_type_avatar')
@@ -34,4 +35,4 @@ const defaultConfig = {
 //const linkInput = addForm.querySelector('.popup__input_type_link'); 
 //const profileInfo = new UserInfo(profileName, profileJob);
 
-  export {avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, nameInput, jobInput, editModal, addModal, editForm, addForm, cardTemplate, list, editButton, addButton, createButton }
+  export {deleteModal, avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, nameInput, jobInput, editModal, addModal, editForm, addForm, cardTemplate, list, editButton, addButton, createButton }

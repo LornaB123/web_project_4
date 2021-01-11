@@ -1,5 +1,5 @@
 import "./index.css";
-import {avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
+import {deleteModal, avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
@@ -94,8 +94,10 @@ imagePopup.setEventListeners();
 const deleteCardPopup = new PopupWithForm({
   popupSelector: '.popup_type_delete-card',
   popupSubmit: ([cardID, cardElement]) => {
+     //loadingPopup(true, deleteModal);
      api.removeCard(cardID)
      .then(() => {
+      //loadingPopup(false, deleteModal);
       deleteCardPopup.close();
       cardElement.remove();
      })
@@ -115,18 +117,19 @@ deleteCardPopup.setEventListeners();
 // //avatar edit form
  const avatarFormPopup = new PopupWithForm({
    popupSelector: '.popup_type_avatar',
-   popupSubmit: (data) => {
-     handleAvatarClick(data)
+   popupSubmit: ([data]) => {
+     handleAvatarClick([data])
    }
  });
  avatarFormPopup.setEventListeners();
 
-// //event listener for avatar edit button
+//event listener for avatar edit button
  avatarButton.addEventListener('click', (e) => {
    avatarFormPopup.open();
  });
+
  //avatar edit handler
- function handleAvatarClick(data){
+ function handleAvatarClick([data]){
    loadingPopup(true, avatarModal);
    api.setUserAvatar({avatar: [data.avatar]})
    .then( res => {
@@ -136,11 +139,6 @@ deleteCardPopup.setEventListeners();
    })
    .catch(err => console.log(err));
  }
-//  api.getUserInfo()
-//       .then(res => {
-//       userInformation.setUserInfo(res.name, res.about)
-//     })
-
 
 //Edit Profile Form
 const editFormPopup = new PopupWithForm({
