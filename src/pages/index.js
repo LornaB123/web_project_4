@@ -64,23 +64,21 @@ api.getAppInfo()
   });
 //function for counting likes
 function cardCountLikes(cardElement, cardID){
-  console.log('cardElement', cardElement);
-  console.log('cardID', cardID)
   if(cardElement.querySelector('.elements__favorite').classList.contains('.elements__favorite_selected')){
   api.removeLike(cardID)
   .then(res => {
     cardElement.querySelector('.elements__favorite').classList.remove('elements__favorite_selected');
-    cardInstance.showLikes(res.likes.length)
-    cardInstance._likes = res.likes;
+    cardElement.querySelector('.elements__likes').textContent = res.likes.length
+    cardElement._likes = res.likes;
   })
   .catch(err => console.log(err))
 } else {
-  cardInstance._cardElement.classList.toggle('.elements__favorite_selected');
+  cardElement.classList.toggle('.elements__favorite_selected');
   api.addLike(cardID)
   .then(res => {
     cardElement.querySelector('.elements__favorite').classList.add('.elements__favorite_selected');
-    cardInstance.showLikes(res.likes.length)
-    cardInstance._likes = res.likes;
+    cardElement._likes = res.likes;
+    cardElement.querySelector('.elements__likes').textContent = res.likes.length;
   })
   .catch(err => console.log(err))
 }

@@ -56,7 +56,7 @@ export default class Api {
     //PUT specified url cardID
     //DELETE specified url cardID
     addLike(cardID) {
-        return fetch(this._baseUrl + '/cards/likes' + cardID, {
+        return fetch(this._baseUrl + '/cards/likes/' + cardID, {
             headers:  this._headers,
             method: "PUT",
             })
@@ -66,7 +66,7 @@ export default class Api {
     }
 
     removeLike(cardID){
-        return fetch(this._baseUrl + '/cards/likes' + cardID, {
+        return fetch(this._baseUrl + '/cards/likes/' + cardID, {
             headers:  this._headers,
             method: "DELETE",
             })
