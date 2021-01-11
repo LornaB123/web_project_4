@@ -61,8 +61,20 @@ export default class Api {
 
     //PATCH user-info
     setUserInfo({ name, about }) {
-
-    }
+        return fetch(this._baseUrl + '/users/me', {
+            method: "PATCH",
+            headers: { 
+            authorization: "a950b923-6d6c-4927-9948-6833c1950cc9",
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name,
+                about
+        })
+        .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
+        .catch(err => console.log(err))
+    })
+}
 
     //PATCH avatar
     setUserAvatar({avatar}) {

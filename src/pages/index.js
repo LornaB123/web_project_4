@@ -38,7 +38,7 @@ api.getAppInfo()
     
     api.getUserInfo()
       .then(res => {
-      userInformation.setUserInfo(res.name, res.about)
+      api.setUserInfo(res.name, res.about)
     })
 
     cardSection.renderer();
@@ -128,9 +128,8 @@ deleteCardPopup.setEventListeners();
  //avatar edit handler
  function handleAvatarClick(data){
    loadingPopup(true, avatarModal);
-   api.setUserAvatar({data})
+   api.setUserAvatar({avatar: [data.avatar]})
    .then( res => {
-     console.log('res', res);
      avatarImage.src = res.avatar;
      loadingPopup(false, avatarModal);
      avatarFormPopup.close();
