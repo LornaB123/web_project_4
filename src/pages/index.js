@@ -20,11 +20,12 @@ const api = new Api({
          "Content-Type": "application/json"
      }
  });
-
+ 
 //Edit Profile Form
 const userInformation =  new UserInfo ({
   nameSelector: '.profile__info-title',
-  jobSelector: '.profile__info-subtitle'
+  jobSelector: '.profile__info-subtitle',
+  avatar: '.profile__image'
 });
 
 //api getAppInfo
@@ -38,7 +39,7 @@ api.getAppInfo()
     
     api.getUserInfo()
       .then(res => {
-      userInformation.setUserInfo(res.name, res.about)
+      userInformation.setUserInfo(res.name, res.about, res.avatar)
     })
 
     cardSection.renderer();
@@ -64,24 +65,19 @@ api.getAppInfo()
   });
 //function for counting likes
 function cardCountLikes(cardElement, cardID){
-  if(cardElement.querySelector('.elements__favorite').classList.contains('.elements__favorite_selected')){
-  api.removeLike(cardID)
-  .then(res => {
-    cardElement.querySelector('.elements__favorite').classList.remove('elements__favorite_selected');
-    cardElement.querySelector('.elements__likes').textContent = res.likes.length
-    cardElement._likes = res.likes;
-  })
-  .catch(err => console.log(err))
-} else {
-  cardElement.classList.toggle('.elements__favorite_selected');
-  api.addLike(cardID)
-  .then(res => {
-    cardElement.querySelector('.elements__favorite').classList.add('.elements__favorite_selected');
-    cardElement._likes = res.likes;
-    cardElement.querySelector('.elements__likes').textContent = res.likes.length;
-  })
-  .catch(err => console.log(err))
-}
+  if(cardElement.isLiked()){
+    api.removeLike(cardID)
+    .then(res => {
+      cardElement.updateLikes(res.likes)
+    })
+    .catch(err => console.log(err))
+  } else {
+    api.addLike(cardID)
+    .then(res => {
+      cardElement.updateLikes(res.likes)
+    })
+    .catch(err => console.log(err))
+  }
 }
   //function to create individual cards
 function createItem(cardInfo) {
@@ -100,8 +96,6 @@ function createItem(cardInfo) {
    cardTemplate).createCard()
 }
 })
-
-
 
 //call form validator class
 const editFormValidator = new FormValidator(defaultConfig, editForm);
@@ -159,7 +153,6 @@ deleteCardPopup.setEventListeners();
    loadingPopup(true, avatarModal);
    api.setUserAvatar(avatar)
    .then( res => {
-     console.log(res);
      avatarImage.src = res.avatar;
      loadingPopup(false, avatarModal);
      avatarFormPopup.close();

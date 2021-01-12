@@ -7,7 +7,7 @@ export default class Api {
 
     // GET specified URL-cards
     getInitialCards() {
-        return fetch(this._baseUrl + '/cards', {
+        return fetch(this._baseUrl + '/cards/', {
             headers:  this._headers
         })
         .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
@@ -16,7 +16,7 @@ export default class Api {
 
     //GET specified URL -user-info
     getUserInfo() {
-        return fetch(this._baseUrl + '/users/me', {
+        return fetch(this._baseUrl + '/users/me/', {
             headers: this._headers
         })
         .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
@@ -30,7 +30,7 @@ export default class Api {
 
     //POST speicifed url -cards
     addCard({ name, link }) {
-        return fetch(this._baseUrl + '/cards', {
+        return fetch(this._baseUrl + '/cards/', {
             headers:  this._headers,
             method: "POST",
             body: JSON.stringify({
@@ -77,7 +77,7 @@ export default class Api {
 
     //PATCH user-info
     setUserInfo({ name, about }) {
-        return fetch(this._baseUrl + '/users/me', {
+        return fetch(this._baseUrl + '/users/me/', {
             method: "PATCH",
             headers: { 
             authorization: "a950b923-6d6c-4927-9948-6833c1950cc9",
@@ -94,7 +94,7 @@ export default class Api {
 
     //PATCH avatar
     setUserAvatar(avatar) {
-        return fetch(this._baseUrl + '/users/me/avatar', {
+        return fetch(this._baseUrl + '/users/me/avatar/', {
             headers: this._headers,
             method: "PATCH",
             body: JSON.stringify({
