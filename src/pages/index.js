@@ -1,5 +1,5 @@
 import "./index.css";
-import {deleteModal, avatarForm, avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
+import {profileName, profileJob, deleteModal, avatarForm, avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, editModal, addModal, nameInput, jobInput, editForm, addForm, cardTemplate, list, editButton, addButton, createButton } from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Card from "../components/Card.js";
@@ -145,6 +145,7 @@ deleteCardPopup.setEventListeners();
 
 //event listener for avatar edit button
  avatarButton.addEventListener('click', (e) => {
+   avatarFormValidator.hideErrors();
    avatarFormPopup.open();
  });
 
@@ -164,11 +165,22 @@ deleteCardPopup.setEventListeners();
 const editFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   popupSubmit: ([nameSelector, jobSelector]) => {
-    userInformation.setUserInfo(nameSelector, jobSelector); 
+    handleEditButtonClick(nameSelector, jobSelector); 
   } 
 });
-
 editFormPopup.setEventListeners();
+
+function handleEditButtonClick(nameSelector, jobSelector){
+  loadingPopup(true, editModal);
+  api.setUserInfo({name: nameSelector, about: jobSelector})
+  .then(res => {
+    profileName.value = res.name;
+    profileJob.value = res.about;
+    loadingPopup(false, editModal);
+    editFormPopup.close();
+  })
+  .catch(err => console.log(err))
+}
 
  //event listener for editButton 
  editButton.addEventListener('click', (e) => {

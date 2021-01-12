@@ -12,17 +12,14 @@ export default class UserInfo {
     }
 
     setUserInfo(nameSelector, jobSelector, avatar) {
-        // this._userInfo = {nameSelector, jobSelector, userAvatar};
-        // if(userAvatar){
-        //     this._userInfo.userAvatar = userAvatar.src;
-        //     this._userInfo.nameSelector = nameSelector.textContent;
-        //     this._userInfo.jobSelector = jobSelector.textContent;
+        //this._userInfo = {nameSelector, jobSelector, avatar};
+         //if(avatar){
+            this._nameSelector.textContent = nameSelector;
+            this._jobSelector.textContent = jobSelector;
+            this._avatar.src = avatar;
+         //} else {
+         //   this._nameSelector.textContent = nameSelector;
+        //    this._jobSelector.textContent = jobSelector;
         // }
-        // this._nameSelector.textContent = nameSelector;
-        // this._jobSelector.textContent = jobSelector;
-        this._nameSelector.textContent = nameSelector;
-        this._jobSelector.textContent = jobSelector;
-        this._avatar.src = avatar;
-
     }
 } 

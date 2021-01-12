@@ -31,10 +31,10 @@ const defaultConfig = {
 
 //const nameInput = document.querySelector('.popup__input_type_name'); 
 //const jobInput = document.querySelector('.popup__input_type_job'); 
-//const profileName = document.querySelector('.profile__info-title'); 
-//const profileJob = document.querySelector('.profile__info-subtitle');  
+const profileName = document.querySelector('.profile__info-title'); 
+const profileJob = document.querySelector('.profile__info-subtitle');  
 //const titleInput = addForm.querySelector('.popup__input_type_title'); 
 //const linkInput = addForm.querySelector('.popup__input_type_link'); 
 //const profileInfo = new UserInfo(profileName, profileJob);
 
-  export {deleteModal, avatarForm, avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, nameInput, jobInput, editModal, addModal, editForm, addForm, cardTemplate, list, editButton, addButton, createButton }
+  export {profileName, profileJob, deleteModal, avatarForm, avatarImage, avatarModal, avatarButton, trashButton, defaultConfig, nameInput, jobInput, editModal, addModal, editForm, addForm, cardTemplate, list, editButton, addButton, createButton }

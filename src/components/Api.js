@@ -87,9 +87,9 @@ export default class Api {
                 name,
                 about
         })
+    })
         .then(res => res.ok ? res.json() : Promise.reject('Error' + res.statusText))
         .catch(err => console.log(err))
-    })
 }
 
     //PATCH avatar
