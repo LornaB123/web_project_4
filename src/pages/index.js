@@ -23,26 +23,64 @@ const api = new Api({
  
 //Edit Profile Form
 const userInformation =  new UserInfo ({
-  nameSelector: '.profile__info-title',
-  jobSelector: '.profile__info-subtitle',
+  name: '.profile__info-title',
+  job: '.profile__info-subtitle',
   avatar: '.profile__image'
 });
+
+//function for counting likes
+function cardCountLikes(cardElement, cardID){
+  if(cardElement.isLiked()){
+    api.removeLike(cardID)
+    .then(res => {
+      cardElement.updateLikes(res.likes)
+    })
+    .catch(err => console.log(err))
+  } else {
+    api.addLike(cardID)
+    .then(res => {
+      cardElement.updateLikes(res.likes)
+    })
+    .catch(err => console.log(err))
+  }
+}
+
+//function to create individual cards
+function createItem(cardInfo) {
+  return new Card({
+    data: cardInfo,
+    handleCardClick: (name, link) => {
+      imagePopup.open(name, link)
+    },
+    handleDeleteClick: (cardInfo) => {
+      deleteCardPopup.open(cardInfo);
+    },
+    likeHandler: (cardElement, cardID) => {
+     cardCountLikes(cardElement, cardID);
+    }
+  }, userId,
+   cardTemplate).createCard()
+}
+
+const cardSection = new Section({
+  renderer: createItem
+}, list)
+
+let userId;
 
 //api getAppInfo
 api.getAppInfo()
 .then(([userData, cardListData]) => {
-     //call Section to render original cards to the 'elements' section of page
-     const cardSection = new Section({
-      items: cardListData,
-      renderer: createItem
-    }, list)
-    
-    api.getUserInfo()
-      .then(res => {
-      userInformation.setUserInfo(res.name, res.about, res.avatar)
-    })
+    userId = userData._id
+    userInformation.setUserInfo(userData.name, userData.about, userData.avatar)
+    cardSection.renderItems(cardListData);
 
-    cardSection.renderer();
+    // api.getUserInfo()
+    //   .then(res => {
+    //   userInformation.setUserInfo(res.name, res.about, res.avatar)
+    // })
+
+    //cardSection.renderItems(cardListData);
 
     //Add Card Form
   const addFormPopup = new PopupWithForm({
@@ -63,38 +101,7 @@ api.getAppInfo()
     addFormValidator.hideErrors();
     addFormPopup.open();
   });
-//function for counting likes
-function cardCountLikes(cardElement, cardID){
-  if(cardElement.isLiked()){
-    api.removeLike(cardID)
-    .then(res => {
-      cardElement.updateLikes(res.likes)
-    })
-    .catch(err => console.log(err))
-  } else {
-    api.addLike(cardID)
-    .then(res => {
-      cardElement.updateLikes(res.likes)
-    })
-    .catch(err => console.log(err))
-  }
-}
-  //function to create individual cards
-function createItem(cardInfo) {
-  return new Card({
-    data: cardInfo,
-    handleCardClick: (name, link) => {
-      imagePopup.open(name, link)
-    },
-    handleDeleteClick: (cardInfo) => {
-      deleteCardPopup.open(cardInfo);
-    },
-    likeHandler: (cardElement, cardID) => {
-     cardCountLikes(cardElement, cardID);
-    }
-  }, userData._id,
-   cardTemplate).createCard()
-}
+  
 })
 
 //call form validator class
@@ -164,18 +171,18 @@ deleteCardPopup.setEventListeners();
 //Edit Profile Form
 const editFormPopup = new PopupWithForm({
   popupSelector: '.popup_type_edit',
-  popupSubmit: ([nameSelector, jobSelector]) => {
-    handleEditButtonClick(nameSelector, jobSelector); 
+  popupSubmit: ([name, job]) => {
+    handleEditButtonClick(name, job); 
   } 
 });
 editFormPopup.setEventListeners();
 
-function handleEditButtonClick(nameSelector, jobSelector){
+function handleEditButtonClick(name, job){
   loadingPopup(true, editModal);
-  api.setUserInfo({name: nameSelector, about: jobSelector})
+  api.setUserInfo({name: name, about: job})
   .then(res => {
-    profileName.value = res.name;
-    profileJob.value = res.about;
+    profileName.textContent = res.name;
+    profileJob.textContent = res.about;
     loadingPopup(false, editModal);
     editFormPopup.close();
   })
@@ -184,9 +191,9 @@ function handleEditButtonClick(nameSelector, jobSelector){
 
  //event listener for editButton 
  editButton.addEventListener('click', (e) => {
-   const [nameSelector, jobSelector] = userInformation.getUserInfo();
-   nameInput.value = nameSelector;
-   jobInput.value = jobSelector;
+   const [name, job] = userInformation.getUserInfo();
+   nameInput.value = name;
+   jobInput.value = job;
    editFormValidator.hideErrors();
    editFormPopup.open();
 });  

@@ -27,7 +27,7 @@ export default class Card {
         if (this.isLiked()) {
             this._cardLike.classList.add('elements__favorite_selected');
         } else {
-            this._cardLike.classList.remove('.elements__favorite_selected');
+            this._cardLike.classList.remove('elements__favorite_selected');
         }
     }
 

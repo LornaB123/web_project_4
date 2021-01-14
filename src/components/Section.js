@@ -1,11 +1,10 @@
 export default class Section {
-    constructor({items, renderer}, container) {
-        this._items = items;
+    constructor({renderer}, container) {
         this._renderer = renderer;
         this._container = container;
     }
-    renderer(){
-        this._items.forEach(item => {
+    renderItems(items){
+        items.forEach(item => {
             this._container.append(this._renderer(item))
         });
 //This is the original code used to render cards in index.js (before Section class creation)

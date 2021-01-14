@@ -11,20 +11,14 @@ export default class PopupWithForm extends Popup {
 
     //private method, collects data from all input fields
     _getInputValues(){
-        if(this._info){
-            return this._info
-        } else {
             return [...this._popupElement.querySelectorAll('.popup__input')].map(input => input.value);
         }
-    }
+    
 
      _submitEventHandler(e){
-        //this._formElement.addEventListener('submit', (e) => {
-            //this._formElement.addEventListener('submit', this._submitEventHandler.bind(this));
             e.preventDefault();
             this._popupSubmit(this._getInputValues());
             this.close();
-        //});
     }
 
     //modifies setEventListeners, adds click event listener
@@ -34,8 +28,7 @@ export default class PopupWithForm extends Popup {
         super.setEventListeners();
     }
     //modifies open method
-    open(cardInfo){
-        this._info = cardInfo;
+    open(){
         super.open();
     }
     //modifies close method to reset form once popup is closed
