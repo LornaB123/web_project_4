@@ -11,8 +11,8 @@ export default class PopupWithForm extends Popup {
 
     //private method, collects data from all input fields
     _getInputValues(){
-        if(this._info){ 
-            return this._info
+        if(!this._popupElement.querySelector('.popup__input')){ 
+            return null
         } else {
             return [...this._popupElement.querySelectorAll('.popup__input')].map(input => input.value);
         }    
@@ -20,9 +20,9 @@ export default class PopupWithForm extends Popup {
     
 
      _submitEventHandler(e){
-        console.log('input vals', this._getInputValues()); 
             e.preventDefault();
-            this._popupSubmit(this._getInputValues());
+            const submittedValue = this._getInputValues() || this._info;
+            this._popupSubmit(submittedValue);
             this.close();
     }
 
