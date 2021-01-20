@@ -28,6 +28,7 @@
   "scripts": {
     "build": "rm -rf dist && webpack",
     "dev": "webpack serve --open chrome",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
