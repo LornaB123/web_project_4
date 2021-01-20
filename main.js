@@ -10,10 +10,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var _components_Section_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
 /* harmony import */ var _components_Card_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5);
-/* harmony import */ var _utils_initialCards_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
-/* harmony import */ var _components_PoppupWithImage_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(7);
-/* harmony import */ var _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9);
-/* harmony import */ var _components_UserInfo_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(10);
+/* harmony import */ var _components_PoppupWithImage_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
+/* harmony import */ var _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8);
+/* harmony import */ var _components_UserInfo_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9);
+/* harmony import */ var _components_Api_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(10);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -30,131 +30,209 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ //import initialCards from "../utils/initialCards.js";
 
 
 
 
- //call form validator class
+ //connect api
+// project server URL = https://around.nomoreparties.co/v1/ + ADD Group ID here(group-7)..., 
+//authorization = TOKEN( a950b923-6d6c-4927-9948-6833c1950cc9 )
 
-var editFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_2__.default(_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.defaultConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.editForm);
-var addFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_2__.default(_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.defaultConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.addForm);
-editFormValidator.enableValidation();
-addFormValidator.enableValidation(); //Image Popup
+var api = new _components_Api_js__WEBPACK_IMPORTED_MODULE_8__.default({
+  baseUrl: "https://around.nomoreparties.co/v1/group-7",
+  headers: {
+    authorization: "a950b923-6d6c-4927-9948-6833c1950cc9",
+    "Content-Type": "application/json"
+  }
+}); //Edit Profile Form
 
-var imagePopup = new _components_PoppupWithImage_js__WEBPACK_IMPORTED_MODULE_6__.default('.popup_type_image');
-imagePopup.setEventListeners(); //function to create individual cards
+var userInformation = new _components_UserInfo_js__WEBPACK_IMPORTED_MODULE_7__.default({
+  name: '.profile__info-title',
+  job: '.profile__info-subtitle',
+  avatar: '.profile__image'
+}); //function for counting likes
+
+function cardCountLikes(cardElement, cardID) {
+  if (cardElement.isLiked()) {
+    api.removeLike(cardID).then(function (res) {
+      cardElement.updateLikes(res.likes);
+    }).catch(function (err) {
+      return console.log(err);
+    });
+  } else {
+    api.addLike(cardID).then(function (res) {
+      cardElement.updateLikes(res.likes);
+    }).catch(function (err) {
+      return console.log(err);
+    });
+  }
+} //function to create individual cards
+
 
 function createItem(cardInfo) {
   return new _components_Card_js__WEBPACK_IMPORTED_MODULE_4__.default({
     data: cardInfo,
     handleCardClick: function handleCardClick(name, link) {
       imagePopup.open(name, link);
+    },
+    handleDeleteClick: function handleDeleteClick(cardInfo) {
+      deleteCardPopup.open(cardInfo);
+    },
+    likeHandler: function likeHandler(cardElement, cardID) {
+      cardCountLikes(cardElement, cardID);
     }
-  }, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.cardTemplate).createCard();
-} //call Section to render original cards to the 'elements' section of page
-
+  }, userId, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.cardTemplate).createCard();
+}
 
 var cardSection = new _components_Section_js__WEBPACK_IMPORTED_MODULE_3__.default({
-  items: _utils_initialCards_js__WEBPACK_IMPORTED_MODULE_5__.default,
   renderer: createItem
 }, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.list);
-cardSection.renderer(); //Call new Popups for each type of form: image, add, edit,
-//Add Card Form
+var userId; //api getAppInfo
 
-var addFormPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_7__.default({
-  popupSelector: '.popup_type_add-card',
-  popupSubmit: function popupSubmit(_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        name = _ref2[0],
-        link = _ref2[1];
+api.getAppInfo().then(function (_ref) {
+  var _ref2 = _slicedToArray(_ref, 2),
+      userData = _ref2[0],
+      cardListData = _ref2[1];
 
-    var newCard = createItem({
-      name: name,
-      link: link
+  userId = userData._id;
+  userInformation.setUserInfo(userData.name, userData.about, userData.avatar);
+  cardSection.renderItems(cardListData); // api.getUserInfo()
+  //   .then(res => {
+  //   userInformation.setUserInfo(res.name, res.about, res.avatar)
+  // })
+  //cardSection.renderItems(cardListData);
+  //Add Card Form
+
+  var addFormPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_6__.default({
+    popupSelector: '.popup_type_add-card',
+    popupSubmit: function popupSubmit(_ref3) {
+      var _ref4 = _slicedToArray(_ref3, 2),
+          name = _ref4[0],
+          link = _ref4[1];
+
+      api.addCard({
+        name: name,
+        link: link
+      }).then(function (res) {
+        var newCard = createItem(res);
+        cardSection.addItem(newCard);
+      });
+    }
+  });
+  addFormPopup.setEventListeners(); ////event listeners for add card button
+
+  _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.addButton.addEventListener('click', function (e) {
+    addFormValidator.disableButton();
+    addFormValidator.hideErrors();
+    addFormPopup.open();
+  });
+}); //call form validator class
+
+var editFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_2__.default(_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.defaultConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.editForm);
+var addFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_2__.default(_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.defaultConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.addForm);
+var avatarFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_2__.default(_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.defaultConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.avatarForm);
+avatarFormValidator.enableValidation();
+editFormValidator.enableValidation();
+addFormValidator.enableValidation(); //Image Popup
+
+var imagePopup = new _components_PoppupWithImage_js__WEBPACK_IMPORTED_MODULE_5__.default('.popup_type_image');
+imagePopup.setEventListeners(); //Delete Card Form
+
+var deleteCardPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_6__.default({
+  popupSelector: '.popup_type_delete-card',
+  popupSubmit: function popupSubmit(_ref5) {
+    var _ref6 = _slicedToArray(_ref5, 2),
+        cardID = _ref6[0],
+        cardElement = _ref6[1];
+
+    loadingPopup(true, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.deleteModal);
+    api.removeCard(cardID).then(function () {
+      loadingPopup(false, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.deleteModal);
+      deleteCardPopup.close();
+      cardElement.remove();
     });
-    cardSection.addItem(newCard);
   }
 });
-addFormPopup.setEventListeners(); //Edit Profile Form
+deleteCardPopup.setEventListeners(); //Call new Popups for each type of form: image, add, edit, avatar
+//popup Loading function
 
-var userInformation = new _components_UserInfo_js__WEBPACK_IMPORTED_MODULE_8__.default({
-  nameSelector: '.profile__info-title',
-  jobSelector: '.profile__info-subtitle'
-}); //Edit Profile Form
+function loadingPopup(isLoading, popup) {
+  if (isLoading) {
+    popup.querySelector('.popup__save').textContent = "Saving...";
+  } else {
+    popup.querySelector(".popup__save").textContent = "Save";
+  }
+} // //avatar edit form
 
-var editFormPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_7__.default({
+
+var avatarFormPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_6__.default({
+  popupSelector: '.popup_type_avatar',
+  popupSubmit: function popupSubmit(_ref7) {
+    var _ref8 = _slicedToArray(_ref7, 1),
+        avatar = _ref8[0];
+
+    handleAvatarClick(avatar);
+  }
+});
+avatarFormPopup.setEventListeners(); //event listener for avatar edit button
+
+_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.avatarButton.addEventListener('click', function (e) {
+  avatarFormValidator.hideErrors();
+  avatarFormPopup.open();
+}); //avatar edit handler
+
+function handleAvatarClick(avatar) {
+  loadingPopup(true, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.avatarModal);
+  api.setUserAvatar(avatar).then(function (res) {
+    _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.avatarImage.src = res.avatar;
+    loadingPopup(false, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.avatarModal);
+    avatarFormPopup.close();
+  }).catch(function (err) {
+    return console.log(err);
+  });
+} //Edit Profile Form
+
+
+var editFormPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_6__.default({
   popupSelector: '.popup_type_edit',
-  popupSubmit: function popupSubmit(_ref3) {
-    var _ref4 = _slicedToArray(_ref3, 2),
-        nameSelector = _ref4[0],
-        jobSelector = _ref4[1];
+  popupSubmit: function popupSubmit(_ref9) {
+    var _ref10 = _slicedToArray(_ref9, 2),
+        name = _ref10[0],
+        job = _ref10[1];
 
-    userInformation.setUserInfo(nameSelector, jobSelector);
+    handleEditButtonClick(name, job);
   }
 });
-editFormPopup.setEventListeners(); // const handleEditButtonClick = new PopupWithForm('.popup_profile',{ //muddoo
-//   info: userInfo,//mudoo
-//   submit: profileFormSubmit //muuddoo
-// });
-//const userInfo = new UserInfo(['.profile__name','.profile__text']);
-//const profileFormSubmit = ([name,info]) => userInfo.setUserInfo(name,info); 
-// editForm.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   profileName.textContent = nameInput.value; 
-//   profileJob.textContent = jobInput.value;
-//   closeModal(editModal);
-// });
-////event listeners for add card button
+editFormPopup.setEventListeners();
 
-_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.addButton.addEventListener('click', function (e) {
-  addFormValidator.disableButton(); //createButton.classList.add('popup__save_disabled');
-  //createButton.disabled = true;
+function handleEditButtonClick(name, job) {
+  loadingPopup(true, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.editModal);
+  api.setUserInfo({
+    name: name,
+    about: job
+  }).then(function (res) {
+    _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.profileName.textContent = res.name;
+    _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.profileJob.textContent = res.about;
+    loadingPopup(false, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.editModal);
+    editFormPopup.close();
+  }).catch(function (err) {
+    return console.log(err);
+  });
+} //event listener for editButton 
 
-  addFormPopup.open();
-}); //  //event listener for editButton 
-//  editButton.addEventListener('click', (e) => {
-//    editFormPopup.open();
-//  })
-//event listener for editButton 
 
 _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.editButton.addEventListener('click', function (e) {
-  var userData = userInformation.getUserInfo();
-  nameInput.value = userData.name;
-  jobInput.value = userData.job;
+  var _userInformation$getU = userInformation.getUserInfo(),
+      _userInformation$getU2 = _slicedToArray(_userInformation$getU, 2),
+      name = _userInformation$getU2[0],
+      job = _userInformation$getU2[1];
+
+  _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.nameInput.value = name;
+  _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.jobInput.value = job;
+  editFormValidator.hideErrors();
   editFormPopup.open();
-}); //Edit Title Form
-// const editFormPopup = newPopupWithForm({
-//  popupSelector: '.popup_type_edit',
-//   poupSubmit: () => profileInfo.setUserInfo(inputName.value, inputJob.value)
-//})
-//Modal Open Functions
-//Edit Modal Open Function
-// function editButtonOpen(){
-//   //update fields on main page 
-//   profileName.textContent = nameInput.value; 
-//   profileJob.textContent = jobInput.value;
-//   //open modal
-//   openModal(editModal);
-// }
-//Image Modal Open Function
-//function imagePopupOpen(){
-// imageModal(card.link, card.name); 
-// openModal(imagePopup);
-//}
-// Previous Edit Form Submit/Save Button Functionality from Sprint 7
-//editButton.addEventListener('click',(e) => openModal(editModal));
-// //Add Form Submit/Save Button Functionality
-// addForm.addEventListener('submit', (e)  => { 
-//   e.preventDefault(); 
-//   //create card: 
-//   const newCard = {name: titleInput.value, link: linkInput.value};
-//   //initiateCardModule(newCard, "prepend");
-//   cardSection.addItem(newCard);
-//   //close modal after submit 
-//   closeModal(addModal); 
-//   addForm.reset(); 
-//   }); 
-//export default {imagePopup}
+});
 
 /***/ }),
 /* 1 */
@@ -170,7 +248,17 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "profileName": () => /* binding */ profileName,
+/* harmony export */   "profileJob": () => /* binding */ profileJob,
+/* harmony export */   "deleteModal": () => /* binding */ deleteModal,
+/* harmony export */   "avatarForm": () => /* binding */ avatarForm,
+/* harmony export */   "avatarImage": () => /* binding */ avatarImage,
+/* harmony export */   "avatarModal": () => /* binding */ avatarModal,
+/* harmony export */   "avatarButton": () => /* binding */ avatarButton,
+/* harmony export */   "trashButton": () => /* binding */ trashButton,
 /* harmony export */   "defaultConfig": () => /* binding */ defaultConfig,
+/* harmony export */   "nameInput": () => /* binding */ nameInput,
+/* harmony export */   "jobInput": () => /* binding */ jobInput,
 /* harmony export */   "editModal": () => /* binding */ editModal,
 /* harmony export */   "addModal": () => /* binding */ addModal,
 /* harmony export */   "editForm": () => /* binding */ editForm,
@@ -192,19 +280,27 @@ var defaultConfig = {
 
 var editModal = document.querySelector('.popup_type_edit');
 var addModal = document.querySelector('.popup_type_add-card');
+var avatarModal = document.querySelector('.popup_type_avatar');
+var deleteModal = document.querySelector('.popup_type_delete-card');
 var editForm = editModal.querySelector('.edit-form');
-var addForm = addModal.querySelector('.add-form'); //const imageModal = document.querySelector('.popup_type_image'); 
+var addForm = addModal.querySelector('.add-form');
+var avatarForm = avatarModal.querySelector('.avatar-form'); //const imageModal = document.querySelector('.popup_type_image'); 
 
 var cardTemplate = document.querySelector('.card__template').content;
 var list = document.querySelector('.elements'); //Buttons and other DOM elements 
 
 var editButton = document.querySelector('.profile__edit-button');
 var addButton = document.querySelector('.profile__add-button');
-var createButton = addModal.querySelector('.popup__save'); //const nameInput = document.querySelector('.popup__input_type_name'); 
+var trashButton = document.querySelector('.elements__trash');
+var createButton = addModal.querySelector('.popup__save');
+var avatarButton = document.querySelector('.profile__image-edit');
+var nameInput = document.querySelector('.popup__input_type_name');
+var jobInput = document.querySelector('.popup__input_type_job');
+var avatarImage = document.querySelector('.profile__image'); //const nameInput = document.querySelector('.popup__input_type_name'); 
 //const jobInput = document.querySelector('.popup__input_type_job'); 
-//const profileName = document.querySelector('.profile__info-title'); 
-//const profileJob = document.querySelector('.profile__info-subtitle');  
-//const titleInput = addForm.querySelector('.popup__input_type_title'); 
+
+var profileName = document.querySelector('.profile__info-title');
+var profileJob = document.querySelector('.profile__info-subtitle'); //const titleInput = addForm.querySelector('.popup__input_type_title'); 
 //const linkInput = addForm.querySelector('.popup__input_type_link'); 
 //const profileInfo = new UserInfo(profileName, profileJob);
 
@@ -246,6 +342,8 @@ var FormValidator = /*#__PURE__*/function () {
     this._inputErrorClass = settings.inputErrorClass;
     this._errorClass = settings.errorClass;
     this._form = formElement;
+    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
+    this._inputs = _toConsumableArray(this._form.querySelectorAll(this._inputSelector));
   } //Function to show error messages when validation criteria is not met
 
 
@@ -284,32 +382,29 @@ var FormValidator = /*#__PURE__*/function () {
   }, {
     key: "_toggleButtonState",
     value: function _toggleButtonState(formElement, inputSelector) {
-      var inputs = _toConsumableArray(formElement.querySelectorAll(inputSelector));
-
-      var isValid = inputs.every(function (input) {
+      //const inputs = [...formElement.querySelectorAll(inputSelector)];
+      var isValid = this._inputs.every(function (input) {
         return input.validity.valid;
-      });
+      }); //const buttonElement = this._form.querySelector(this._submitButtonSelector);
 
-      var buttonElement = this._form.querySelector(this._submitButtonSelector);
 
       if (isValid) {
-        buttonElement.classList.remove(this._inactiveButtonClass);
-        buttonElement.disabled = false;
+        this._buttonElement.classList.remove(this._inactiveButtonClass);
+
+        this._buttonElement.disabled = false;
       } else {
-        buttonElement.classList.add(this._inactiveButtonClass);
-        buttonElement.disabled = true;
+        this._buttonElement.classList.add(this._inactiveButtonClass);
+
+        this._buttonElement.disabled = true;
       }
     } //method to disable create button 
 
   }, {
     key: "disableButton",
     value: function disableButton() {
-      this._addModal = document.querySelector('.popup_type_add-card');
-      this._createButton = this._addModal.querySelector('.popup__save');
+      this._buttonElement.classList.add(this._inactiveButtonClass);
 
-      this._createButton.classList.add('popup__save_disabled');
-
-      this._createButton.disabled = true;
+      this._buttonElement.disabled = true;
     } //event listeners set for card arrays
 
   }, {
@@ -317,9 +412,7 @@ var FormValidator = /*#__PURE__*/function () {
     value: function _setEventListeners() {
       var _this = this;
 
-      var inputs = Array.from(this._form.querySelectorAll(this._inputSelector)); //const buttonElement = this._form.querySelector(this._submitButtonSelector);
-
-      inputs.forEach(function (inputElement) {
+      this._inputs.forEach(function (inputElement) {
         inputElement.addEventListener("input", function () {
           //check Input Validity
           _this._checkInputValidity(inputElement, _this._inputErrorClass); //toggle button state
@@ -330,8 +423,17 @@ var FormValidator = /*#__PURE__*/function () {
       });
     }
   }, {
+    key: "hideErrors",
+    value: function hideErrors() {
+      var _this2 = this;
+
+      this._inputs.forEach(function (inputElement) {
+        _this2._hideErrorMessage(inputElement);
+      });
+    } //enable validation of form submit buttons
+
+  }, {
     key: "enableValidation",
-    //enable validation of form submit buttons
     value: function enableValidation() {
       this._form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -362,24 +464,22 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var Section = /*#__PURE__*/function () {
-  function Section(_ref, cssSelector) {
-    var items = _ref.items,
-        renderer = _ref.renderer;
+  function Section(_ref, container) {
+    var renderer = _ref.renderer;
 
     _classCallCheck(this, Section);
 
-    this._items = items;
     this._renderer = renderer;
-    this._cssSelector = cssSelector;
+    this._container = container;
   }
 
   _createClass(Section, [{
-    key: "renderer",
-    value: function renderer() {
+    key: "renderItems",
+    value: function renderItems(items) {
       var _this = this;
 
-      this._items.forEach(function (item) {
-        _this._cssSelector.append(_this._renderer(item));
+      items.forEach(function (item) {
+        _this._container.append(_this._renderer(item));
       }); //This is the original code used to render cards in index.js (before Section class creation)
       // function initiateCardModule(cardInfo, insert){
       //     const cardObject = new Card(cardInfo, cardTemplate);
@@ -387,16 +487,11 @@ var Section = /*#__PURE__*/function () {
       //     list[insert](card);
       //   } 
       //   for(const initialCard of initialCards) initiateCardModule(initialCard, "append");
-
     }
   }, {
     key: "addItem",
-    value: function addItem(cardInfo) {
-      var _this2 = this;
-
-      cardInfo.forEach(function (item) {
-        _this2._cssSelector.prepend(_this2._renderer(item));
-      });
+    value: function addItem(newItem) {
+      this._container.prepend(newItem);
     }
   }]);
 
@@ -413,80 +508,116 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => /* binding */ Card
 /* harmony export */ });
+/* harmony import */ var _utils_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// //import {openModal} from "../utils/utils.js";
-// const imageModalPopup = document.querySelector('.popup_type_image');
-// const popupPic = imageModalPopup.querySelector('.popup__image');
-// const popupCaption = imageModalPopup.querySelector('.popup__caption');
+
+
 var Card = /*#__PURE__*/function () {
-  function Card(_ref, template) {
+  function Card(_ref, userId, template) {
     var data = _ref.data,
-        handleCardClick = _ref.handleCardClick;
+        handleCardClick = _ref.handleCardClick,
+        handleDeleteClick = _ref.handleDeleteClick,
+        likeHandler = _ref.likeHandler;
 
     _classCallCheck(this, Card);
 
     this._link = data.link;
     this._name = data.name;
+    this._owner = data.owner;
+    this._likes = data.likes;
+    this._id = data._id;
+    this._userId = userId;
     this._template = template;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._likeHandler = likeHandler;
   }
 
   _createClass(Card, [{
-    key: "_getCardTemplate",
-    value: function _getCardTemplate() {
-      return this._template.cloneNode(true);
-    } // _imageModal() { 
-    //    popupPic.setAttribute('src', this._link); 
-    //    popupPic.setAttribute('alt', this._name); 
-    //    popupCaption.textContent = this._name; 
-    //  } 
-    //  _cardImageSelector(){
-    //      this._imageModal();
-    //      openModal(imageModalPopup);
-    //  }
-
-  }, {
-    key: "_handleTrashClick",
-    value: function _handleTrashClick(e) {
-      e.target.closest('.elements__element').remove();
+    key: "id",
+    value: function id() {
+      return this._id;
     }
   }, {
-    key: "_handleCardLike",
-    value: function _handleCardLike(e) {
-      e.target.classList.toggle('elements__favorite_selected');
+    key: "isLiked",
+    value: function isLiked() {
+      var _this = this;
+
+      return this._likes.some(function (item) {
+        return item._id === _this._userId;
+      });
+    }
+  }, {
+    key: "showLikes",
+    value: function showLikes() {
+      this._cardLikes.textContent = this._likes.length;
+
+      if (this.isLiked()) {
+        this._cardLike.classList.add('elements__favorite_selected');
+      } else {
+        this._cardLike.classList.remove('elements__favorite_selected');
+      }
+    }
+  }, {
+    key: "updateLikes",
+    value: function updateLikes(likes) {
+      this._likes = likes;
+      this.showLikes();
+    }
+  }, {
+    key: "_showDeleteIcon",
+    value: function _showDeleteIcon() {
+      if (this._owner._id === this._userId) {
+        this._cardTrash.classList.add('elements__trash_visible');
+      }
+    }
+  }, {
+    key: "_getCardTemplate",
+    value: function _getCardTemplate() {
+      return this._template.cloneNode(true).querySelector('.elements__element');
     }
   }, {
     key: "_setEventListeners",
     value: function _setEventListeners() {
-      var _this = this;
+      var _this2 = this;
 
-      this._cardLike.addEventListener("click", this._cardLikeSelector);
+      this._cardLike.addEventListener("click", function () {
+        return _this2._likeHandler(_this2, _this2._id);
+      });
 
-      this._cardTrash.addEventListener("click", this._cardTrashSelector);
+      this._cardTrash.addEventListener("click", function () {
+        return _this2._handleDeleteClick([_this2._id, _this2._cardElement]);
+      });
 
       this._cardImage.addEventListener("click", function () {
-        return _this._handleCardClick(_this._name, _this._link);
+        return _this2._handleCardClick(_this2._name, _this2._link);
       });
     }
   }, {
     key: "createCard",
     value: function createCard() {
-      this._cardElement = this._getCardTemplate(); //const cardImage = this._cardElement.querySelector('.elements__element-pic');
-
+      this._cardElement = this._getCardTemplate();
       this._cardTitle = this._cardElement.querySelector('.elements__caption');
       this._cardImage = this._cardElement.querySelector('.elements__element-pic');
       this._cardLike = this._cardElement.querySelector('.elements__favorite');
       this._cardTrash = this._cardElement.querySelector('.elements__trash');
+      this._cardLikes = this._cardElement.querySelector('.elements__likes');
       this._cardTitle.textContent = this._name;
 
       this._cardImage.setAttribute('src', this._link);
 
       this._cardImage.setAttribute('alt', this._name);
+
+      this._cardElement.id = this._id;
+
+      this._showDeleteIcon();
+
+      this.showLikes();
 
       this._setEventListeners();
 
@@ -506,39 +637,9 @@ var Card = /*#__PURE__*/function () {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-//Cards to be loaded to browser upon opening
-var initialCards = [{
-  name: "Yosemite Valley",
-  link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
-}, {
-  name: "Lake Louise",
-  link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
-}, {
-  name: "Bald Mountains",
-  link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
-}, {
-  name: "Latemar",
-  link: "https://code.s3.yandex.net/web-code/latemar.jpg"
-}, {
-  name: "Vanoise National Park",
-  link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
-}, {
-  name: "Lago di Braies",
-  link: "https://code.s3.yandex.net/web-code/lago.jpg"
-}];
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initialCards);
-
-/***/ }),
-/* 7 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => /* binding */ PopupWithImage
 /* harmony export */ });
-/* harmony import */ var _Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -600,7 +701,7 @@ var PopupWithImage = /*#__PURE__*/function (_Popup) {
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -621,43 +722,21 @@ var Popup = /*#__PURE__*/function () {
 
     this._popupElement = document.querySelector(popupSelector);
     this._handleEscapeClose = this._handleEscapeClose.bind(this);
-  } // //Toggle Functions 
-  // //Button Popup Toggle Function 
-  // function toggleModal(modal){ 
-  //     modal.classList.toggle('popup_open'); 
-  //   }  
-
+  }
 
   _createClass(Popup, [{
     key: "open",
     value: function open() {
       this._popupElement.classList.add('popup_open');
 
-      document.addEventListener('keyup', this._handleEscapeClose); //Previous code to open modals on sprint 7
-      //Open Modal Function
-      //   function openModal(modal){
-      //      toggleModal(modal);
-      //      window.addEventListener('keydown', escKeyClose);
-      //      modal.addEventListener('click', closePopup);
-      //    }
+      document.addEventListener('keyup', this._handleEscapeClose);
     }
   }, {
     key: "close",
     value: function close() {
       this._popupElement.classList.remove('popup_open');
 
-      document.removeEventListener('keyup', this._handleEscapeClose); //   //Close Function
-      //   function closePopup(e){
-      //     if(e.target === this || e.target === this.querySelector('.popup__close-button')) {
-      //       closeModal(this);
-      //       addForm.reset();
-      //     } 
-      //   }
-      //   function closeModal(modal){
-      //     toggleModal(modal);
-      //     window.removeEventListener('keydown', escKeyClose);
-      //     modal.removeEventListener('click', closePopup);
-      //   }
+      document.removeEventListener('keyup', this._handleEscapeClose);
     }
   }, {
     key: "_handleEscapeClose",
@@ -665,14 +744,7 @@ var Popup = /*#__PURE__*/function () {
       if (e.which == 27) {
         this.close();
       }
-    } //   //Escape key close functionality
-    //   function escKeyClose(e){
-    //     if(e.key === 'Escape'){
-    //       closeModal(document.querySelector('.popup_open'));
-    //       addForm.reset();
-    //     }
-    //   }
-
+    }
   }, {
     key: "setEventListeners",
     value: function setEventListeners() {
@@ -711,14 +783,14 @@ var Popup = /*#__PURE__*/function () {
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => /* binding */ PopupWithForm
 /* harmony export */ });
-/* harmony import */ var _Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _Popup_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -784,30 +856,25 @@ var PopupWithForm = /*#__PURE__*/function (_Popup) {
   _createClass(PopupWithForm, [{
     key: "_getInputValues",
     value: function _getInputValues() {
-      return _toConsumableArray(this._popupElement.querySelectorAll('.popup__input')).map(function (input) {
-        return input.value;
-      });
+      if (!this._popupElement.querySelector('.popup__input')) {
+        return null;
+      } else {
+        return _toConsumableArray(this._popupElement.querySelectorAll('.popup__input')).map(function (input) {
+          return input.value;
+        });
+      }
     }
   }, {
     key: "_submitEventHandler",
-    value: function _submitEventHandler() {
-      var _this2 = this;
+    value: function _submitEventHandler(e) {
+      e.preventDefault();
 
-      this._formElement.addEventListener('submit', function (e) {
-        e.preventDefault();
+      var submittedValue = this._getInputValues() || this._info;
 
-        _this2._popupSubmit(_this2._getInputValues());
+      this._popupSubmit(submittedValue);
 
-        _this2.close();
-      });
-    } // _submitEventHandler(){
-    //     this._formElement.addEventListener('submit', (e) => {
-    //         e.preventDefault();
-    //         this._popupSubmit(this._getInputValues());
-    //         this.close();
-    //     })
-    // }
-    //modifies setEventListeners, adds click event listener
+      this.close();
+    } //modifies setEventListeners, adds click event listener
     //to the close icon, while adding submit event handler
 
   }, {
@@ -815,31 +882,21 @@ var PopupWithForm = /*#__PURE__*/function (_Popup) {
     value: function setEventListeners() {
       this._popupElement.addEventListener('submit', this._submitEventHandler);
 
-      _get(_getPrototypeOf(PopupWithForm.prototype), "setEventListeners", this).call(this); // Previous Edit Form Submit/Save Button Functionality from Sprint 7
-      // editForm.addEventListener('submit', (e) => {
-      //   e.preventDefault();
-      //   profileName.textContent = nameInput.value; 
-      //   profileJob.textContent = jobInput.value;
-      //   closeModal(editModal);
-      // });
-      // //Add Form Submit/Save Button Functionality
-      // addForm.addEventListener('submit', (e)  => { 
-      //   e.preventDefault(); 
-      //   //create card: 
-      //   const newCard = {name: titleInput.value, link: linkInput.value};
-      //   //initiateCardModule(newCard, "prepend");
-      //   cardSection.addItem(newCard);
-      //   //close modal after submit 
-      //   closeModal(addModal); 
-      //   addForm.reset(); 
-      //   }); 
+      _get(_getPrototypeOf(PopupWithForm.prototype), "setEventListeners", this).call(this);
+    } //modifies open method
 
+  }, {
+    key: "open",
+    value: function open(cardInfo) {
+      _get(_getPrototypeOf(PopupWithForm.prototype), "open", this).call(this);
+
+      this._info = cardInfo;
     } //modifies close method to reset form once popup is closed
 
   }, {
     key: "close",
     value: function close() {
-      this._popupElement.querySelector('.popup__form').reset();
+      this._formElement.reset();
 
       _get(_getPrototypeOf(PopupWithForm.prototype), "close", this).call(this);
     }
@@ -851,12 +908,66 @@ var PopupWithForm = /*#__PURE__*/function (_Popup) {
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => /* binding */ UserInfo
+/* harmony export */ });
+/* harmony import */ var _utils_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var UserInfo = /*#__PURE__*/function () {
+  function UserInfo(_ref) {
+    var name = _ref.name,
+        job = _ref.job,
+        avatar = _ref.avatar;
+
+    _classCallCheck(this, UserInfo);
+
+    this._name = document.querySelector(name);
+    this._job = document.querySelector(job);
+    this._avatar = document.querySelector(avatar);
+  }
+
+  _createClass(UserInfo, [{
+    key: "getUserInfo",
+    value: function getUserInfo() {
+      return this.userInfo = [this._name.textContent, this._job.textContent, this._avatar.src];
+    }
+  }, {
+    key: "setUserInfo",
+    value: function setUserInfo(name, job, avatar) {
+      //this._userInfo = {nameSelector, jobSelector, avatar};
+      //if(avatar){
+      this._name.textContent = name;
+      this._job.textContent = job;
+      this._avatar.src = avatar; //} else {
+      //   this._nameSelector.textContent = nameSelector;
+      //    this._jobSelector.textContent = jobSelector;
+      // }
+    }
+  }]);
+
+  return UserInfo;
+}();
+
+
+
+/***/ }),
+/* 10 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ Api
 /* harmony export */ });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -864,32 +975,158 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var UserInfo = /*#__PURE__*/function () {
-  function UserInfo(_ref) {
-    var nameSelector = _ref.nameSelector,
-        jobSelector = _ref.jobSelector;
+var Api = /*#__PURE__*/function () {
+  function Api(_ref) {
+    var baseUrl = _ref.baseUrl,
+        headers = _ref.headers;
 
-    _classCallCheck(this, UserInfo);
+    _classCallCheck(this, Api);
 
-    this._nameSelector = document.querySelector(nameSelector);
-    this._jobSelector = document.querySelector(jobSelector);
-  }
+    //constructor body
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+  } // GET specified URL-cards
 
-  _createClass(UserInfo, [{
+
+  _createClass(Api, [{
+    key: "getInitialCards",
+    value: function getInitialCards() {
+      return fetch(this._baseUrl + '/cards/', {
+        headers: this._headers
+      }).then(function (res) {
+        return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    } //GET specified URL -user-info
+
+  }, {
     key: "getUserInfo",
     value: function getUserInfo() {
-      return [this._nameSelector.textContent, this._jobSelector.textContent];
+      return fetch(this._baseUrl + '/users/me/', {
+        headers: this._headers
+      }).then(function (res) {
+        return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
+      }).catch(function (err) {
+        return console.log(err);
+      });
     }
   }, {
+    key: "getAppInfo",
+    value: function getAppInfo() {
+      //gather all info together and render all at once
+      return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+    } //POST speicifed url -cards
+
+  }, {
+    key: "addCard",
+    value: function addCard(_ref2) {
+      var name = _ref2.name,
+          link = _ref2.link;
+      return fetch(this._baseUrl + '/cards/', {
+        headers: this._headers,
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
+          link: link
+        })
+      }).then(function (res) {
+        return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    } // //DELETE specified url =cardID
+
+  }, {
+    key: "removeCard",
+    value: function removeCard(cardID) {
+      return fetch(this._baseUrl + '/cards/' + cardID, {
+        headers: this._headers,
+        method: "DELETE"
+      }).then(function (res) {
+        return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
+      }) //.then(res => res.remove(cardID))
+      .catch(function (err) {
+        return console.log(err);
+      });
+    } //PUT specified url cardID
+    //DELETE specified url cardID
+
+  }, {
+    key: "addLike",
+    value: function addLike(cardID) {
+      return fetch(this._baseUrl + '/cards/likes/' + cardID, {
+        headers: this._headers,
+        method: "PUT"
+      }).then(function (res) {
+        return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
+      }) //.then(res => res.remove(cardID))
+      .catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: "removeLike",
+    value: function removeLike(cardID) {
+      return fetch(this._baseUrl + '/cards/likes/' + cardID, {
+        headers: this._headers,
+        method: "DELETE"
+      }).then(function (res) {
+        return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
+      }) //.then(res => res.remove(cardID))
+      .catch(function (err) {
+        return console.log(err);
+      });
+    } //PATCH user-info
+
+  }, {
     key: "setUserInfo",
-    value: function setUserInfo(nameSelector, jobSelector) {
-      this._nameSelector.textContent = nameSelector;
-      this._jobSelector.textContent = jobSelector;
+    value: function setUserInfo(_ref3) {
+      var name = _ref3.name,
+          about = _ref3.about;
+      return fetch(this._baseUrl + '/users/me/', {
+        method: "PATCH",
+        headers: {
+          authorization: "a950b923-6d6c-4927-9948-6833c1950cc9",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          about: about
+        })
+      }).then(function (res) {
+        return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    } //PATCH avatar
+
+  }, {
+    key: "setUserAvatar",
+    value: function setUserAvatar(avatar) {
+      return fetch(this._baseUrl + '/users/me/avatar/', {
+        headers: this._headers,
+        method: "PATCH",
+        body: JSON.stringify({
+          avatar: avatar
+        })
+      }).then(function (res) {
+        return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
+      }).catch(function (err) {
+        return console.log(err);
+      });
     }
   }]);
 
-  return UserInfo;
-}();
+  return Api;
+}(); // const api = new Api({
+//     baseUrl: "correct url given to me",
+//     headers: {
+//         authorization: "token given to me",
+//         "Content-Type": "application/json"
+//     }
+// });
+
 
 
 
