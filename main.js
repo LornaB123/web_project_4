@@ -30,14 +30,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- //import initialCards from "../utils/initialCards.js";
+ //import initialCards from "../utils/initialCards.js"; 
 
 
 
 
- //connect api
-// project server URL = https://around.nomoreparties.co/v1/ + ADD Group ID here(group-7)..., 
-//authorization = TOKEN( a950b923-6d6c-4927-9948-6833c1950cc9 )
+ //connect api 
+// project server URL = https://around.nomoreparties.co/v1/ + ADD Group ID here(group-7)...,  
+//authorization = TOKEN( a950b923-6d6c-4927-9948-6833c1950cc9 ) 
 
 var api = new _components_Api_js__WEBPACK_IMPORTED_MODULE_8__.default({
   baseUrl: "https://around.nomoreparties.co/v1/group-7",
@@ -45,13 +45,13 @@ var api = new _components_Api_js__WEBPACK_IMPORTED_MODULE_8__.default({
     authorization: "a950b923-6d6c-4927-9948-6833c1950cc9",
     "Content-Type": "application/json"
   }
-}); //Edit Profile Form
+}); //Edit Profile Form 
 
 var userInformation = new _components_UserInfo_js__WEBPACK_IMPORTED_MODULE_7__.default({
   name: '.profile__info-title',
   job: '.profile__info-subtitle',
   avatar: '.profile__image'
-}); //function for counting likes
+}); //function for counting likes 
 
 function cardCountLikes(cardElement, cardID) {
   if (cardElement.isLiked()) {
@@ -67,7 +67,7 @@ function cardCountLikes(cardElement, cardID) {
       return console.log(err);
     });
   }
-} //function to create individual cards
+} //function to create individual cards 
 
 
 function createItem(cardInfo) {
@@ -88,7 +88,7 @@ function createItem(cardInfo) {
 var cardSection = new _components_Section_js__WEBPACK_IMPORTED_MODULE_3__.default({
   renderer: createItem
 }, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.list);
-var userId; //api getAppInfo
+var userId; //api getAppInfo 
 
 api.getAppInfo().then(function (_ref) {
   var _ref2 = _slicedToArray(_ref, 2),
@@ -97,12 +97,12 @@ api.getAppInfo().then(function (_ref) {
 
   userId = userData._id;
   userInformation.setUserInfo(userData.name, userData.about, userData.avatar);
-  cardSection.renderItems(cardListData); // api.getUserInfo()
-  //   .then(res => {
-  //   userInformation.setUserInfo(res.name, res.about, res.avatar)
-  // })
-  //cardSection.renderItems(cardListData);
-  //Add Card Form
+  cardSection.renderItems(cardListData); // api.getUserInfo() 
+  //   .then(res => { 
+  //   userInformation.setUserInfo(res.name, res.about, res.avatar) 
+  // }) 
+  //cardSection.renderItems(cardListData); 
+  //Add Card Form 
 
   var addFormPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_6__.default({
     popupSelector: '.popup_type_add-card',
@@ -120,24 +120,24 @@ api.getAppInfo().then(function (_ref) {
       });
     }
   });
-  addFormPopup.setEventListeners(); ////event listeners for add card button
+  addFormPopup.setEventListeners(); ////event listeners for add card button 
 
   _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.addButton.addEventListener('click', function (e) {
     addFormValidator.disableButton();
     addFormValidator.hideErrors();
     addFormPopup.open();
   });
-}); //call form validator class
+}); //call form validator class 
 
 var editFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_2__.default(_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.defaultConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.editForm);
 var addFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_2__.default(_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.defaultConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.addForm);
 var avatarFormValidator = new _components_FormValidator_js__WEBPACK_IMPORTED_MODULE_2__.default(_utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.defaultConfig, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.avatarForm);
 avatarFormValidator.enableValidation();
 editFormValidator.enableValidation();
-addFormValidator.enableValidation(); //Image Popup
+addFormValidator.enableValidation(); //Image Popup 
 
 var imagePopup = new _components_PoppupWithImage_js__WEBPACK_IMPORTED_MODULE_5__.default('.popup_type_image');
-imagePopup.setEventListeners(); //Delete Card Form
+imagePopup.setEventListeners(); //Delete Card Form 
 
 var deleteCardPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_6__.default({
   popupSelector: '.popup_type_delete-card',
@@ -154,8 +154,8 @@ var deleteCardPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_
     });
   }
 });
-deleteCardPopup.setEventListeners(); //Call new Popups for each type of form: image, add, edit, avatar
-//popup Loading function
+deleteCardPopup.setEventListeners(); //Call new Popups for each type of form: image, add, edit, avatar 
+//popup Loading function 
 
 function loadingPopup(isLoading, popup) {
   if (isLoading) {
@@ -163,7 +163,7 @@ function loadingPopup(isLoading, popup) {
   } else {
     popup.querySelector(".popup__save").textContent = "Save";
   }
-} // //avatar edit form
+} // //avatar edit form 
 
 
 var avatarFormPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_6__.default({
@@ -175,12 +175,12 @@ var avatarFormPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_
     handleAvatarClick(avatar);
   }
 });
-avatarFormPopup.setEventListeners(); //event listener for avatar edit button
+avatarFormPopup.setEventListeners(); //event listener for avatar edit button 
 
 _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.avatarButton.addEventListener('click', function (e) {
   avatarFormValidator.hideErrors();
   avatarFormPopup.open();
-}); //avatar edit handler
+}); //avatar edit handler 
 
 function handleAvatarClick(avatar) {
   loadingPopup(true, _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.avatarModal);
@@ -191,7 +191,7 @@ function handleAvatarClick(avatar) {
   }).catch(function (err) {
     return console.log(err);
   });
-} //Edit Profile Form
+} //Edit Profile Form 
 
 
 var editFormPopup = new _components_PopupWithForm_js__WEBPACK_IMPORTED_MODULE_6__.default({
@@ -219,7 +219,7 @@ function handleEditButtonClick(name, job) {
   }).catch(function (err) {
     return console.log(err);
   });
-} //event listener for editButton 
+} //event listener for editButton  
 
 
 _utils_constants_js__WEBPACK_IMPORTED_MODULE_1__.editButton.addEventListener('click', function (e) {
@@ -276,7 +276,7 @@ var defaultConfig = {
   inactiveButtonClass: "popup__save_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible"
-}; //Modals 
+}; //Modals  
 
 var editModal = document.querySelector('.popup_type_edit');
 var addModal = document.querySelector('.popup_type_add-card');
@@ -284,10 +284,10 @@ var avatarModal = document.querySelector('.popup_type_avatar');
 var deleteModal = document.querySelector('.popup_type_delete-card');
 var editForm = editModal.querySelector('.edit-form');
 var addForm = addModal.querySelector('.add-form');
-var avatarForm = avatarModal.querySelector('.avatar-form'); //const imageModal = document.querySelector('.popup_type_image'); 
+var avatarForm = avatarModal.querySelector('.avatar-form'); //const imageModal = document.querySelector('.popup_type_image');  
 
 var cardTemplate = document.querySelector('.card__template').content;
-var list = document.querySelector('.elements'); //Buttons and other DOM elements 
+var list = document.querySelector('.elements'); //Buttons and other DOM elements  
 
 var editButton = document.querySelector('.profile__edit-button');
 var addButton = document.querySelector('.profile__add-button');
@@ -296,13 +296,13 @@ var createButton = addModal.querySelector('.popup__save');
 var avatarButton = document.querySelector('.profile__image-edit');
 var nameInput = document.querySelector('.popup__input_type_name');
 var jobInput = document.querySelector('.popup__input_type_job');
-var avatarImage = document.querySelector('.profile__image'); //const nameInput = document.querySelector('.popup__input_type_name'); 
-//const jobInput = document.querySelector('.popup__input_type_job'); 
+var avatarImage = document.querySelector('.profile__image'); //const nameInput = document.querySelector('.popup__input_type_name');  
+//const jobInput = document.querySelector('.popup__input_type_job');  
 
 var profileName = document.querySelector('.profile__info-title');
-var profileJob = document.querySelector('.profile__info-subtitle'); //const titleInput = addForm.querySelector('.popup__input_type_title'); 
-//const linkInput = addForm.querySelector('.popup__input_type_link'); 
-//const profileInfo = new UserInfo(profileName, profileJob);
+var profileJob = document.querySelector('.profile__info-subtitle'); //const titleInput = addForm.querySelector('.popup__input_type_title');  
+//const linkInput = addForm.querySelector('.popup__input_type_link');  
+//const profileInfo = new UserInfo(profileName, profileJob); 
 
 
 
@@ -344,7 +344,7 @@ var FormValidator = /*#__PURE__*/function () {
     this._form = formElement;
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._inputs = _toConsumableArray(this._form.querySelectorAll(this._inputSelector));
-  } //Function to show error messages when validation criteria is not met
+  } //Function to show error messages when validation criteria is not met 
 
 
   _createClass(FormValidator, [{
@@ -355,7 +355,7 @@ var FormValidator = /*#__PURE__*/function () {
       errorElement.textContent = inputElement.validationMessage;
       errorElement.classList.add(this._errorClass);
       inputElement.classList.add(this._inputErrorClass);
-    } //Function to hide the error messages when validation criteria is met
+    } //Function to hide the error messages when validation criteria is met 
 
   }, {
     key: "_hideErrorMessage",
@@ -365,27 +365,27 @@ var FormValidator = /*#__PURE__*/function () {
       errorElement.textContent = "";
       errorElement.classList.remove(this._errorClass);
       inputElement.classList.remove(this._inputErrorClass);
-    } //Function to check the input validity according to requirements
+    } //Function to check the input validity according to requirements 
 
   }, {
     key: "_checkInputValidity",
     value: function _checkInputValidity(inputElement, inputErrorClass) {
       if (inputElement.validity.valid) {
-        //hide error message
+        //hide error message 
         this._hideErrorMessage(inputElement, inputErrorClass);
       } else {
-        //show error message
+        //show error message 
         this._showErrorMessage(inputElement, inputErrorClass);
       }
-    } //Function to change state of Save/Create buttons on form
+    } //Function to change state of Save/Create buttons on form 
 
   }, {
     key: "_toggleButtonState",
     value: function _toggleButtonState(formElement, inputSelector) {
-      //const inputs = [...formElement.querySelectorAll(inputSelector)];
+      //const inputs = [...formElement.querySelectorAll(inputSelector)]; 
       var isValid = this._inputs.every(function (input) {
         return input.validity.valid;
-      }); //const buttonElement = this._form.querySelector(this._submitButtonSelector);
+      }); //const buttonElement = this._form.querySelector(this._submitButtonSelector); 
 
 
       if (isValid) {
@@ -397,7 +397,7 @@ var FormValidator = /*#__PURE__*/function () {
 
         this._buttonElement.disabled = true;
       }
-    } //method to disable create button 
+    } //method to disable create button  
 
   }, {
     key: "disableButton",
@@ -405,7 +405,7 @@ var FormValidator = /*#__PURE__*/function () {
       this._buttonElement.classList.add(this._inactiveButtonClass);
 
       this._buttonElement.disabled = true;
-    } //event listeners set for card arrays
+    } //event listeners set for card arrays 
 
   }, {
     key: "_setEventListeners",
@@ -414,8 +414,8 @@ var FormValidator = /*#__PURE__*/function () {
 
       this._inputs.forEach(function (inputElement) {
         inputElement.addEventListener("input", function () {
-          //check Input Validity
-          _this._checkInputValidity(inputElement, _this._inputErrorClass); //toggle button state
+          //check Input Validity 
+          _this._checkInputValidity(inputElement, _this._inputErrorClass); //toggle button state 
 
 
           _this._toggleButtonState(_this._form, _this._inputSelector);
@@ -430,7 +430,7 @@ var FormValidator = /*#__PURE__*/function () {
       this._inputs.forEach(function (inputElement) {
         _this2._hideErrorMessage(inputElement);
       });
-    } //enable validation of form submit buttons
+    } //enable validation of form submit buttons 
 
   }, {
     key: "enableValidation",
@@ -480,13 +480,13 @@ var Section = /*#__PURE__*/function () {
 
       items.forEach(function (item) {
         _this._container.append(_this._renderer(item));
-      }); //This is the original code used to render cards in index.js (before Section class creation)
-      // function initiateCardModule(cardInfo, insert){
-      //     const cardObject = new Card(cardInfo, cardTemplate);
-      //     const card = cardObject.createCard();
-      //     list[insert](card);
-      //   } 
-      //   for(const initialCard of initialCards) initiateCardModule(initialCard, "append");
+      }); //This is the original code used to render cards in index.js (before Section class creation) 
+      // function initiateCardModule(cardInfo, insert){ 
+      //     const cardObject = new Card(cardInfo, cardTemplate); 
+      //     const card = cardObject.createCard(); 
+      //     list[insert](card); 
+      //   }  
+      //   for(const initialCard of initialCards) initiateCardModule(initialCard, "append"); 
     }
   }, {
     key: "addItem",
@@ -714,8 +714,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// const addModal = document.querySelector('.popup_type_add-card');
-// const addForm = addModal.querySelector('.add-form');
+// const addModal = document.querySelector('.popup_type_add-card'); 
+// const addForm = addModal.querySelector('.add-form'); 
 var Popup = /*#__PURE__*/function () {
   function Popup(popupSelector) {
     _classCallCheck(this, Popup);
@@ -759,25 +759,25 @@ var Popup = /*#__PURE__*/function () {
   }]);
 
   return Popup;
-}(); // editButton.addEventListener('click',(e) => openModal(editModal));
-// //Edit Form Submit/Save Button Functionality
-// editForm.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   profileName.textContent = nameInput.value; 
-//   profileJob.textContent = jobInput.value;
-//   closeModal(editModal);
-// });
-// //Add Form Submit/Save Button Functionality
-// addForm.addEventListener('submit', (e)  => { 
+}(); // editButton.addEventListener('click',(e) => openModal(editModal)); 
+// //Edit Form Submit/Save Button Functionality 
+// editForm.addEventListener('submit', (e) => { 
 //   e.preventDefault(); 
-//   //create card: 
-//   const newCard = {name: titleInput.value, link: linkInput.value};
-//   //initiateCardModule(newCard, "prepend");
-//   cardSection.addItem(newCard);
-//   //close modal after submit 
-//   closeModal(addModal); 
-//   addForm.reset(); 
-//   });
+//   profileName.textContent = nameInput.value;  
+//   profileJob.textContent = jobInput.value; 
+//   closeModal(editModal); 
+// }); 
+// //Add Form Submit/Save Button Functionality 
+// addForm.addEventListener('submit', (e)  => {  
+//   e.preventDefault();  
+//   //create card:  
+//   const newCard = {name: titleInput.value, link: linkInput.value}; 
+//   //initiateCardModule(newCard, "prepend"); 
+//   cardSection.addItem(newCard); 
+//   //close modal after submit  
+//   closeModal(addModal);  
+//   addForm.reset();  
+//   }); 
 
 
 
@@ -829,7 +829,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
- //class takes callback of form submission into constructor
+ //class takes callback of form submission into constructor 
 
 var PopupWithForm = /*#__PURE__*/function (_Popup) {
   _inherits(PopupWithForm, _Popup);
@@ -844,13 +844,13 @@ var PopupWithForm = /*#__PURE__*/function (_Popup) {
 
     _classCallCheck(this, PopupWithForm);
 
-    _this = _super.call(this, popupSelector); //the 'add/edit FORMS' as this._popupElement (addForm or editForm)
+    _this = _super.call(this, popupSelector); //the 'add/edit FORMS' as this._popupElement (addForm or editForm) 
 
     _this._popupSubmit = popupSubmit;
     _this._formElement = _this._popupElement.querySelector('.popup__form');
     _this._submitEventHandler = _this._submitEventHandler.bind(_assertThisInitialized(_this));
     return _this;
-  } //private method, collects data from all input fields
+  } //private method, collects data from all input fields 
 
 
   _createClass(PopupWithForm, [{
@@ -874,8 +874,8 @@ var PopupWithForm = /*#__PURE__*/function (_Popup) {
       this._popupSubmit(submittedValue);
 
       this.close();
-    } //modifies setEventListeners, adds click event listener
-    //to the close icon, while adding submit event handler
+    } //modifies setEventListeners, adds click event listener 
+    //to the close icon, while adding submit event handler 
 
   }, {
     key: "setEventListeners",
@@ -883,7 +883,7 @@ var PopupWithForm = /*#__PURE__*/function (_Popup) {
       this._popupElement.addEventListener('submit', this._submitEventHandler);
 
       _get(_getPrototypeOf(PopupWithForm.prototype), "setEventListeners", this).call(this);
-    } //modifies open method
+    } //modifies open method 
 
   }, {
     key: "open",
@@ -891,7 +891,7 @@ var PopupWithForm = /*#__PURE__*/function (_Popup) {
       _get(_getPrototypeOf(PopupWithForm.prototype), "open", this).call(this);
 
       this._info = cardInfo;
-    } //modifies close method to reset form once popup is closed
+    } //modifies close method to reset form once popup is closed 
 
   }, {
     key: "close",
@@ -945,14 +945,14 @@ var UserInfo = /*#__PURE__*/function () {
   }, {
     key: "setUserInfo",
     value: function setUserInfo(name, job, avatar) {
-      //this._userInfo = {nameSelector, jobSelector, avatar};
-      //if(avatar){
+      //this._userInfo = {nameSelector, jobSelector, avatar}; 
+      //if(avatar){ 
       this._name.textContent = name;
       this._job.textContent = job;
-      this._avatar.src = avatar; //} else {
-      //   this._nameSelector.textContent = nameSelector;
-      //    this._jobSelector.textContent = jobSelector;
-      // }
+      this._avatar.src = avatar; //} else { 
+      //   this._nameSelector.textContent = nameSelector; 
+      //    this._jobSelector.textContent = jobSelector; 
+      // } 
     }
   }]);
 
@@ -982,10 +982,10 @@ var Api = /*#__PURE__*/function () {
 
     _classCallCheck(this, Api);
 
-    //constructor body
+    //constructor body 
     this._baseUrl = baseUrl;
     this._headers = headers;
-  } // GET specified URL-cards
+  } // GET specified URL-cards 
 
 
   _createClass(Api, [{
@@ -998,7 +998,7 @@ var Api = /*#__PURE__*/function () {
       }).catch(function (err) {
         return console.log(err);
       });
-    } //GET specified URL -user-info
+    } //GET specified URL -user-info 
 
   }, {
     key: "getUserInfo",
@@ -1014,9 +1014,9 @@ var Api = /*#__PURE__*/function () {
   }, {
     key: "getAppInfo",
     value: function getAppInfo() {
-      //gather all info together and render all at once
+      //gather all info together and render all at once 
       return Promise.all([this.getUserInfo(), this.getInitialCards()]);
-    } //POST speicifed url -cards
+    } //POST speicifed url -cards 
 
   }, {
     key: "addCard",
@@ -1035,7 +1035,7 @@ var Api = /*#__PURE__*/function () {
       }).catch(function (err) {
         return console.log(err);
       });
-    } // //DELETE specified url =cardID
+    } // //DELETE specified url =cardID 
 
   }, {
     key: "removeCard",
@@ -1045,12 +1045,12 @@ var Api = /*#__PURE__*/function () {
         method: "DELETE"
       }).then(function (res) {
         return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
-      }) //.then(res => res.remove(cardID))
+      }) //.then(res => res.remove(cardID)) 
       .catch(function (err) {
         return console.log(err);
       });
-    } //PUT specified url cardID
-    //DELETE specified url cardID
+    } //PUT specified url cardID 
+    //DELETE specified url cardID 
 
   }, {
     key: "addLike",
@@ -1060,7 +1060,7 @@ var Api = /*#__PURE__*/function () {
         method: "PUT"
       }).then(function (res) {
         return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
-      }) //.then(res => res.remove(cardID))
+      }) //.then(res => res.remove(cardID)) 
       .catch(function (err) {
         return console.log(err);
       });
@@ -1073,11 +1073,11 @@ var Api = /*#__PURE__*/function () {
         method: "DELETE"
       }).then(function (res) {
         return res.ok ? res.json() : Promise.reject('Error' + res.statusText);
-      }) //.then(res => res.remove(cardID))
+      }) //.then(res => res.remove(cardID)) 
       .catch(function (err) {
         return console.log(err);
       });
-    } //PATCH user-info
+    } //PATCH user-info 
 
   }, {
     key: "setUserInfo",
@@ -1099,7 +1099,7 @@ var Api = /*#__PURE__*/function () {
       }).catch(function (err) {
         return console.log(err);
       });
-    } //PATCH avatar
+    } //PATCH avatar 
 
   }, {
     key: "setUserAvatar",
@@ -1119,13 +1119,13 @@ var Api = /*#__PURE__*/function () {
   }]);
 
   return Api;
-}(); // const api = new Api({
-//     baseUrl: "correct url given to me",
-//     headers: {
-//         authorization: "token given to me",
-//         "Content-Type": "application/json"
-//     }
-// });
+}(); // const api = new Api({ 
+//     baseUrl: "correct url given to me", 
+//     headers: { 
+//         authorization: "token given to me", 
+//         "Content-Type": "application/json" 
+//     } 
+// }); 
 
 
 
